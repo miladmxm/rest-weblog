@@ -1,12 +1,11 @@
 import React from "react";
 import HeaderBlog from "./common/header";
 import PostCart from "./common/postCart";
-const blog = () => {
+const Blog = () => {
     return (
         <div>
-            <HeaderBlog />
             <PostCart />
         </div>
     )
 }
-export default blog
+export default Blog

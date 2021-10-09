@@ -1,18 +1,21 @@
 import React from "react";
 import { Route,Switch } from "react-router-dom";
-import blog from "./components/layouts/blog/bloglayout";
+import Blog from "./components/layouts/blog/bloglayout";
+import HeaderBlog from "./components/layouts/blog/common/header";
+import Single from "./components/layouts/blog/single";
 import dashboard from "./components/layouts/dashboard/dashlayout";
 
 const App = () => {
   return (
     <>
+      <HeaderBlog />
       <Switch>
         {/* blog router  */}
-        <Route path="/" exact component={blog} />
-        <Route path="/single" exact component={blog} />
-        <Route path="/login" exact component={blog} />
-        <Route path="/register" exact component={blog} />
-        <Route path="/contact" exact component={blog} />
+        <Route path="/" exact component={Blog} />
+        <Route path="/single/:id" exact component={Single} />
+        <Route path="/login" exact component={Blog} />
+        <Route path="/register" exact component={Blog} />
+        <Route path="/contact" exact component={Blog} />
 
 
         {/* dashboard router  */}
