@@ -10,6 +10,8 @@ const App = ()=> {
     </ul>
    <Route path="/" exact render={()=><p>salam inja safe avale</p>} />
    <Route path="/chekhabar" exact render={()=><p>saalaaaaaaam</p>} />
+   <Route path="/chekhabar" exact render={()=><p>saalaaaaaaam</p>} />
+   <Route path="/chekhabar" exact render={()=><p>saalaaaaaaam</p>} />
    </>
   );
 }
