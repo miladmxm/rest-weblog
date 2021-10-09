@@ -25,10 +25,10 @@ const HeaderBlog = () => {
                             <li><Link to="/users/logout">خروج</Link></li>
 
                             <li>
-                                <Link className="" to="/users/login">ورود</Link>
+                                <Link className="" to="/login">ورود</Link>
                             </li>
                             <li>
-                                <Link to="/users/register">ثبت نام</Link>
+                                <Link to="/register">ثبت نام</Link>
                             </li>
                             <li>
                                 <Link className="<%= path == '/contact'? 'active' : ''%>" to="/contact">تماس با ما</Link>
