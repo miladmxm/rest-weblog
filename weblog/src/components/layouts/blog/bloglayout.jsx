@@ -1,8 +1,11 @@
-import { React } from "react";
+import React from "react";
+import HeaderBlog from "./common/header";
+import PostCart from "./common/postCart";
 const blog = () => {
     return (
         <div>
-            blog
+            <HeaderBlog />
+            <PostCart />
         </div>
     )
 }

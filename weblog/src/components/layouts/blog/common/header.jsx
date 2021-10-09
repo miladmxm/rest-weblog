@@ -1,37 +1,39 @@
-import { React } from "react";
-const headerBlog = () => {
+import React, { useState } from "react";
+import SearchForm from "./search";
+
+
+const HeaderBlog = () => {
+    const [activedToggleBtn, setActivedToggleBtn] = useState(false)
+    const toggleMenu = (e) => {
+        setActivedToggleBtn(!activedToggleBtn)
+    }
     return (
-        <div class="fixed-top">
-            <div class="navbar">
-                <div class="container">
-                    <h2 class="logo"><a class='text-initial' href="/">Milad MXM</a></h2>
-                    <button class="toggle">
+        <div className="fixed-top">
+            <div className="navbar">
+                <div className="container">
+                    <h2 className="logo"><a className='text-initial' href="/">Milad MXM</a></h2>
+                    <button className={activedToggleBtn ? "toggle toggler" : "toggle"} onClick={toggleMenu}>
                         <span></span>
                     </button>
 
-                    <nav id="navMenu">
+                    <nav id="navMenu" className={activedToggleBtn ? "showNav" : ""}>
                         <ul>
-                            <li><a class="active" href="/">خانه</a></li>
+                            <li><a className="active" href="/">خانه</a></li>
 
                             <li><a href="/dashboard">پنل کاربری</a></li>
                             <li><a href="/users/logout">خروج</a></li>
 
                             <li>
-                                <a class="" href="/users/login">ورود</a>
+                                <a className="" href="/users/login">ورود</a>
                             </li>
                             <li>
-                                <a href="/users/register">ثبت نام</a >
+                                <a href="/users/register">ثبت نام</a>
                             </li>
                             <li>
-                                <a class="<%= path == '/contact'? 'active' : ''%>" href="/contact"
-                                >تماس با ما</a
-                                >
+                                <a className="<%= path == '/contact'? 'active' : ''%>" href="/contact">تماس با ما</a>
                             </li>
                             <li>
-                                <form action="/search" method="POST" class="serchbar">
-                                    <input type="serch" name="search" placeholder="جستجو کنید" />
-                                    <button class="serchBtn"><i class="fa fa-search"></i></button>
-                                </form>
+                                <SearchForm />
                             </li>
                         </ul>
                     </nav>
@@ -41,4 +43,4 @@ const headerBlog = () => {
 
     )
 }
-export default headerBlog
+export default HeaderBlog

@@ -118,7 +118,7 @@ nav ul li a:hover {
 }
 
 @media screen and (max-width: 960px) {
-  .navbar .container nav {
+  .navbar .container #navMenu{
     width: 100%;
     background-color: #334;
     border-radius: 0 0 10px 10px;
@@ -126,7 +126,7 @@ nav ul li a:hover {
     overflow: hidden;
     transition: height 0.4s ease-in-out;
   }
-  .navbar .container nav ul {
+  .navbar .container #navMenu ul {
     display: block;
     border-top: 1px solid #eeeeeea4;
     width: 95%;
@@ -135,14 +135,15 @@ nav ul li a:hover {
     padding-top: 10px;
     box-sizing: border-box;
   }
-  nav.showNav {
+  .navbar .container #navMenu.showNav {
     padding-bottom: 10px;
+    height: 300px;
     
   }
-  .navbar .container nav.showNav ul {
+  .navbar .container #navMenu.showNav ul {
     visibility: visible;
   }
-  .navbar .container nav ul li {
+  .navbar .container #navMenu ul li {
     margin-bottom: 10px;
   }
   .toggle {
