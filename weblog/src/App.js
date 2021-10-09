@@ -1,6 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
 const App = ()=> {
   return (
    <h1>hello worls</h1>
