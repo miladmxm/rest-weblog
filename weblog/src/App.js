@@ -1,17 +1,29 @@
 import React from "react";
-import { Route,Link } from "react-router-dom";
+import { Route,Switch } from "react-router-dom";
+import blog from "./components/layouts/blog/bloglayout";
+import dashboard from "./components/layouts/dashboard/dashlayout";
 
-const App = ()=> {
+const App = () => {
   return (
     <>
-    <ul>
-      <li><Link to="/">صفحه اصلی</Link></li>
-      <li><Link to="/chekhabar">صفحه غیر اصلی</Link></li>
-    </ul>
-   <Route path="/" exact render={()=><p>salam inja safe avale</p>} />
-   <Route path="/chekhabar" exact render={()=><p>saalaaaaaaam</p>} />
-   <Route path="/chekhabar" exact render={()=><p>saalaaaaaaam</p>} />
-   </>
+      <Switch>
+        {/* blog router  */}
+        <Route path="/" exact component={blog} />
+        <Route path="/single" exact component={blog} />
+        <Route path="/login" exact component={blog} />
+        <Route path="/register" exact component={blog} />
+        <Route path="/contact" exact component={blog} />
+
+
+        {/* dashboard router  */}
+        <Route path="/dashboard" exact component={dashboard} />
+        <Route path="/add-post" exact component={dashboard} />
+        <Route path="/edit-post" exact component={dashboard} />
+
+        
+        <Route path="*" render={()=><p>404</p>} />
+      </Switch>
+    </>
   );
 }
 

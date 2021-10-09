@@ -1,0 +1,184 @@
+
+#main{
+    min-height: 50vh;
+    width: 40%;
+    margin: 10% auto;
+    background-color: #fafefa;
+    border-radius: 30px;
+    display: block;
+    overflow-y: hidden;
+    position: relative;
+    box-shadow:20px 15px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    box-sizing: border-box;
+    position: relative;
+  }
+  #main h2.title{
+    text-align: center;
+    margin-top: 20px;
+  }
+  #main form.loginForm{
+    margin: 50px auto;
+    min-height: 200px;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #main form.loginForm>input,
+  #main form .captchalabel input
+  {
+    width: 100%;
+    border: none;
+    font-size: 130%;
+    background-color: #333;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    color: #fff;
+    opacity: .8;
+    transition: opacity 0.4s ease-in-out;
+  }
+  #main form.loginForm .remember,.captchalabel{
+    width: 100%;
+    border: none;
+    font-size: 80%;
+    background-color: rgb(10, 51, 26);
+    padding: 20px 12px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    color: #fff;
+    
+  }
+
+  #main .checkedBeautiful{
+    width: 50px;
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    background-color: #7775;
+    height: 20px;
+    border-radius:10px;
+    cursor: pointer;
+    transition:all .3s ease-in-out;
+  }
+  #main .checkedBeautiful::before{
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    background-color: #777;
+    transition:all .3s ease-in-out;
+  }
+  #main .checkedBeautiful:checked{
+    background-color: rgb(7, 105, 233);
+    transition-delay: .1s;
+  }
+  #main .checkedBeautiful:checked::before{
+    transform: translateX(26px);
+    background-color: rgb(17, 34, 110);
+  }
+
+
+  #main form.loginForm input:focus{
+    opacity: 1;
+  }
+  
+  #main form.loginForm input:nth-child(1){
+    border-radius: 10px 10px 0 0;
+  }
+  #main form.loginForm input::-webkit-input-placeholder { /* Edge */
+    color: #ffffffa1;
+  }
+  
+  #main form.loginForm input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #ffffffa1;
+  }
+  
+  #main form.loginForm input::placeholder {
+    color: #ffffffa1;
+  }
+  #main button{
+    width: 100%;
+    border: none;
+    font-size: 130%;
+    background-color: rgb(34, 133, 224);
+    padding: 20px 12px;
+    box-sizing: border-box;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #main button *{
+    margin: 10px;
+  }
+
+  #main .g-recaptcha{
+    width: 100%;
+    border: none;
+    background-color: #333;
+    padding: 5px 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    color: #fff;
+  }
+  .center{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+  }
+
+
+  .loginForm #mainText::placeholder{
+    color: rgb(221, 221, 221);
+    font-size: large;
+  }
+  .loginForm #mainText{
+    resize: vertical;
+    max-height: 400px;
+    width: 100%;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    color: #fff;
+    min-height: 100px;
+    background-color: rgb(9, 104, 141) !important;
+    font-size: small !important;
+  }
+
+  #main .captchalabel{
+    cursor: inherit;
+  }
+  #main .captchalabel input{
+    width: 60% !important;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    -ms-border-radius: 5px !important;
+    -o-border-radius: 5px !important;
+}
+
+
+  @media screen and (max-width : 700px) {
+    
+    #main{
+      width: 100%;
+    }
+  }
