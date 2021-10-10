@@ -8,11 +8,11 @@ import Rejister from "./components/layouts/blog/register";
 import Single from "./components/layouts/blog/single";
 import dashboard from "./components/layouts/dashboard/dashlayout";
 
-const App = (props) => {
-  console.log(props);
+const App = ({location}) => {
+  const isDashboard = location.pathname.includes("dashboard")
   return (
     <>
-      <HeaderBlog />
+      {!isDashboard?<HeaderBlog />:null}
       <Switch>
         {/* blog router  */}
         <Route path="/" exact component={Blog} />
