@@ -1,182 +1,64 @@
-body{
-    padding:0px !important;
+#dashboard{
+  width: 80%;
+  background-color: aliceblue;
+  margin: 5px auto;
+  max-width: 1920;
+  border-radius:0 0 12px 12px;
+  -webkit-border-radius:0 0 12px 12px;
+  -moz-border-radius:0 0 12px 12px;
+  -ms-border-radius:0 0 12px 12px;
+  -o-border-radius:0 0 12px 12px;
+  box-shadow: 3px 3px 15px #1b1b1bbb;
+  overflow: hidden;
 }
-#mainDashboard {
-    min-height: calc(100vh - 50px);
-    width: calc(100vw - 100px);
-    margin: 25px 50px;
-    background-color: #fafefa;
-    border-radius: 30px;
-    display: block;
-    overflow-y: hidden;
-    position: relative;
-    box-shadow: 20px 15px 25px rgba(0, 0, 0, 0.4);
-    border: 1px solid #333;
-    box-sizing: border-box;
-    position: relative;
-  }
-  #mainDashboard #scroolingcontent {
-    width: 100%;
-    height: calc(100vh - 50px);
-    overflow-y: auto;
-  }
-  #mainDashboard #scroolingcontent::-webkit-scrollbar {
-    appearance: none;
-    -webkit-appearance: none;
-  }
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(165, 165, 165);
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #bdbdbd;
-  }
-  .header {
-    width: 100%;
-    background-color: rgb(51, 51, 51);
-    height: 60px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: #fafefa;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 25px;
-    box-sizing: border-box;
-    z-index: 5;
-    box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  .serchbar {
-    width: 70%;
-    position: relative;
-  }
-  .serchbar input {
-    border: none;
-    background-color: #fafefa;
-    width: 96%;
-    height: 40px;
-    padding: 10px;
-    border-radius:0 10px 10px 0;
-    font-size: large;
-  }
-  .serchbar .searchBtn{
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 40px;
-    background-color: #fafefa;
-    border: none;
-    font-size: 100%;
-    cursor: pointer;
-    border-radius:10px 0 0 10px ;
-    transition: all ease 0.4s;
-    -webkit-transition: all ease 0.4s;
-    -moz-transition: all ease 0.4s;
-    -ms-transition: all ease 0.4s;
-    -o-transition: all ease 0.4s;
+.table{
+  overflow: auto;
 }
 
-  .serchbar input:focus {
-    box-shadow: 2px 2px 5px #da690c79, -2px -2px 5px #da690c79;
-  }
-  .logout a {
-    color: #fafefa;
-    margin-left: 20px;
-    border: 2px solid #fafefa;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 40px;
-    border-radius: 8px;
-    font-weight: 800;
-    transition: 0.5s;
-  }
-  .logout a:hover {
-    background-color: #fafefa;
-    color: #333;
-  }
-  .container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  #sidebarDashbord {
-    width: 18%;
-    height: 80vh;
-    position: fixed;
-    top: 100px;
-  }
-  #sidebarDashbord .dashbordList {
-    list-style: none;
-    margin: 10px 20px;
-    min-width: 200px;
-  }
-  #sidebarDashbord .dashbordList li{
-    margin: 10px 0;
-  }
-  #sidebarDashbord .dashbordList li a {
-    color: rgba(51, 51, 51, 0.678);
-    font-weight: 900;
-  }
-  #sidebarDashbord .dashbordList li a svg,
-  #sidebarDashbord .dashbordList li a i{
-    margin-left: 10px;
-  }
-  #sidebarDashbord .dashbordList li a:hover,
-  #sidebarDashbord .dashbordList li a.active {
-    color: rgb(14, 103, 185);
-  }
-  #sidebarDashbord .spacing {
-    width: 90%;
-    margin: 10px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 80%;
-    color: #333a;
-  }
-  #sidebarDashbord .serchbar{
-    display: none;
-    width: 90%;
-    margin: 20px auto;
-  }
-  #contentDashbord {
-    width: 78%;
-    margin-top: 60px;
-    padding: 10px;
-    position: absolute;
-    height: calc(100% - 60px);
-    left: 0;
-    box-sizing: border-box;
-  }
-  .table table.tableShowItem {
-    border-collapse: collapse;
-    width: 100%;
-    min-width: 450px;
-  }
+.table table.tableShowItem {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 450px;
+}
+.textCenter{
+  text-align: center;
+}
 
 
+.dashboard-header{
+  width: 80%;
+  margin: 0 auto;
+}
+.dashboard-header .text-initial{
+  color: #11683f;
+}
 
+.dashboard-header .navbar{
+  background-color: #f2f2f2;
+  
+}
+.dashboard-header .navbar #navMenu{
+  background-color: #f2f2f2;
+  
+}
+.dashboard-header .navbar #navMenu .serchbar input::placeholder{
+  color: #fff;
+}
+.dashboard-header .navbar #navMenu .serchbar input{
+  color: #fff;
+  box-shadow: none;
+  background-color: #04aa6d;
+}
+.dashboard-header .navbar #navMenu .serchbar .serchBtn .fa-search{
+  color: #f2f2f2;
+}
+.dashboard-header .navbar #navMenu ul li a{
+  color: #334;
+}
+.dashboard-header .navbar #navMenu ul li a:hover,
+.dashboard-header .navbar #navMenu ul li a.active{
+  color: #04aa6d;
+}
   /* badge */
   .badge{
     display: inline-block;
@@ -191,7 +73,6 @@ body{
     -o-border-radius: 5px;
 }
 .badge.badge-denger{
-  
   background-color: #681711;
   color: #fafafa;
 }
@@ -210,57 +91,13 @@ body{
     background-color: #04aa6d;
     color: white;
   }
-  .toggle {
-    width: 40px;
-    height: 35px;
-    cursor: pointer;
-    display: none;
-    background-color: #333;
-    border: 2px solid #fff;
-    border-radius: 5px;
-  }
-  .toggle span {
-    width: 25px;
-    height: 2px;
-    background-color: rgb(255, 255, 255);
-    display: block;
-    margin: auto;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-  }
-  .toggle span::after,
-  .toggle span::before {
-    content: "";
-    width: 25px;
-    height: 2px;
-    background-color: rgb(255, 255, 255);
-    display: block;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transition: all 0.2s ease-in-out;
-  }
-  .toggle span::after {
-    transform: translateY(6px);
-  }
-  .toggle span::before {
-    transform: translateY(-6px);
-  }
-  .toggle.toggler span {
-    background-color: transparent;
-  }
-  .toggle.toggler span::after {
-    transform: rotate(45deg);
-  }
-  .toggle.toggler span::before {
-    transform: rotate(135deg);
-  }
-  
-  .textCenter{
-    text-align: center;
-  }
 
+  td a,
+  td a:hover,
+  td a:focus,
+  td a:active{
+    color: inherit;
+  }
   .editDelete .fa-edit,.editDelete .fa-trash{
     cursor: pointer;
     background-color: #04aa6d;
@@ -279,63 +116,11 @@ body{
 }
 
 
- @media screen and (max-width: 950px) {
-    .header .serchbar {
-      width: 250px;
-    }
+@media screen and (max-width:650px) {
+  #dashboard{
+    width: 98%;
+  } 
+  .dashboard-header{
+    width: 98%;
   }
-  @media screen and (max-width: 666px) {
-      #contentDashbord{
-          width:99%;
-      }
-    .contentTitle,
-    .header h2 {
-      font-weight: 600;
-      font-size: 90%;
-    }
-    .header .serchbar {
-      display: none;
-    }
-    .logout a {
-      color: #fafefa;
-      margin-left: 10px;
-      width: 90%;
-      height: 30px;
-      font-weight: 300;
-    }
-    #sidebarDashbord {
-      opacity: 0;
-      width: 0;
-      visibility: hidden;
-      transition: all 0.5s ease-in-out;
-      overflow: hidden;
-      z-index: 100;
-    }
-    #sidebarDashbord .serchbar{
-      display: block;
-    }
-    #sidebarDashbord .serchbar input{
-      width: 85%;
-    }
-    #sidebarDashbord .serchbar .searchBtn{
-      left: 10px;
-    }
-    #sidebarDashbord.showSideBar {
-      opacity: 1;
-      visibility: visible;
-      background-color: rgb(250, 250, 250);
-      z-index: 100;
-      width: calc(90% - 20px);
-      box-shadow: -10px 5px 15px #3333;
-    }
-    .toggle {
-      display: block;
-    }
-     #mainDashboard{
-          width:calc(100% - 20px);
-          margin:7px;
-      }
-  }
-  
- 
-
+}
