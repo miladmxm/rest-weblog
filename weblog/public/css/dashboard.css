@@ -19,42 +19,6 @@
   text-align: center;
 }
 
-/* 
-.dashboard-header{
-  width: 80%;
-  margin: 0 auto;
-}
-.dashboard-header .text-initial{
-  color: #11683f;
-}
-
-.dashboard-header .navbar{
-  background-color: #f2f2f2;
-  
-}
-.dashboard-header .navbar #navMenu{
-  background-color: #f2f2f2;
-  
-}
-.dashboard-header .navbar #navMenu .serchbar input::placeholder{
-  color: #fff;
-}
-.dashboard-header .navbar #navMenu .serchbar input{
-  color: #fff;
-  box-shadow: none;
-  background-color: #04aa6d;
-}
-.dashboard-header .navbar #navMenu .serchbar .serchBtn .fa-search{
-  color: #f2f2f2;
-}
-.dashboard-header .navbar #navMenu ul li a{
-  color: #334;
-}
-.dashboard-header .navbar #navMenu ul li a:hover,
-.dashboard-header .navbar #navMenu ul li a.active{
-  color: #04aa6d;
-} */
-
 /* dashboard header */
 
 .dashboard-header {
@@ -95,7 +59,7 @@
 }
 
 /* content */
-.content {
+.contentDash {
   width: 72%;
   box-shadow: 1px 1px 8px #3333;
   margin-top: 65px;
@@ -103,6 +67,9 @@
   position: absolute;
   left: 1%;
 }
+
+
+/* side bar */
 
 .side-bar {
   width: 25%;
@@ -115,15 +82,21 @@
   padding: 30px 30px 30px 0;
   box-sizing: border-box;
 }
+.side-bar header{
+  color: #f2f2f2;
+  font-size: 18px;
+  text-align: center;
+  margin: 10px auto;
+}
 .side-bar nav {
-  background-color: #272841;
+  background-color: #445;
   width: 95%;
   margin: 0 auto 0 0;
   height: 100%;
   position: relative;
 }
-.side-bar nav::before {
-  content: "\f085";
+.side-bar nav .side-settingShow {
+  content: "\f013";
   font-family: FontAwesome;
   position: absolute;
   display: block;
@@ -131,13 +104,35 @@
   height: 50px;
   top: 15px;
   right: -13%;
-  background-color: #272841;
+  background-color: #445;
   border-radius: 0 10px 10px 0;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 120%;
+  cursor: pointer;
+}
+.side-bar nav .side-settingShow::before {
+  animation: rotate 0.5s ease-in-out 0.2s infinite;
+  -webkit-animation: rotate 4s ease-in-out 0.1s infinite;
+}
+
+@keyframes rotate {
+  0%{
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+}
 }
 .side-bar nav ul {
   list-style: none;
