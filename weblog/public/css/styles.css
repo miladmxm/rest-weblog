@@ -11,6 +11,7 @@
   outline: none;
   font-family: "Vazir", Tahoma;
   text-decoration: none;
+  color: inherit;
 }
 body {
   width: 100%;
@@ -43,6 +44,33 @@ body {
 .top50{
   padding-top: 50px;
 }
+
+/* tooltip : class = "tooltip" data-tooltip="your message" */
+.tooltip{
+  position: relative;
+}
+.tooltip::before{
+  content: attr(data-tooltip);
+  position: absolute;
+  width: 100%;
+  padding: 5px 10px;
+  background-color: rgba(228, 224, 224, 0.89);
+  font-size: 11px;
+  top: 130%;
+  right: 65%;
+  border-radius: 5px 0 5px 5px;
+  color: #333c;
+  opacity: 0;
+  transition: all ease-in-out 0.3s;
+  transition-delay: 0.3s;
+}
+
+.tooltip:hover::before{
+  opacity: 1;
+  top: 100%;
+}
+
+
 .alertBox {
   display: flex;
   align-items: center;
