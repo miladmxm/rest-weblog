@@ -68,7 +68,6 @@
   left: 1%;
 }
 
-
 /* side bar */
 
 .side-bar {
@@ -82,7 +81,7 @@
   padding: 30px 30px 30px 0;
   box-sizing: border-box;
 }
-.side-bar header{
+.side-bar header {
   color: #f2f2f2;
   font-size: 18px;
   text-align: center;
@@ -95,17 +94,20 @@
   height: 100%;
   position: relative;
 }
-.side-bar nav .side-settingShow {
+.side-bar nav ul{
+  position: relative;
+}
+.side-settingShow {
   content: "\f013";
   font-family: FontAwesome;
   position: absolute;
   display: block;
-  width: 13%;
-  height: 50px;
+  width: 34px;
+  height: 40px;
   top: 15px;
-  right: -13%;
+  right: -34px;
   background-color: #445;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 8px 8px 0;
   color: #fff;
   display: flex;
   align-items: center;
@@ -113,26 +115,38 @@
   font-size: 120%;
   cursor: pointer;
 }
-.side-bar nav .side-settingShow::before {
+.side-settingShow::before {
   animation: rotate 0.5s ease-in-out 0.2s infinite;
   -webkit-animation: rotate 4s ease-in-out 0.1s infinite;
 }
 
+.side-settingShow.for-show {
+  position: fixed;
+  top: 54px;
+  right: 0;
+  width: 34px;
+  left: 95%;
+  border-radius: 8px 0 0 8px;
+  z-index: 100;
+  height: 40px;
+  opacity: 0;
+}
+
 @keyframes rotate {
-  0%{
+  0% {
     transform: rotate(0);
     -webkit-transform: rotate(0);
     -moz-transform: rotate(0);
     -ms-transform: rotate(0);
     -o-transform: rotate(0);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     -o-transform: rotate(360deg);
-}
+  }
 }
 .side-bar nav ul {
   list-style: none;
@@ -142,7 +156,7 @@
 .side-bar nav ul li {
   margin: 5px auto;
 }
-.side-bar nav ul li .fa {
+.side-bar>nav>ul>li>.fa {
   margin: 0 10px;
   color: #fff;
 }
@@ -204,11 +218,51 @@ td a:active {
   background-color: #681711;
 }
 
-@media screen and (max-width: 650px) {
-  #dashboard {
-    width: 98%;
-  }
+.side-bar .serchbar{
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  
   .dashboard-header {
     width: 98%;
+  }
+  .side-bar {
+    transform: translateX(140%);
+    visibility: hidden;
+    transition: all ease-in-out 0.4s;
+    width: 50%;
+  }
+  .contentDash {
+    width: 95%;
+  }
+  .side-settingShow.for-show{
+    opacity: 1;
+    transition: opacity 0.1s linear 0.2s;
+  }
+  .side-settingShow.for-show.hide{
+    opacity: 0 !important;
+  }
+  .side-bar.showSide{
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .dashboard-header .serchbar{
+    width: 50%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .side-bar {
+    width: 85%;
+  }
+  .dashboard-header>.serchbar{
+    display: none;
+  }
+  .side-bar .serchbar{
+    display: inherit;
+    width: 98%;
+  }
+  .side-bar .serchbar button{
+    left: -20px;
   }
 }

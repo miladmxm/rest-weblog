@@ -1,35 +1,55 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import DropShadow from "../../../utils/brop-shadow";
+import SearchForm from "./search";
 
 const Aside = () => {
-    const [toggleSide ,setToggleSide] = useState(false)
-    const sideToggler = () => {
-        setToggleSide(!toggleSide)
-    }
-    return (
-        
-        <aside className={toggleSide ?"side-bar showSide":"side-bar"}>
-        <header>داشبورد وبلاگ <img stc="./img/logo.png" /></header>
+  const [toggleSide, setToggleSide] = useState(false);
+  const sideShow = () => {
+    setToggleSide(true);
+  };
+  const sideHide = () => {
+    setToggleSide(false);
+  };
+  return (
+    <>
+      <i
+        onClick={sideShow}
+        className={
+          toggleSide
+            ? "fa fa-cog side-settingShow for-show hide"
+            : "fa fa-cog side-settingShow for-show"
+        }
+      ></i>
+      <aside className={toggleSide ? "side-bar showSide" : "side-bar"}>
+        <header>
+          داشبورد وبلاگ <img stc="./img/logo.png" />
+        </header>
         <nav>
-            <ul>
-                <li>
-                    <Link className="active" href="">
-                        <i className="fa fa-book"></i>
-                        پست ها
-                    </Link>
-                </li>
-                <li>
-                    <i className="fa fa-plus"></i>
-                    <Link href="">افزودن پست</Link>
-                </li>
-                <li>
-                    <i className="fa fa-cog"></i>
-                    <Link href="">تنظیمات حساب</Link>
-                </li>
-            </ul>
-            <i onClick={sideToggler} className="fa fa-cog side-settingShow"></i>
+          <ul>
+            <li>
+              <Link className="active" to="/dahsboard/">
+                <i className="fa fa-book"></i>
+                پست ها
+              </Link>
+            </li>
+            <li>
+              <i className="fa fa-plus"></i>
+              <Link to="/dahsboard/add-post">افزودن پست</Link>
+            </li>
+            <li>
+              <i className="fa fa-cog"></i>
+              <Link to="/dahsboard/setting">تنظیمات حساب</Link>
+            </li>
+            <li>
+              <SearchForm />
+            </li>
+            <i onClick={sideHide} className="fa fa-cog side-settingShow"></i>
+          </ul>
         </nav>
-    </aside>
-    )
-}
-export default Aside
+      </aside>
+      <DropShadow click={sideHide} toggleShow={toggleSide} />
+    </>
+  );
+};
+export default Aside;
