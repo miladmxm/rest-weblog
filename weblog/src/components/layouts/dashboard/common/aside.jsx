@@ -28,8 +28,8 @@ const Aside = () => {
         <nav>
           <ul>
             <li>
+              <i className="fa fa-book"></i>
               <Link className="active" to="/dahsboard/">
-                <i className="fa fa-book"></i>
                 پست ها
               </Link>
             </li>
