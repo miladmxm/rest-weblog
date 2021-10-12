@@ -78,9 +78,6 @@ label {
   background-color: rgb(126, 37, 25);
   color: #fff;
 }
-
-.uploadFile {
-}
 .uploadFile input {
   opacity: 0;
   width: 100%;

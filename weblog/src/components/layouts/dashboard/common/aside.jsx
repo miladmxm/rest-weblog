@@ -29,17 +29,17 @@ const Aside = () => {
           <ul>
             <li>
               <i className="fa fa-book"></i>
-              <Link className="active" to="/dahsboard/">
+              <Link className="active" to="/dashboard/">
                 پست ها
               </Link>
             </li>
             <li>
               <i className="fa fa-plus"></i>
-              <Link to="/dahsboard/add-post">افزودن پست</Link>
+              <Link to="/dashboard/add-post">افزودن پست</Link>
             </li>
             <li>
               <i className="fa fa-cog"></i>
-              <Link to="/dahsboard/setting">تنظیمات حساب</Link>
+              <Link to="/dashboard/setting">تنظیمات حساب</Link>
             </li>
             <li>
               <SearchForm />

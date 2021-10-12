@@ -5,6 +5,7 @@ import Contact from "./components/layouts/blog/contact";
 import Login from "./components/layouts/blog/login";
 import Rejister from "./components/layouts/blog/register";
 import Single from "./components/layouts/blog/single";
+import AddPost from "./components/layouts/dashboard/addPost";
 import DashBlogs from "./components/layouts/dashboard/DashBlogs";
 import MainLayout from "./components/layouts/mainLayout";
 
@@ -24,7 +25,7 @@ const App = ({ location }) => {
 
           {/* dashboard router  */}
           <Route path="/dashboard" exact component={DashBlogs} />
-          <Route path="/dashboard/add-post" exact component={DashBlogs} />
+          <Route path="/dashboard/add-post" exact component={AddPost} />
           <Route path="/dashboard/edit-post" exact component={DashBlogs} />
 
 
