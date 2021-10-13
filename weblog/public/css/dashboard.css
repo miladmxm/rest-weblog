@@ -53,12 +53,20 @@
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.4s ease-in-out;
+  margin: 10px;
 }
 .btn:hover {
   opacity: 1;
   transform: scale(1.1);
 }
-
+.btn.btn-success{
+  background-color: #04aa6d;
+  color: #fff;
+}
+.btn.btn-denger{
+  background-color: #aa0404;
+  color: #fff;
+}
 /* content */
 .contentDash {
   width: 72%;
@@ -139,6 +147,12 @@
 
 /*  add post  */
 
+.add-post{
+  width: 70%;
+  display: block;
+  margin: 15px auto;
+}
+
 .input-outlined{
   border: 2px solid #1b1b1bb2;
   border-radius: 6px;
@@ -146,10 +160,9 @@
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
-  width: 40%;
+  width: 100%;
   padding: 10px;
   background-color: transparent;
-  margin: 50px auto;
   box-sizing: border-box;
   opacity: 0.8;
 }
@@ -157,13 +170,16 @@
   width: auto;
   height: auto;
   position: relative;
+  display: block;
+  width: 100%;
+  margin: 12px 5px;
 }
 .fildinput span{
   cursor: text;
   z-index: 110;
-  top: -80%;
+  top: -20%;
   background-color: #f2f2f2;
-  font-size: 80%;
+  font-size: 70%;
   right: 10px;
   position: absolute;
   color: #333d;
@@ -177,15 +193,15 @@
   transition-property: top font-size;
 }
 .input-outlined[data-value = "true"] + span{
-  top: 0;
+  top: 23%;
   background-color: transparent;
   font-size: 100%;
   z-index: 1;
 }
 .input-outlined:focus + span{
-  top: -80%;
+  top: -20%;
   background-color: #f2f2f2;
-  font-size: 80%;
+  font-size: 70%;
 }
 .input-outlined:focus{
   opacity: 1;
@@ -200,6 +216,129 @@ select.input-outlined{
 select.input-outlined:focus{
   text-indent: 0;
 }
+
+
+/* select file */
+
+.uploadFile{
+  width: 100%;
+  height: 150px;
+  border: 1px solid rgba(235, 232, 232, 0.2);
+  background-color: rgba(201, 201, 201, 0.24);
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.uploadFile input{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.uploadFile span {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+.uploadFile img.preW{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  display: none;
+}
+.progress,
+.progressBar {
+  width: 50%;
+  height: 15px;
+  background-color: rgba(163, 158, 158, 0.274);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.progressBar {
+  background: rgb(0, 212, 255);
+  background: linear-gradient(
+    71deg,
+    rgba(0, 212, 255, 1) 0%,
+    rgba(33, 33, 241, 1) 100%
+  );
+  width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+}
+
+
+#copyBox {
+  width: 80%;
+  border: none;
+  outline: none;
+  background-color: #fff4;
+  padding: 12px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.hideTop {
+  height: 0px;
+  width: 100%;
+  overflow: hidden;
+}
+.hideTop * {
+  transition: all 0.4s ease-in-out;
+  transform: translateY(-100px);
+  -webkit-transform: translateY(-100px);
+  -moz-transform: translateY(-100px);
+  -ms-transform: translateY(-100px);
+  -o-transform: translateY(-100px);
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+}
+.hideTop.showing {
+  height: 50px;
+}
+
+.hideTop.showing * {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+}
+
+
 @keyframes rotate {
   0% {
     transform: rotate(0);
@@ -323,6 +462,10 @@ td a:active {
   .side-bar {
     width: 85%;
   }
+  .contentDash{
+    margin-left: auto;
+    margin-right: auto;
+  }
   .dashboard-header>.serchbar{
     display: none;
   }
@@ -332,5 +475,8 @@ td a:active {
   }
   .side-bar .serchbar button{
     left: -20px;
+  }
+  .add-post{
+    width: 90%;
   }
 }
