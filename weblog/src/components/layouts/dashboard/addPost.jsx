@@ -28,7 +28,7 @@ const AddPost = () => {
           <span>عنوان پست</span>
         </label>
         <div className="">
-          <label className="fildinput" for="status">
+          <label className="fildinput" htmlFor="status">
             <select
               className="input-outlined"
               data-value="true"
@@ -55,7 +55,7 @@ const AddPost = () => {
         </div> */}
 
         <div className="">
-          <label for="body">متن اصلی</label>
+          <label htmlFor="body">متن اصلی</label>
           <CKEditor
             config={{ language: "fa" }}
             // initData={}

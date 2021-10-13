@@ -42,6 +42,10 @@ const Aside = () => {
               <Link to="/dashboard/setting">تنظیمات حساب</Link>
             </li>
             <li>
+              <i className="fa fa-upload"></i>
+              <Link to="#">آپلود کردن تصویر</Link>
+            </li>
+            <li>
               <SearchForm />
             </li>
             <i onClick={sideHide} className="fa fa-cog side-settingShow"></i>
