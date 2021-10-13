@@ -4,6 +4,7 @@
   min-height: 100vh;
   background-color: #f2f2f2;
   position: relative;
+  padding-top: 10px;
 }
 
 .table {
@@ -62,13 +63,12 @@
 .contentDash {
   width: 72%;
   box-shadow: 1px 1px 8px #3333;
-  margin-top: 65px;
+  margin: 65px auto 10px 20px;
   border-radius: 8px;
   overflow: hidden;
   padding: 10px;
   box-sizing: border-box;
-  position: absolute;
-  left: 1%;
+  display: block;
 }
 
 /* side bar */
@@ -161,7 +161,9 @@
 .fildinput span{
   cursor: text;
   z-index: 110;
-  top: 0;
+  top: -80%;
+  background-color: #f2f2f2;
+  font-size: 80%;
   right: 10px;
   position: absolute;
   color: #333d;
@@ -174,6 +176,12 @@
   -o-transition: ease-in-out 0.1s;
   transition-property: top font-size;
 }
+.input-outlined[data-value = "true"] + span{
+  top: 0;
+  background-color: transparent;
+  font-size: 100%;
+  z-index: 1;
+}
 .input-outlined:focus + span{
   top: -80%;
   background-color: #f2f2f2;
@@ -183,6 +191,15 @@
   opacity: 1;
 }
 
+select.input-outlined{
+  text-indent: 100px;
+  box-sizing: border-box;
+  transition: all ease 0.1s;
+}
+
+select.input-outlined:focus{
+  text-indent: 0;
+}
 @keyframes rotate {
   0% {
     transform: rotate(0);
