@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextDash } from "../../../context/context";
 import DropShadow from "../../../utils/brop-shadow";
+import UploadBox from "../../../utils/uploadBox";
 import SearchForm from "./search";
 
 const Aside = () => {
 
   const dashContext = useContext(ContextDash)
-  const { sideShow, toggleSide, sideHide } = dashContext
+  const { sideShow, toggleSide, sideHide,showUploadBox } = dashContext
 
   return (
     <>
@@ -41,7 +42,7 @@ const Aside = () => {
             </li>
             <li>
               <i className="fa fa-upload"></i>
-              <Link to="#">آپلود کردن تصویر</Link>
+              <Link onClick={showUploadBox} to="#">آپلود کردن تصویر</Link>
             </li>
             <li>
               <SearchForm />
@@ -51,6 +52,7 @@ const Aside = () => {
         </nav>
       </aside>
       <DropShadow />
+      <UploadBox />
     </>
   );
 };

@@ -42,18 +42,6 @@ const AddPost = () => {
           </label>
         </div>
         
-        {/* <div className="">
-          <div className="progress">
-            <div className="progressBar"></div>
-          </div>
-          <div className="row hideTop">
-            <input readonly id="copyBox" value="سلام" />
-            <button id="copyURL" className="btn" type="button">
-              کپی
-            </button>
-          </div>
-        </div> */}
-
         <div className="">
           <label htmlFor="body">متن اصلی</label>
           <CKEditor

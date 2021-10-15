@@ -55,6 +55,15 @@
   transition: all 0.4s ease-in-out;
   margin: 10px;
 }
+.btn-sm{
+  font-size: small;
+  padding: 4px 7px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
 .btn:hover {
   opacity: 1;
   transform: scale(1.1);
@@ -266,7 +275,7 @@ select.input-outlined:focus{
 }
 .progress,
 .progressBar {
-  width: 50%;
+  width: 100%;
   height: 15px;
   background-color: rgba(163, 158, 158, 0.274);
   border-radius: 20px;
@@ -297,7 +306,7 @@ select.input-outlined:focus{
 
 
 #copyBox {
-  width: 80%;
+  width: 100%;
   border: none;
   outline: none;
   background-color: #fff4;
@@ -309,10 +318,27 @@ select.input-outlined:focus{
   -o-border-radius: 5px;
 }
 
+.btnCopy{
+  position: absolute;
+  left: 0;
+  width: 8%;
+  background-color: rgb(3, 84, 131);
+  color: #f2f2f2;
+  height: 100%;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px 0 0 5px;
+  -moz-border-radius: 5px 0 0 5px;
+  -ms-border-radius: 5px 0 0 5px;
+  -o-border-radius: 5px 0 0 5px;
+  cursor: pointer;
+}
+
 .hideTop {
   height: 0px;
-  width: 100%;
+  width: 80%;
   overflow: hidden;
+  position: relative;
 }
 .hideTop * {
   transition: all 0.4s ease-in-out;
@@ -327,7 +353,7 @@ select.input-outlined:focus{
   -o-transition: all 0.4s ease-in-out;
 }
 .hideTop.showing {
-  height: 50px;
+  height: 100%;
 }
 
 .hideTop.showing * {
@@ -427,6 +453,63 @@ td a:active {
 
 .side-bar .serchbar{
   display: none;
+}
+
+
+/*  upload box */
+.uoloadBox{
+  width: 80%;
+  position: fixed;
+  height: 90%;
+  top: 5%;
+  right: 10%;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  box-shadow: 5px 5px 15px #333d;
+  z-index: 105;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  animation: boxShow 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+  -webkit-animation: boxShow 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.uoloadBox .container{
+  width: 80%;
+  margin: auto;
+}
+.uoloadBox .uploadFile{
+  width: 100%;
+  margin: auto;
+}
+
+.uoloadBox .row{
+  width: 100%;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+@keyframes boxShow{
+  0%{
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
 }
 
 @media screen and (max-width: 900px) {
