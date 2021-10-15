@@ -442,6 +442,8 @@ td a:active {
   }
   .contentDash {
     width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .side-settingShow.for-show{
     opacity: 1;
@@ -461,10 +463,6 @@ td a:active {
 @media screen and (max-width: 450px) {
   .side-bar {
     width: 85%;
-  }
-  .contentDash{
-    margin-left: auto;
-    margin-right: auto;
   }
   .dashboard-header>.serchbar{
     display: none;
