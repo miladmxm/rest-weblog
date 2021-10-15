@@ -1,7 +1,11 @@
-import React from 'react';
-const DropShadow = ({click,toggleShow}) => {
+import React, { useContext } from 'react';
+import { ContextDash } from '../context/context';
+const DropShadow = () => {
+    const modalContext = useContext(ContextDash)
+    const { DropShadowToggle, DropShadowClick ,setDropShadowToggle} = modalContext
+    
     return ( 
-        <div onClick={click} className={toggleShow?"dropShadow show":"dropShadow"}>
+        <div onClick={DropShadowClick} className={DropShadowToggle ? "dropShadow show" : "dropShadow"}>
         </div>
      );
 }

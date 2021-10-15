@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { ContextDash } from "../../../context/context";
 import DropShadow from "../../../utils/brop-shadow";
 import SearchForm from "./search";
 
 const Aside = () => {
-  const [toggleSide, setToggleSide] = useState(false);
-  const sideShow = () => {
-    setToggleSide(true);
-  };
-  const sideHide = () => {
-    setToggleSide(false);
-  };
+
+  const dashContext = useContext(ContextDash)
+  const { sideShow, toggleSide, sideHide } = dashContext
+
   return (
     <>
       <i
@@ -52,7 +50,7 @@ const Aside = () => {
           </ul>
         </nav>
       </aside>
-      <DropShadow click={sideHide} toggleShow={toggleSide} />
+      <DropShadow />
     </>
   );
 };
