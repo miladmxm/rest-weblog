@@ -8,7 +8,7 @@ const UploadBox = () => {
         <>
             <DropShadow click={()=>setToggleUp(false)} toggleShow={toggleUp} />
             <section className="uoloadBox">
-                <UploadImg name="image" uploadChange={e=>console.log(e)}title="تصویر جهت آپلود انتخاب کنید" />
+                <UploadImg name="image" uploadChange={e=>console.log(e)}title="یک تصویر جهت آپلود انتخاب کنید" />
             </section>
         </>
     )
