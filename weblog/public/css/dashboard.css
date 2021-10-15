@@ -272,6 +272,8 @@ select.input-outlined:focus{
   object-fit: cover;
   opacity: 0.8;
   display: none;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
 }
 .progress,
 .progressBar {
