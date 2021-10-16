@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 const ImageUploaded = ({ url }) => {
     const urlHide = useRef()
     const copyImg=() =>{
-        console.log(urlHide.current);
         urlHide.current.select()
         document.execCommand("copy")
     }
