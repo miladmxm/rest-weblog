@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ContextDash } from "../context/context";
 import DropShadow from "./brop-shadow";
 import CopyBox from "./copyText";
+import ImgShow from "./imgShow";
 import UploadImg from "./uploadimage";
 
 const UploadBox = () => {
@@ -23,9 +24,7 @@ const UploadBox = () => {
                             <button className="btn btn-success btn-sm sendImg" onClick={()=>copyBoxShow('https://tpc.googlesyndication.com/simgad/8307608687953688610/downsize_200k_v1?sqp=4sqPyQSWAUKTAQgAEhQNzczMPhUAAABAHQAAAAAlAAAAABgAIgoNAACAPxUAAIA_Kk8IWhABHQAAtEIgASgBMAY4A0CAwtcvSABQAFgAYFpwAngAgAEAiAEAkAEAnQEAAIA_oAEAqAEAsAGAreIEuAH___________8BxQEtsp0-MhoIqgIQnAEYASABLQAAAD8wqgI4nAFFAACAPw&rs=AOga4qnaLPcVla9-NeRjiZgiCZmf7n4nGA')}>ارسال عکس</button>
                             <CopyBox />
                         </div>
-                        <div className="row">
-                            
-                        </div>
+                        <ImgShow />
                     </div>
                 </section>
             </>

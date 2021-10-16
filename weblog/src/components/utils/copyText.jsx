@@ -13,7 +13,7 @@ const CopyBox = () => {
         <>
             <div className={textForCopy.length > 4 ? "hideTop showing" : "hideTop"}>
                 <div className="row">
-                <input readonly id="copyBox" ref={inputEl} value={textForCopy} />
+                <input readOnly id="copyBox" ref={inputEl} value={textForCopy} />
                 <button id="copyURL" onClick={copyTxt} className="btnCopy" type="button">
                     <i className="fa fa-copy"></i>
                 </button>
