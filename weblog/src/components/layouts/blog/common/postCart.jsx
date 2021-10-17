@@ -1,7 +1,7 @@
 import React from "react";
 import { localhost } from '../../../../services/config.json'
 import { Link } from 'react-router-dom'
-const PostCart = ({ thumbnail, body, title, fullname, createdAt }) => {
+const PostCart = ({ thumbnail,id, body, title, fullname, createdAt }) => {
    
     return (
         <>
@@ -12,7 +12,7 @@ const PostCart = ({ thumbnail, body, title, fullname, createdAt }) => {
                     <div className="bodyPost minImg" dangerouslySetInnerHTML={{ __html: body }}>
                       
                     </div>
-                    <Link className="readMore" to="/single/15sdasf5d36h8rs">خوندن ادامه</Link>
+                    <Link className="readMore" to={`/single/${id}`}>خوندن ادامه</Link>
                 </div>
                 <footer>
                     <span>تاریخ انتشار : { createdAt}</span>
