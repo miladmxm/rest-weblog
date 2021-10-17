@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { findPost } from "../../utils/findPost";
 import { localhost } from "../../../services/config.json"
+import { formatDate } from "../../utils/jalali";
 const Single = (props) => {
 
     const posts = useSelector(state => state.getBlog)
@@ -14,12 +15,11 @@ const Single = (props) => {
                 <img src={`${localhost}/uploads/thumbnails/${thumbnail}`} />
                 <div className="main">
                     <h2>{title}</h2>
-                    <div className="bodyPost">
-                        {body}
+                    <div className="bodyPost" dangerouslySetInnerHTML={{ __html: body }}>
                     </div>
                 </div>
                 <footer>
-                    <span>تاریخ انتشار: { createdAt}</span>
+                    <span>تاریخ انتشار: { formatDate(createdAt)}</span>
                     <span>نویسنده: {user.fullname} </span>
                 </footer>
             </article>
