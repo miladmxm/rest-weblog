@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextDash } from "../../../context/context";
-import DropShadow from "../../../utils/brop-shadow";
-import UploadBox from "../../../utils/uploadBox";
+import DropShadow from "../../../ui/brop-shadow";
+import UploadBox from "../../../ui/uploadBox";
 import SearchForm from "./search";
 
 const Aside = () => {

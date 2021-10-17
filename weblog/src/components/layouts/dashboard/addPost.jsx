@@ -1,6 +1,6 @@
 import React from "react";
 import { CKEditor } from "ckeditor4-react";
-import UploadImg from "../../utils/uploadimage";
+import UploadImg from "../../ui/uploadimage";
 
 const AddPost = () => {
   const titleHadnler = (e) => {
