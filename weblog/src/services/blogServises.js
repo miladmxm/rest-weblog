@@ -9,3 +9,7 @@ export const getAllPosts = () => {
 export const registerUser =(data)=>{
    return http.post(`${config.localhost}/users/register` , JSON.stringify(data))
 }
+
+export const loginUser =(data)=>{
+   return http.post(`${config.localhost}/users/login` , JSON.stringify(data))
+}
