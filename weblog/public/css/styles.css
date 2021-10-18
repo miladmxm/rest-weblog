@@ -37,6 +37,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 .fixed-top {
   position: fixed;
@@ -136,6 +137,7 @@ body {
 }
 
 .alertBox.show {
+  pointer-events: visible;
   display: flex;
   animation: ShowAlert 1s ease forwards;
   -webkit-animation: ShowAlert 1s ease forwards;
@@ -182,6 +184,7 @@ body {
   right: 0;
   animation: timeout 5s linear forwards;
   -webkit-animation: timeout 5s linear forwards;
+
 }
 .alertBox.show.alertBox-error::before {
   background-color: rgb(236, 108, 108);
@@ -375,6 +378,12 @@ display: none;
   opacity: 1;
 }
 
+
+@media screen and (max-width: 400px) {
+  .alertBox{
+    width: 70vw;
+  }
+}
 
 @media screen and (max-width: 700px) {
   .postCart {
