@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-const Message = ({ message, classN , index}) => {
+const Message = ({ message, classN , index = 1}) => {
   const [alertClass, setAlertClass] = useState("hidden-alertBox");
   const [timer, setTimer] = useState(null);
 
@@ -16,7 +16,6 @@ const Message = ({ message, classN , index}) => {
       }, 5000)
     );
   };
-  console.log(alertClass);
 
   useEffect(() => {
     setTimeout(() => {
