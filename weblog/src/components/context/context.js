@@ -14,4 +14,8 @@ export const ContextDash = createContext({
     textForCopy: '',
     setTextForCopy: () => { },
     copyBoxShow: () => { },
+    messageArr: [],
+    typeOfMessage: '',
+    setMessage: () => { },
+    setMessageArr: ()=>{}
 })

@@ -1,22 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { registerUser } from '../../../services/blogServises'
-import { MessageError, MessageSuccess } from '../../ui/messages'
+import { ContextDash } from '../../context/context'
 
-const Rejister = () => {
+const Rejister = ({history}) => {
     const [fullname,setFullname] = useState('')
     const [email, setEmail]=useState('')
     const [password,setPassword] = useState('')
     const [repassword,setRepassword]=useState('')
-
-    const [errorRes,setErrorRes] = useState([])
-
+    const {setMessage,setMessageArr} = useContext(ContextDash)
     const reset = ()=>{
         setFullname('')
         setEmail('')
         setPassword('')
         setRepassword('')
     }
-    const registerHandler =async e=>{
+    const registerHandler = async e => {
+        setMessageArr([])
         e.preventDefault()
         const datas = {
             fullname,
@@ -26,10 +25,10 @@ const Rejister = () => {
         }
         
         try {
-          const {data} = await registerUser(datas)
-          
-          console.log(data);
-          reset()
+            const {data} = await registerUser(datas)
+            setMessage(['ثبت نام شما موفقیت آمیز بود'], "success")
+            history.replace('/login')
+            reset()
         } catch (ex) {
             let err = []
             if(ex.response.data.data){
@@ -40,17 +39,13 @@ const Rejister = () => {
                 err.push(ex.response.data.message)
                 console.log('bb');
             }
-            setErrorRes(err)
-            console.log(errorRes);
-            console.log( ex.response.data);
+            setMessage(err,'error')
         }
     }
     return (
         <main id="main">
-        <MessageError errors={errorRes}/>
-        <MessageSuccess message={errorRes}/>
             <h2 className="title">ثبت نام در سایت</h2>
-            <form className="loginForm" onSubmit={(e)=>registerHandler(e)}>
+            <form className="loginForm" onSubmit={(e) => registerHandler(e)}>
                 <input
                     type="text"
                     name="fullname"

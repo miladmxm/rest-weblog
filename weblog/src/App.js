@@ -9,6 +9,7 @@ import Single from "./components/layouts/blog/single";
 import AddPost from "./components/layouts/dashboard/addPost";
 import DashBlogs from "./components/layouts/dashboard/DashBlogs";
 import MainLayout from "./components/layouts/mainLayout";
+import { Messages } from "./components/ui/messages";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
@@ -16,6 +17,7 @@ const App = ({ location }) => {
     <>
       <DashContext>
         <MainLayout dashboard={isDashboard}>
+        <Messages />
           <Switch>
             {/* blog router  */}
             <Route path="/" exact component={Blog} />
@@ -24,17 +26,16 @@ const App = ({ location }) => {
             <Route path="/register" exact component={Rejister} />
             <Route path="/contact" exact component={Contact} />
 
-
             {/* dashboard router  */}
             <Route path="/dashboard" exact component={DashBlogs} />
             <Route path="/dashboard/add-post" exact component={AddPost} />
             <Route path="/dashboard/edit-post" exact component={DashBlogs} />
 
-
             <Route path="*" render={() => <p style={{ margin: '150px auto', width: '100%' }}>404</p>} />
           </Switch>
         </MainLayout>
       </DashContext>
+
     </>
   );
 }

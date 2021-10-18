@@ -5,9 +5,9 @@ const DashContext = ({ children }) => {
   const [DropShadowToggle, setDropShadowToggle] = useState(false);
   const [toggleSide, setToggleSide] = useState(false);
   const [uploadBoxShow, setUploadBoxShow] = useState(false)
-  const [showCopyText, setShowCopyText] = useState(false)
   const [textForCopy, setTextForCopy] = useState('')
-
+  const [messageArr, setMessageArr] = useState([])
+  const [typeOfMessage, setTypeOfMessage] = useState('error')
   const sideShow = () => {
     setToggleSide(true);
     setDropShadowToggle(true)
@@ -31,6 +31,11 @@ const DashContext = ({ children }) => {
   const copyBoxShow = (text) => {
     setTextForCopy(text)
   }
+
+  const setMessage = (message, type)=>{
+    setMessageArr(message)
+    setTypeOfMessage(type)
+  }
   return (
     <ContextDash.Provider value={{
       DropShadowToggle,
@@ -45,7 +50,11 @@ const DashContext = ({ children }) => {
       showUploadBox,
       textForCopy,
       setTextForCopy,
-      copyBoxShow
+      copyBoxShow,
+      messageArr,
+      typeOfMessage,
+      setMessage,
+      setMessageArr
     }}>
       {children}
     </ContextDash.Provider>
