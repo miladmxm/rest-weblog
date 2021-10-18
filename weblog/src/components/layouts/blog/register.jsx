@@ -1,9 +1,10 @@
 import React from 'react'
+import { MessageError } from '../../ui/messages'
 
 const Rejister = () => {
     return (
         <main id="main">
-            {/* message */}
+            <MessageError errors={['salam','daal']}/>
             <h2 className="title">ثبت نام در سایت</h2>
             <form className="loginForm">
                 <input

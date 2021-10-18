@@ -99,6 +99,7 @@ body {
 }
 
 .alertBox.hide {
+  opacity: 1;
   animation: HideAlert 1s ease forwards reverse;
   -webkit-animation: HideAlert 1s ease forwards reverse;
 }
