@@ -8,6 +8,7 @@ const DashContext = ({ children }) => {
   const [textForCopy, setTextForCopy] = useState('')
   const [messageArr, setMessageArr] = useState([])
   const [typeOfMessage, setTypeOfMessage] = useState('error')
+
   const sideShow = () => {
     setToggleSide(true);
     setDropShadowToggle(true)
@@ -35,6 +36,9 @@ const DashContext = ({ children }) => {
   const setMessage = (message, type)=>{
     setMessageArr(message)
     setTypeOfMessage(type)
+    setTimeout(() => {
+      setMessageArr([])
+    },8000)
   }
   return (
     <ContextDash.Provider value={{

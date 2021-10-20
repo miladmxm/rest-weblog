@@ -37,7 +37,6 @@ const Rejister = ({history}) => {
                 });
             }else{
                 err.push(ex.response.data.message)
-                console.log('bb');
             }
             setMessage(err,'error')
         }

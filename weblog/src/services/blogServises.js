@@ -13,3 +13,7 @@ export const registerUser =(data)=>{
 export const loginUser =(data)=>{
    return http.post(`${config.localhost}/users/login` , JSON.stringify(data))
 }
+
+export const contact =(data)=>{
+   return http.post(`${config.localhost}/contact` , JSON.stringify(data))
+}

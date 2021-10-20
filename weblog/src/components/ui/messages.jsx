@@ -4,10 +4,10 @@ import Message from "./message";
 
 export const Messages = () => {
   const context = useContext(ContextDash)
-  const {typeOfMessage, messageArr} = context
+  const { typeOfMessage, messageArr } = context
   if (messageArr.length > 0) {
     switch (typeOfMessage) {
-      case "error":return (
+      case "error": return (
         <div className="fixedR">
           {messageArr.map((err, index) => {
             return (
@@ -21,7 +21,7 @@ export const Messages = () => {
           })}
         </div>
       );
-      case "success":return (
+      case "success": return (
         <div className="fixedR">
           <Message
             classN=""
@@ -29,37 +29,12 @@ export const Messages = () => {
           />
         </div>
       );
-      default:return null
+      default: return null
     }
+
   } else {
     return null
   }
-  // if (errors.length > 0) {
-  //   return (
-  //     <div className="fixedR">
-  //       {errors.map((err, index) => {
-  //         return (
-  //           <Message
-  //             key={index}
-  //             index={index}
-  //             classN="alertBox-error"
-  //             message={err}
-  //           />
-  //         );
-  //       })}
-  //     </div>
-  //   );
-  // }else if (message.length > 0) {
-  //   return (
-  //     <div className="fixedR">
-  //       <Message
-  //         classN=""
-  //         message={message}
-  //       />
-  //     </div>
-  //   );
-  // } else {
-  //   return null;
-  // }
+
 };
 
