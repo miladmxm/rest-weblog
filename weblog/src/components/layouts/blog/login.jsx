@@ -7,6 +7,7 @@ const Login = ({history}) => {
     const [isCaptcha, setIsCaptcha] = useState(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [reMember,setReMember] = useState(false)
     const { setMessage, setMessageArr } = useContext(ContextDash)
     const captcha = (value) => {
         if (value) {
@@ -19,6 +20,7 @@ const Login = ({history}) => {
         setEmail('')
         setPassword("")
         setIsCaptcha('')
+        setReMember(false)
     }
     const loginHandler = async (e) => {
         setMessageArr([])
@@ -26,6 +28,7 @@ const Login = ({history}) => {
         const datas = {
             email,
             password,
+            reMember,
             grecaptcharesponse:isCaptcha
         }
         try {
@@ -62,7 +65,7 @@ const Login = ({history}) => {
                 <input type="password" name="password" id="password" placeholder="رمز عبور را وارد کنید" required value={password} onChange={e=>setPassword(e.target.value)} />
                 <div className="remember">
                     <label htmlFor="reMember">مرا به خاطر بسپار</label>
-                    <input name="reMember" className="checkedBeautiful" id="reMember" type="checkbox" />
+                    <input name="reMember" value={reMember} onChange={e=>{setReMember(e.target.checked)}} className="checkedBeautiful" id="reMember" type="checkbox" />
                 </div>
                 <div className="g-recaptcha">
                     {isCaptcha !== ''? <ReCAPTCHA
