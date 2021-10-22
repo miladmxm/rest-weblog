@@ -1,14 +1,20 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { loginUser } from '../../../services/blogServises'
 import { Link } from "react-router-dom";
 import { ContextDash } from "../../context/context";
+import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../action/user";
+import { decodedToken } from "../../utils/decodedToken";
+
 const Login = ({history}) => {
     const [isCaptcha, setIsCaptcha] = useState(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [reMember,setReMember] = useState(false)
     const { setMessage, setMessageArr } = useContext(ContextDash)
+    const dispatch = useDispatch()
     const captcha = (value) => {
         if (value) {
             setIsCaptcha(value)
@@ -35,8 +41,12 @@ const Login = ({history}) => {
             const {data,status} = await loginUser(datas)
             if (status === 200) {
                 reset()
+                
                 console.log(data.token);
-                localStorage.setItem('token',data.token)
+                const {payload} = decodedToken(data.token)
+                dispatch(addUser(payload.user))
+                localStorage.setItem('token', data.token)
+                
                 setMessage(['با موفقیت وارد شدید'], "success")
                 history.replace('/dashboard')
             } else (
@@ -59,7 +69,9 @@ const Login = ({history}) => {
     return (
         <main id="main" onClick={() =>  isCaptcha === '' ? setIsCaptcha('d') : null }>
             <h2 className="title">ورود به بخش مدیریت</h2>
-            {/* message for validate */}
+            <Helmet>
+                <title>وبلاگ | ورود به سایت</title>
+            </Helmet>
             <form className="loginForm" onSubmit={e=>loginHandler(e)}>
                 <input type="email" name="email" id="email" placeholder="ایمیل خود را وارد کنید" required value={email} onChange={e=>setEmail(e.target.value)} />
                 <input type="password" name="password" id="password" placeholder="رمز عبور را وارد کنید" required value={password} onChange={e=>setPassword(e.target.value)} />

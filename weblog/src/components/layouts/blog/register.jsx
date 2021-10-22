@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { registerUser } from '../../../services/blogServises'
 import { ContextDash } from '../../context/context'
 
@@ -43,6 +44,9 @@ const Rejister = ({history}) => {
     }
     return (
         <main id="main">
+            <Helmet>
+                <title>وبلاگ | ثبت نام در سایت</title>
+            </Helmet>
             <h2 className="title">ثبت نام در سایت</h2>
             <form className="loginForm" onSubmit={(e) => registerHandler(e)}>
                 <input

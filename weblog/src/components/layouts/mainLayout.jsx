@@ -4,6 +4,7 @@ import HeaderDash from "./dashboard/common/header"
 import Dashboard from "./dashboard/dashlayout"
 
 const MainLayout = ({ children, dashboard }) => {
+    console.log(dashboard);
     if (dashboard) {
         return (
             <>

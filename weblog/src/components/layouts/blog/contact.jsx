@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Helmet } from "react-helmet";
 import { contact } from "../../../services/blogServises";
 import { ContextDash } from "../../context/context";
 
@@ -51,8 +52,10 @@ const Contact = ({history}) => {
     return (
         <main id="main">
             <h2 className="title">ارسال پیام به ما</h2>
-            {/* message validate */}
-            <form className="loginForm" onSubmit={e=>submitSendContact(e)}>
+            <Helmet>
+                <title>وبلاک | تماس با ما</title>
+            </Helmet>
+            <form className="loginForm" onSubmit={e => submitSendContact(e)}>
                 <input
                     type="text"
                     name="fullname"

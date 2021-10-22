@@ -1,6 +1,7 @@
 import React from "react";
 import { CKEditor } from "ckeditor4-react";
 import UploadImg from "../../ui/uploadimage";
+import { Helmet } from "react-helmet";
 
 const AddPost = () => {
   const titleHadnler = (e) => {
@@ -13,7 +14,9 @@ const AddPost = () => {
   return (
     <>
       <h2 className="contentTitle">افزودن پست جدید</h2>
-
+      <Helmet>
+        <title>داشبورد | افزودن پست</title>
+      </Helmet>
       <form className="add-post" method="POST">
         <UploadImg name="thumbnale" uploadChange={e=>console.log(e)}title="انتخاب تصویر اصلی"/>
         <label className="fildinput">

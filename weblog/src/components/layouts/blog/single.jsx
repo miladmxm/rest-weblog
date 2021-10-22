@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { findPost } from "../../utils/findPost";
 import { localhost } from "../../../services/config.json"
 import { formatDate } from "../../utils/jalali";
+import { Helmet } from "react-helmet";
 const Single = (props) => {
 
     const posts = useSelector(state => state.getBlog)
@@ -10,6 +11,9 @@ const Single = (props) => {
 
     return (
         <>
+            <Helmet>
+                <title>وبلاگ | {title }</title>
+            </Helmet>
             <div style={{ marginTop: "60px" }}></div>
             <article className="postCart w-100">
                 <img src={`${localhost}/uploads/thumbnails/${thumbnail}`} />

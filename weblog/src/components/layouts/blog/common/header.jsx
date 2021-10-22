@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+import isEmpty from "../../../utils/isEmpty";
 import SearchForm from "./search";
 
 
 const HeaderBlog = () => {
+    const user = useSelector(state => state.userHandler)
+    const [empty, setEmpty] = useState(isEmpty(user))
+    useEffect(() => {
+        setEmpty(isEmpty(user))
+    },[user])
     const [activedToggleBtn, setActivedToggleBtn] = useState(false)
     const toggleMenu = () => {
         setActivedToggleBtn(!activedToggleBtn)
     }
+
     return (
         <div className="fixed-top">
             <div className="navbar">
@@ -19,19 +27,26 @@ const HeaderBlog = () => {
 
                     <nav id="navMenu" className={activedToggleBtn ? "showNav" : ""}>
                         <ul>
-                            <li><Link className="active" to="/">خانه</Link></li>
+                            <li><NavLink exact to="/">خانه</NavLink></li>
+                            {!empty ? (
+                                <>
+                                    <li>
+                                        <NavLink to="/login">ورود</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/register">ثبت نام</NavLink>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li><NavLink to="/dashboard">پنل کاربری</NavLink></li>
+                                    <li><NavLink to="/logout">خروج</NavLink></li>
+                                </>
+                            )}
 
-                            <li><Link to="/dashboard">پنل کاربری</Link></li>
-                            <li><Link to="/users/logout">خروج</Link></li>
 
                             <li>
-                                <Link className="" to="/login">ورود</Link>
-                            </li>
-                            <li>
-                                <Link to="/register">ثبت نام</Link>
-                            </li>
-                            <li>
-                                <Link className="<%= path == '/contact'? 'active' : ''%>" to="/contact">تماس با ما</Link>
+                                <NavLink to="/contact">تماس با ما</NavLink>
                             </li>
                             <li>
                                 <SearchForm />

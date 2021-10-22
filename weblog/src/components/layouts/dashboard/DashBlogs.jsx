@@ -1,8 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom"
 const DashBlogs = () => {
     return (
         <div className="table">
+            <Helmet>
+                <title>داشبورد | همه پست ها</title>
+            </Helmet>
             <table className="tableShowItem">
                 <thead>
                     <tr>

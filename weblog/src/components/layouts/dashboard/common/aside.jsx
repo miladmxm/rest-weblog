@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ContextDash } from "../../../context/context";
 import DropShadow from "../../../ui/brop-shadow";
 import UploadBox from "../../../ui/uploadBox";
@@ -28,17 +28,17 @@ const Aside = () => {
           <ul>
             <li>
               <i className="fa fa-book"></i>
-              <Link className="active" to="/dashboard/">
+              <NavLink exact to="/dashboard/">
                 پست ها
-              </Link>
+              </NavLink>
             </li>
             <li>
               <i className="fa fa-plus"></i>
-              <Link to="/dashboard/add-post">افزودن پست</Link>
+              <NavLink to="/dashboard/add-post">افزودن پست</NavLink>
             </li>
             <li>
               <i className="fa fa-cog"></i>
-              <Link to="/dashboard/setting">تنظیمات حساب</Link>
+              <NavLink to="/dashboard/setting">تنظیمات حساب</NavLink>
             </li>
             <li>
               <i className="fa fa-upload"></i>
