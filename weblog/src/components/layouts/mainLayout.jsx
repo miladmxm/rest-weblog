@@ -1,11 +1,14 @@
 import React from "react"
+import { useSelector } from "react-redux"
+import isEmpty from "../utils/isEmpty"
 import HeaderBlog from "./blog/common/header"
 import HeaderDash from "./dashboard/common/header"
 import Dashboard from "./dashboard/dashlayout"
 
 const MainLayout = ({ children, dashboard }) => {
-    console.log(dashboard);
-    if (dashboard) {
+  const user = useSelector(state => state.userHandler)
+    
+    if (isEmpty(user) && dashboard) {
         return (
             <>
                 <HeaderDash />

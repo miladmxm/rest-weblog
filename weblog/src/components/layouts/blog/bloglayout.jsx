@@ -6,7 +6,6 @@ import { Helmet } from "react-helmet";
 const Blog = () => {
 
     const posts = useSelector(state => state.getBlog)
-
     return (
         <div>
             <Helmet>

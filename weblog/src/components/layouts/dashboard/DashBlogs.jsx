@@ -1,7 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
+import { formatDate } from "../../utils/jalali"
 import { Link } from "react-router-dom"
 const DashBlogs = () => {
+    const posts = useSelector(state => state.getDashboard)
     return (
         <div className="table">
             <Helmet>
@@ -18,82 +21,32 @@ const DashBlogs = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <Link to="#">لورم ایپسوم</Link>
-                        </td>
-                        <td>25 بهمن 1400</td>
-                        <td>
-                            <span className="badge badge-denger">خصوصی</span>
-                        </td>
-                        <td className="textCenter editDelete">
-                            <Link to="#">
-                                <i className="fa fa-edit"></i>
-                            </Link>{" "}
-                            |{" "}
-                            <Link to="">
-                                <i className="fa fa-trash"></i>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <Link to="#">لورم ایپسوم</Link>
-                        </td>
-                        <td>25 بهمن 1400</td>
-                        <td>
-                            <span className="badge">خصوصی</span>
-                        </td>
-                        <td className="textCenter editDelete">
-                            <Link to="#">
-                                <i className="fa fa-edit"></i>
-                            </Link>{" "}
-                            |{" "}
-                            <Link to="">
-                                <i className="fa fa-trash"></i>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <Link to="#">لورم ایپسوم</Link>
-                        </td>
-                        <td>25 بهمن 1400</td>
-                        <td>
-                            <span className="badge">خصوصی</span>
-                        </td>
-                        <td className="textCenter editDelete">
-                            <Link to="#">
-                                <i className="fa fa-edit"></i>
-                            </Link>{" "}
-                            |{" "}
-                            <Link to="">
-                                <i className="fa fa-trash"></i>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <Link to="#">لورم ایپسوم</Link>
-                        </td>
-                        <td>25 بهمن 1400</td>
-                        <td>
-                            <span className="badge badge-denger">عمومی</span>
-                        </td>
-                        <td className="textCenter editDelete">
-                            <Link to="#">
-                                <i className="fa fa-edit"></i>
-                            </Link>{" "}
-                            |{" "}
-                            <Link to="">
-                                <i className="fa fa-trash"></i>
-                            </Link>
-                        </td>
-                    </tr>
+                    {posts.length > 0 ? posts.map((post, index) => {
+                        return (
+
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>
+                                    <Link to={`/single/${post._id}`}>{post.title}</Link>
+                                </td>
+                                <td>{formatDate(post.createdAt)}</td>
+                                <td>
+                                    {post.state === "private" ? <span className="badge badge-denger">خصوصی</span> : <span className="badge">عمومی</span>}
+                                </td>
+                                <td className="textCenter editDelete">
+                                    <Link to={`/dashboard/edit-post/${post._id}`}>
+                                        <i className="fa fa-edit"></i>
+                                    </Link>{" "}
+                                    |{" "}
+                                    <Link to="#">
+                                        <i className="fa fa-trash"></i>
+                                    </Link>
+                                </td>
+                            </tr>
+                        )
+                    }) : null
+                    }
+
                 </tbody>
             </table>
         </div>

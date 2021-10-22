@@ -17,27 +17,17 @@ import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
 
 const App = ({ location }) => {
-  const [isDashboard, setIsDashboard] = useState(location.pathname.includes("dashboard"))
+  const isDashboard = location.pathname.includes("dashboard")
   const user = useSelector(state => state.userHandler)
   const dispatch = useDispatch()
+ 
   useEffect(() => {
-
-    if (!isEmpty(user)) {
-      setIsDashboard(false)
-    } else {
-      setIsDashboard(location.pathname.includes("dashboard"))
-    }
-  }, [location])
-  useEffect(() => {
-
     const token = localStorage.getItem('token')
     if (token) {
       const { payload } = decodedToken(token)
       if (payload.exp > Date.now() / 1000) {
-        setIsDashboard(false)
         dispatch(addUser(payload.user))
       } else {
-        setIsDashboard(true)
         localStorage.removeItem('token')
         dispatch(deleteUser())
       }
