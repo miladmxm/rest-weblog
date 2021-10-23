@@ -5,6 +5,8 @@ const DashContext = ({ children }) => {
   const [DropShadowToggle, setDropShadowToggle] = useState(false);
   const [toggleSide, setToggleSide] = useState(false);
   const [uploadBoxShow, setUploadBoxShow] = useState(false)
+  const [loader, setLoader] = useState(false)
+  const [messaLoader, setMessaLoader] = useState('اتصال اینترنت خود را بررسی کنید')
   const [textForCopy, setTextForCopy] = useState('')
   const [messageArr, setMessageArr] = useState([])
   const [typeOfMessage, setTypeOfMessage] = useState('error')
@@ -58,7 +60,11 @@ const DashContext = ({ children }) => {
       messageArr,
       typeOfMessage,
       setMessage,
-      setMessageArr
+      setMessageArr,
+      loader,
+      setLoader,
+      messaLoader,
+      setMessaLoader
     }}>
       {children}
     </ContextDash.Provider>

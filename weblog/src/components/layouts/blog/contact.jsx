@@ -11,7 +11,7 @@ const Contact = ({history}) => {
     const [text, setText] = useState('')
     const [numCaptcha, setNumCaptcha] = useState('')
 
-    const { setMessageArr, setMessage } = useContext(ContextDash)
+    const { setMessageArr, setMessage,setLoader,setMessaLoader } = useContext(ContextDash)
     
     const reset = () => {
         setFullname('')
@@ -20,7 +20,9 @@ const Contact = ({history}) => {
         setText('')
         setNumCaptcha('')
     }
-    const submitSendContact =async (e) => {
+    const submitSendContact = async (e) => {
+        setLoader(true)
+        setMessaLoader("لطفا منتظر بمانید")
         setMessageArr([])
         e.preventDefault()
         const datas = {
@@ -32,11 +34,14 @@ const Contact = ({history}) => {
         }
         
         try {
-            const { data } = await contact(datas)
-            console.log(data);
-            setMessage(['پیام شما با موفقیت ارسال شد'], "success")
-            history.replace('/')
-            reset()
+            const { data,status } = await contact(datas)
+            if (status === 200) {
+                setMessage(['پیام شما با موفقیت ارسال شد'], "success")
+                history.replace('/')
+                reset()
+            } else {
+                setMessage(["مشکلی در ثبت نام پیش آمده است"], 'error')
+            }
         } catch (ex) {
             let err = []
             if(ex.response.data.data){
@@ -48,6 +53,8 @@ const Contact = ({history}) => {
             }
             setMessage(err,'error')
         }
+        setLoader(false)
+        setMessaLoader("اتصال اینترنت خود را بررسی کنید")
     }
     return (
         <main id="main">
@@ -94,7 +101,7 @@ const Contact = ({history}) => {
                         value={numCaptcha}
                         onChange={e=>setNumCaptcha(e.target.value)}
                     />
-                    <img src="/img/captcha.png" alt="captcha" />
+                    <img src="http://localhost:4000/captcha.png" alt="captcha" />
                 </label>
                 <button type="submit">ارسال <i className="fa fa-send"></i></button>
             </form>

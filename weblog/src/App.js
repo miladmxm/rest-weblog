@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import DashContext from "./components/context/dashContext";
 import Blog from "./components/layouts/blog/bloglayout";
@@ -15,12 +15,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, deleteUser } from "./action/user";
 import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
+import Loader from "./components/ui/loader";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
   const user = useSelector(state => state.userHandler)
   const dispatch = useDispatch()
- 
+
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -38,6 +39,7 @@ const App = ({ location }) => {
     <>
       <DashContext>
         <MainLayout dashboard={isDashboard}>
+        <Loader />
           <Messages />
           <Switch>
             {/* dashboard router  */}

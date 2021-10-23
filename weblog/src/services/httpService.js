@@ -8,9 +8,10 @@ if (token) axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 axios.interceptors.response.use(null, err => {
     const expectedError = err.response && err.response.status >= 400 && err.response.status < 500
     if (!expectedError) {
-        console.log('server error');
+        return false
+    } else {    
+        return Promise.reject(err)
     }
-    return Promise.reject(err)
 })
 
 export default {
