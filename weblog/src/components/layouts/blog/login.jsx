@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../../action/user";
 import { decodedToken } from "../../utils/decodedToken";
 import isEmpty from "../../utils/isEmpty";
+import { getDashboard } from "../../../action/dashboard";
 
 const Login = ({ history }) => {
 
@@ -48,6 +49,7 @@ const Login = ({ history }) => {
                 const { payload } = decodedToken(data.token)
                 dispatch(addUser(payload.user))
                 localStorage.setItem('token', data.token)
+                dispatch(getDashboard(payload.user.userId));
 
                 setMessage(['با موفقیت وارد شدید'], "success")
                 history.replace('/dashboard')
@@ -56,9 +58,7 @@ const Login = ({ history }) => {
             )
 
         } catch (ex) {
-            console.table(ex);
             let err = []
-            console.log(ex);
             if (isEmpty(ex.response.data.data)) {
                 ex.response.data.data.forEach(message => {
                     err.push(message.message)

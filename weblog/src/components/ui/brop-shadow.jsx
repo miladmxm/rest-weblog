@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { ContextDash } from '../context/context';
-const DropShadow = ({zindex = 100}) => {
+const DropShadow = () => {
     const modalContext = useContext(ContextDash)
-    const { DropShadowToggle, DropShadowClick} = modalContext
+    const { DropShadowToggle, DropShadowClick,zindexShadow} = modalContext
     
     return ( 
-        <div style={{zIndex:zindex}} onClick={DropShadowClick} className={DropShadowToggle ? "dropShadow show" : "dropShadow"}>
+        <div style={{zIndex:zindexShadow}} onClick={DropShadowClick} className={DropShadowToggle ? "dropShadow show" : "dropShadow"}>
         </div>
      );
 }

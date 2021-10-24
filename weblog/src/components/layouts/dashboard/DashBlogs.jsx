@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../utils/jalali";
 import { Link } from "react-router-dom";
 import { getDashboard } from "../../../action/dashboard";
+import { ContextDash } from "../../context/context";
 const DashBlogs = ({location}) => {
   const posts = useSelector((state) => state.getDashboard);
   const user = useSelector((state) => state.userHandler);
+  const contextx = useContext(ContextDash)
+  const {setConfirm} = contextx
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDashboard(user.userId));
+    dispatch(getDashboard(user.userId,localStorage.getItem('token')));
   }, [location]);
   return (
     <div className="table">
@@ -37,7 +40,7 @@ const DashBlogs = ({location}) => {
                     </td>
                     <td>{formatDate(post.createdAt)}</td>
                     <td>
-                      {post.state === "private" ? (
+                      {post.status == "private" ? (
                         <span className="badge badge-denger">خصوصی</span>
                       ) : (
                         <span className="badge">عمومی</span>
@@ -48,7 +51,7 @@ const DashBlogs = ({location}) => {
                         <i className="fa fa-edit"></i>
                       </Link>{" "}
                       |{" "}
-                      <Link to="#">
+                      <Link to="#" onClick={()=>setConfirm(post._id)}>
                         <i className="fa fa-trash"></i>
                       </Link>
                     </td>

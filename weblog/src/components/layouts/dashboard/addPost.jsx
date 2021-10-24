@@ -5,13 +5,16 @@ import { Helmet } from "react-helmet";
 import { addPost } from "../../../services/dashServises";
 import isEmpty from "../../utils/isEmpty";
 import { ContextDash } from "../../context/context";
+import { useDispatch } from "react-redux";
+import { getBlog } from "../../../action/blog";
 
-const AddPost = () => {
+const AddPost = ({history}) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("public");
   const [body, setBody] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const { setMessage, setMessageArr,setLoader,setMessaLoader } = useContext(ContextDash)
+  const dispatch = useDispatch()
 
   const titleHadnler = (e) => {
     setTitle(e.target.value);
@@ -49,7 +52,11 @@ const AddPost = () => {
     
     try {
       const res = await addPost(data);
-      console.log(res);
+      if (res.status == 201) {
+        dispatch(getBlog())
+        history.replace('/dashboard')
+        
+      }
     } catch (ex) {
       console.log(ex);
       let err = [];

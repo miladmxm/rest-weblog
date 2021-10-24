@@ -57,7 +57,7 @@ body {
 .tooltip::before{
   content: attr(data-tooltip);
   position: absolute;
-  width: 100%;
+  width: max-content;
   padding: 5px 10px;
   background-color: rgba(228, 224, 224, 0.89);
   font-size: 11px;
@@ -200,6 +200,40 @@ body {
 }
 
 /* end alert errors */
+
+
+/* confirm box */
+.boxConfirm{
+  width: 32%;
+  position: fixed;
+  height: max-content;
+  top: 15%;
+  right: 34%;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  box-shadow: 5px 5px 15px #333d;
+  z-index: 155;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  animation: boxShow 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+  -webkit-animation: boxShow 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.boxConfirm img{
+  width: 98%;
+  height: auto;
+  display: block;
+  margin: 5px auto;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
 
 /* pagination */
 
@@ -381,6 +415,7 @@ display: none;
   position: fixed;
   z-index: 150;
   top: 0;
+  right: 0;
   width: 100%;
   height: 100vh;
   background-color: #333333d2;
@@ -465,6 +500,10 @@ display: none;
 @media screen and (max-width: 700px) {
   .postCart {
     width: 95%;
+  }
+  .boxConfirm{
+    width: 70%;
+    right: 15%;
   }
   .Comments {
     width: 95%;

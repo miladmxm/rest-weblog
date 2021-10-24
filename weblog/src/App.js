@@ -17,6 +17,7 @@ import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
 import Loader from "./components/ui/loader";
 import { cleareDash } from "./action/dashboard";
+import Confirm from "./components/ui/confirm";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")

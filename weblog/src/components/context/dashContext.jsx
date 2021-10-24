@@ -3,6 +3,7 @@ import { ContextDash } from "./context";
 
 const DashContext = ({ children }) => {
   const [DropShadowToggle, setDropShadowToggle] = useState(false);
+  const [zindexShadow, setZindexShadow] = useState(100);
   const [toggleSide, setToggleSide] = useState(false);
   const [uploadBoxShow, setUploadBoxShow] = useState(false)
   const [loader, setLoader] = useState(false)
@@ -10,7 +11,8 @@ const DashContext = ({ children }) => {
   const [textForCopy, setTextForCopy] = useState('')
   const [messageArr, setMessageArr] = useState([])
   const [typeOfMessage, setTypeOfMessage] = useState('error')
-
+  const [confirm, setConfirm] = useState('')
+  
   const sideShow = () => {
     setToggleSide(true);
     setDropShadowToggle(true)
@@ -23,6 +25,8 @@ const DashContext = ({ children }) => {
     setDropShadowToggle(false);
     setToggleSide(false)
     setUploadBoxShow(false)
+    setTextForCopy('')
+    setConfirm('')
   }
 
   const showUploadBox = () => {
@@ -64,7 +68,11 @@ const DashContext = ({ children }) => {
       loader,
       setLoader,
       messaLoader,
-      setMessaLoader
+      setMessaLoader,
+      confirm,
+      setConfirm,
+      zindexShadow,
+      setZindexShadow
     }}>
       {children}
     </ContextDash.Provider>

@@ -6,6 +6,10 @@ export const getAllPosts = () => {
    return http.get(`${config.localhost}`)
 }
 
+export const getSinglePosts = (id) => {
+   return http.get(`${config.localhost}/blog/${id}`)
+}
+
 export const registerUser =(data)=>{
    return http.post(`${config.localhost}/users/register` , JSON.stringify(data))
 }
