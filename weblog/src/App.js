@@ -16,6 +16,7 @@ import { addUser, deleteUser } from "./action/user";
 import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
 import Loader from "./components/ui/loader";
+import { cleareDash } from "./action/dashboard";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
@@ -31,6 +32,7 @@ const App = ({ location }) => {
       } else {
         localStorage.removeItem('token')
         dispatch(deleteUser())
+        dispatch(cleareDash())
       }
 
     }

@@ -45,8 +45,6 @@ const Login = ({ history }) => {
             const { data, status } = await loginUser(datas)
             if (status === 200) {
                 reset()
-
-                console.log(data.token);
                 const { payload } = decodedToken(data.token)
                 dispatch(addUser(payload.user))
                 localStorage.setItem('token', data.token)

@@ -1,36 +1,75 @@
-import React, { useContext } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import { ContextDash } from "../context/context";
 import DropShadow from "./brop-shadow";
 import CopyBox from "./copyText";
 import ImgShow from "./imgShow";
 import UploadImg from "./uploadimage";
+import { localhost } from "../../services/config.json";
+import isEmpty from "../utils/isEmpty";
 
 const UploadBox = () => {
-    const dashcontext = useContext(ContextDash)
-    const { uploadBoxShow,copyBoxShow } = dashcontext
-    if (uploadBoxShow) {
-        return (
-            <>
-                <DropShadow zindex="104" />
-                <section className="uoloadBox">
-                    <div className="container">
-                        <UploadImg name="image" uploadChange={e => console.log(e)} title="یک تصویر جهت آپلود انتخاب کنید" />
-                        <div className="row">
-                            <div className="progress">
-                                <div className="progressBar"></div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <button className="btn btn-success btn-sm sendImg" onClick={()=>copyBoxShow('https://tpc.googlesyndication.com/simgad/8307608687953688610/downsize_200k_v1?sqp=4sqPyQSWAUKTAQgAEhQNzczMPhUAAABAHQAAAAAlAAAAABgAIgoNAACAPxUAAIA_Kk8IWhABHQAAtEIgASgBMAY4A0CAwtcvSABQAFgAYFpwAngAgAEAiAEAkAEAnQEAAIA_oAEAqAEAsAGAreIEuAH___________8BxQEtsp0-MhoIqgIQnAEYASABLQAAAD8wqgI4nAFFAACAPw&rs=AOga4qnaLPcVla9-NeRjiZgiCZmf7n4nGA')}>ارسال عکس</button>
-                            <CopyBox />
-                        </div>
-                        <ImgShow />
-                    </div>
-                </section>
-            </>
-        )
+  const dashcontext = useContext(ContextDash);
+  const { uploadBoxShow, copyBoxShow } = dashcontext;
+
+  const [progressBar, setProgressBar] = useState(0);
+
+  const uploaded = (e) => {
+    if (isEmpty(e.target.files)) {
+      const data = new FormData();
+      data.append("image", e.target.files[0]);
+      const token = localStorage.getItem("token");
+
+      axios
+        .post(`${localhost}/dashboard/image-upload`, data, {
+            onUploadProgress: (progressEvent) => {
+                setProgressBar(Math.floor((progressEvent.loaded * 100) / progressEvent.total));
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) =>{
+            if(res.status === 200){
+                setProgressBar(0)
+                copyBoxShow(res.data.message)
+            }
+        })
+        .catch((err) => console.log(err));
     } else {
-        return null
+      return false;
     }
-}
-export default UploadBox
+  };
+  if (uploadBoxShow) {
+    return (
+      <>
+        <DropShadow zindex="104" />
+        <section className="uoloadBox">
+          <div className="container">
+            <UploadImg
+              name="image"
+              uploadChange={(e) => uploaded(e)}
+              title="یک تصویر جهت آپلود انتخاب کنید"
+            />
+            <div className="row">
+              <div className="progress">
+                <div
+                  className="progressBar"
+                  style={{ width: `${progressBar}%` }}
+                >{`${progressBar}%`}</div>
+              </div>
+            </div>
+            <div className="row">
+              <CopyBox />
+            </div>
+            <ImgShow />
+          </div>
+        </section>
+      </>
+    );
+  } else {
+    return null;
+  }
+};
+export default UploadBox;
