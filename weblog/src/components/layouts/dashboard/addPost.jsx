@@ -54,8 +54,8 @@ const AddPost = ({history}) => {
       const res = await addPost(data);
       if (res.status == 201) {
         dispatch(getBlog())
+        reset();
         history.replace('/dashboard')
-        
       }
     } catch (ex) {
       console.log(ex);
@@ -70,7 +70,7 @@ const AddPost = ({history}) => {
       
       setMessage(err, "error");
     }
-    reset();
+    
     setLoader(false)
     setMessaLoader("اتصال اینترنت خود را بررسی کنید")
   };

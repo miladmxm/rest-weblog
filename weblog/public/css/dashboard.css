@@ -1,6 +1,6 @@
 #dashboard {
   width: 98%;
-  margin: 10px auto;
+  margin: 10px auto 0 auto;
   min-height: 100vh;
   background-color: #f2f2f2;
   position: relative;
@@ -394,7 +394,7 @@ select.input-outlined:focus{
 .side-bar nav ul {
   list-style: none;
   padding: 20px;
-  box-sizing: border-box;
+  -sizing: border-box;
 }
 .side-bar nav ul li {
   margin: 5px auto;

@@ -49,7 +49,8 @@ const Login = ({ history }) => {
                 const { payload } = decodedToken(data.token)
                 dispatch(addUser(payload.user))
                 localStorage.setItem('token', data.token)
-                dispatch(getDashboard(payload.user.userId));
+                console.log(payload.user.userId," j j j : "+data.token);
+                dispatch(getDashboard(payload.user.userId,data.token));
 
                 setMessage(['با موفقیت وارد شدید'], "success")
                 history.replace('/dashboard')

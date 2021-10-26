@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../utils/jalali";
@@ -9,11 +9,11 @@ const DashBlogs = ({location}) => {
   const posts = useSelector((state) => state.getDashboard);
   const user = useSelector((state) => state.userHandler);
   const contextx = useContext(ContextDash)
-  const {setConfirm} = contextx
+  const {setConfirm,confirm} = contextx
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDashboard(user.userId,localStorage.getItem('token')));
-  }, [location]);
+    dispatch(getDashboard(user.userId,localStorage.getItem('token'))); 
+  }, [location,confirm]);
   return (
     <div className="table">
       <Helmet>

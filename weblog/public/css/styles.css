@@ -19,7 +19,7 @@ body {
   overflow-x: hidden;
   background-color: rgb(39, 40, 65);
   position: relative;
-  padding-bottom: 50px;
+  /* padding-bottom: 50px; */
 }
 
 .hide{
@@ -226,6 +226,8 @@ body {
   width: 98%;
   height: auto;
   display: block;
+  max-height: 50vh;
+  object-fit: cover;
   margin: 5px auto;
   border-radius: 5px;
   -webkit-border-radius: 5px;
