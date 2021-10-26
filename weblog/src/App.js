@@ -18,6 +18,7 @@ import isEmpty from "./components/utils/isEmpty";
 import Loader from "./components/ui/loader";
 import { cleareDash } from "./action/dashboard";
 import Confirm from "./components/ui/confirm";
+import NotFound from "./components/layouts/404";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
@@ -57,14 +58,14 @@ const App = ({ location }) => {
                 <Route path="/dashboard" exact component={DashBlogs} />
                 <Route path="/dashboard/add-post" exact component={AddPost} />
                 <Route path="/dashboard/edit-post" exact component={DashBlogs} />
-                <Route path="*" render={() => <p style={{ margin: '250px auto', width: '100%', color: "red" }}>404</p>} />
+                <Route path="*" component={NotFound} />
               </Switch>
 
             ) : (
               <Switch>
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={Rejister} />
-                <Route path="*" render={() => <p style={{ margin: '250px auto', width: '100%', color: "red" }}>404</p>} />
+                <Route path="*" component={NotFound} />
               </Switch>
             )}
             {/* blog router  */}
