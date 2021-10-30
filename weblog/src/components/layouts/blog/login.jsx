@@ -65,7 +65,7 @@ const Login = ({ history }) => {
 
         } catch (ex) {
             let err = []
-            if (isEmpty(ex.response.data)) {
+            if (isEmpty(ex.response.data.data)) {
                 ex.response.data.data.forEach(message => {
                     err.push(message.message)
                 });

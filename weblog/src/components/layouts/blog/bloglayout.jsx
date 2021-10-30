@@ -6,15 +6,21 @@ import { Helmet } from "react-helmet";
 const Blog = () => {
 
     const posts = useSelector(state => state.getBlog)
+
     return (
         <div>
             <Helmet>
                 <title>miladmxm</title>
             </Helmet>
-            <div style={{ marginTop: "70px" }}></div>
+            <div className="postWraper">
+
+
             {posts.length > 0 ? posts.map((post, index) => {
                 return <PostCart key={index} id={post._id} thumbnail={post.thumbnail} body={post.body} title={post.title} fullname={post.user.fullname} createdAt={post.createdAt} />
-            }) : null}
+            }) :
+                <h2 className="center" style={{ color:"#fff"}}>متأسفم مثل اینکه هیچ پستی وجود نداره 😥</h2>
+            }
+            </div>
         </div>
     )
 }

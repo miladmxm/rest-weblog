@@ -6,36 +6,42 @@ import { Link } from "react-router-dom";
 import { getDashboard } from "../../../action/dashboard";
 import { ContextDash } from "../../context/context";
 import { getAllPosts } from "../../../services/dashServises";
-const DashBlogs = ({location}) => {
+const DashBlogs = ({ location }) => {
   const posts = useSelector((state) => state.getDashboard);
   const user = useSelector((state) => state.userHandler);
   const contextx = useContext(ContextDash)
-  const {setConfirm,confirm} = contextx
+  const { setConfirm, confirm } = contextx
   const dispatch = useDispatch();
-  
+
   useEffect(async () => {
-      const postsH = await getAllPosts(user.userId,localStorage.getItem('token'))
-      console.log(postsH);
-      dispatch(getDashboard(postsH.data.posts)); 
-  }, [location,confirm]);
+    const postsH = await getAllPosts(user.userId, localStorage.getItem('token'))
+    if (postsH) {
+      
+      dispatch(getDashboard(postsH.data.posts));
+    }
+  }, [location, confirm]);
   return (
     <div className="table">
       <Helmet>
         <title>داشبورد | همه پست ها</title>
       </Helmet>
-      <table className="tableShowItem">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>عنوان پست</th>
-            <th>تاریخ ثبت پست</th>
-            <th>وضعیت</th>
-            <th className="textCenter">ویرایش | حذف</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.length > 0
-            ? posts.map((post, index) => {
+
+      {posts.length > 0
+
+        ?
+        <table className="tableShowItem">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>عنوان پست</th>
+              <th>تاریخ ثبت پست</th>
+              <th>وضعیت</th>
+              <th className="textCenter">ویرایش | حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              posts.map((post, index) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
@@ -55,16 +61,20 @@ const DashBlogs = ({location}) => {
                         <i className="fa fa-edit"></i>
                       </Link>{" "}
                       |{" "}
-                      <Link to="#" onClick={()=>setConfirm(post._id)}>
+                      <Link to="#" onClick={() => setConfirm(post._id)}>
                         <i className="fa fa-trash"></i>
                       </Link>
                     </td>
                   </tr>
                 );
               })
-            : null}
-        </tbody>
-      </table>
+            }
+          </tbody>
+        </table>
+        :
+          <h2 className="center">متأسفم مثل اینکه هیچ پستی وجود نداره 😥</h2>
+      }
+
     </div>
   );
 };

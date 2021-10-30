@@ -11,7 +11,6 @@ const ImgShow = ({numberOfShow = 42}) => {
     useEffect(async()=>{
         try {
             const data = await getAllImage(user.email)
-            console.log(data.data);
             if(data.status=200){
                 setImg(data.data)
             }else{
