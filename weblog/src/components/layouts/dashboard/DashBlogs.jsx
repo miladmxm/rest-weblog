@@ -12,11 +12,11 @@ const DashBlogs = ({location}) => {
   const contextx = useContext(ContextDash)
   const {setConfirm,confirm} = contextx
   const dispatch = useDispatch();
+  
   useEffect(async () => {
-    if(posts.length < 1){
       const postsH = await getAllPosts(user.userId,localStorage.getItem('token'))
-      dispatch(getDashboard(postsH)); 
-    }
+      console.log(postsH);
+      dispatch(getDashboard(postsH.data.posts)); 
   }, [location,confirm]);
   return (
     <div className="table">
