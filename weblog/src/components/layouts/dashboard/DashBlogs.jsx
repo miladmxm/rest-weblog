@@ -5,14 +5,18 @@ import { formatDate } from "../../utils/jalali";
 import { Link } from "react-router-dom";
 import { getDashboard } from "../../../action/dashboard";
 import { ContextDash } from "../../context/context";
+import { getAllPosts } from "../../../services/dashServises";
 const DashBlogs = ({location}) => {
   const posts = useSelector((state) => state.getDashboard);
   const user = useSelector((state) => state.userHandler);
   const contextx = useContext(ContextDash)
   const {setConfirm,confirm} = contextx
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getDashboard(user.userId,localStorage.getItem('token'))); 
+  useEffect(async () => {
+    if(posts.length < 1){
+      const postsH = await getAllPosts(user.userId,localStorage.getItem('token'))
+      dispatch(getDashboard(postsH)); 
+    }
   }, [location,confirm]);
   return (
     <div className="table">

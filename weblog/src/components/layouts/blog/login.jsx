@@ -9,6 +9,7 @@ import { addUser } from "../../../action/user";
 import { decodedToken } from "../../utils/decodedToken";
 import isEmpty from "../../utils/isEmpty";
 import { getDashboard } from "../../../action/dashboard";
+import { getAllPosts } from "../../../services/dashServises";
 
 const Login = ({ history }) => {
 
@@ -45,12 +46,16 @@ const Login = ({ history }) => {
         try {
             const { data, status } = await loginUser(datas)
             if (status === 200) {
-                reset()
                 const { payload } = decodedToken(data.token)
-                dispatch(addUser(payload.user))
+                const posts = await getAllPosts(payload.user.userId,data.token)
+                console.log(posts.data.posts)
+
+                reset()
+                
                 localStorage.setItem('token', data.token)
-                console.log(payload.user.userId," j j j : "+data.token);
-                dispatch(getDashboard(payload.user.userId,data.token));
+
+                dispatch(getDashboard(posts.data.posts));
+                dispatch(addUser(payload.user))
 
                 setMessage(['با موفقیت وارد شدید'], "success")
                 history.replace('/dashboard')
@@ -60,7 +65,7 @@ const Login = ({ history }) => {
 
         } catch (ex) {
             let err = []
-            if (isEmpty(ex.response.data.data)) {
+            if (isEmpty(ex.response.data)) {
                 ex.response.data.data.forEach(message => {
                     err.push(message.message)
                 });

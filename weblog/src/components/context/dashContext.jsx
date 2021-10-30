@@ -27,10 +27,12 @@ const DashContext = ({ children }) => {
     setUploadBoxShow(false)
     setTextForCopy('')
     setConfirm('')
+    setZindexShadow(100)
   }
 
   const showUploadBox = () => {
     setUploadBoxShow(true)
+    setZindexShadow(102)
     setDropShadowToggle(true)
     setToggleSide(false)
   }

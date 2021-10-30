@@ -7,7 +7,7 @@ const token = localStorage.getItem('token')
 export const getAllPosts = (id,tk) => {
    return http.get(`${config.localhost}/dashboard/${id}`,{
       headers:{
-         'Authorization':`Bearer ${token.length > 10?token:tk}`
+         'Authorization':`Bearer ${tk}`
       }
    })
 }
