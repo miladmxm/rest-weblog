@@ -17,8 +17,8 @@ import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
 import Loader from "./components/ui/loader";
 import { cleareDash } from "./action/dashboard";
-import Confirm from "./components/ui/confirm";
 import NotFound from "./components/layouts/404";
+import EditPost from "./components/layouts/dashboard/editPost";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
@@ -57,7 +57,7 @@ const App = ({ location }) => {
                 <Route path="/logout" exact component={Logout} />
                 <Route path="/dashboard" exact component={DashBlogs} />
                 <Route path="/dashboard/add-post" exact component={AddPost} />
-                <Route path="/dashboard/edit-post" exact component={DashBlogs} />
+                <Route path="/dashboard/edit-post/:id" exact component={EditPost} />
                 <Route path="*" component={NotFound} />
               </Switch>
 
