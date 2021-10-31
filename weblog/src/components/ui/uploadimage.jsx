@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-
-const UploadImg = ({ name, uploadChange, title }) => {
-    const [preW, setPreW] = useState(null)
+import {localhost} from '../../services/config.json'
+const UploadImg = ({ name, uploadChange, title,defaultImg }) => {
+    const [preW, setPreW] = useState(defaultImg?`${localhost}/uploads/thumbnails/${defaultImg}`:null)
     const [titleStatus , setTitleStatus] = useState(title)
     const uploadValidator = e => {
         const file = e.target.files[0]

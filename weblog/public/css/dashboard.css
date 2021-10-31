@@ -193,7 +193,7 @@
 }
 .fildinput span{
   cursor: text;
-  z-index: 110;
+  z-index: 99;
   top: -20%;
   background-color: #f2f2f2;
   font-size: 70%;

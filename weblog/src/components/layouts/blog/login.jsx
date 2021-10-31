@@ -102,7 +102,7 @@ const Login = ({ history }) => {
                 </div>
                 <button type="submit">ورود <i className="fa fa-sign-in"></i></button>
             </form>
-            <Link to="/forget-pass" className="center">رمز عبورتان را فراموش کردید؟!</Link>
+            <Link to="/forget-password" className="center">رمز عبورتان را فراموش کردید؟!</Link>
         </main>
 
     )

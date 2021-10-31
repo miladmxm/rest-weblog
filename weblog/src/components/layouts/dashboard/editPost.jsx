@@ -1,14 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CKEditor } from "ckeditor4-react";
 import UploadImg from "../../ui/uploadimage";
 import { Helmet } from "react-helmet";
-import { addPost } from "../../../services/dashServises";
+import { editPost } from "../../../services/dashServises";
 import isEmpty from "../../utils/isEmpty";
 import { ContextDash } from "../../context/context";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getBlog } from "../../../action/blog";
+import { findPost } from "../../utils/findPost";
 
-const EditPost = ({history}) => {
+const EditPost = ({history,match}) => {
+
+  const posts = useSelector(state=>state.getDashboard)
+  const post =  findPost(match.params.id,posts)
+  
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("public");
   const [body, setBody] = useState("");
@@ -51,8 +56,8 @@ const EditPost = ({history}) => {
     )
     
     try {
-      const res = await addPost(data);
-      if (res.status == 201) {
+      const res = await editPost(match.params.id,data);
+      if (res.status == 200) {
         dispatch(getBlog())
         reset();
         history.replace('/dashboard')
@@ -74,71 +79,86 @@ const EditPost = ({history}) => {
     setLoader(false)
     setMessaLoader("اتصال اینترنت خود را بررسی کنید")
   };
-
-  return (
-    <>
-      <h2 className="contentTitle">افزودن پست جدید</h2>
-      <Helmet>
-        <title>داشبورد | افزودن پست</title>
-      </Helmet>
-      <form
-        className="add-post"
-        encType="multipart/form-data"
-        onSubmit={(e) => submitHandler(e)}
-      >
-        <UploadImg
-          name="thumbnale"
-          uploadChange={(e) => setThumbnail(e.target.files[0])}
-          title="انتخاب تصویر اصلی"
-        />
-        <label className="fildinput">
-          <input
-            className="input-outlined"
-            type="text"
-            name="title"
-            id="titlePost"
-            data-value="true"
-            value={title}
-            onChange={(e) => titleHadnler(e)}
+  useEffect(() => {
+    if (post.length > 0) {
+      
+      setTitle(post[0].title)
+      setStatus(post[0].status)
+      setBody(post[0].body)
+    }
+  },[])
+  if (post.length <= 0) {
+    history.replace('/dashboard')
+    return null
+  } else {
+    
+    return (
+      <>
+        <h2 className="contentTitle">ویرایش پست</h2>
+        <Helmet>
+          <title>داشبورد | ویرایش</title>
+        </Helmet>
+        <form
+          className="add-post"
+          encType="multipart/form-data"
+          onSubmit={(e) => submitHandler(e)}
+        >
+          <UploadImg
+            name="thumbnale"
+            uploadChange={(e) => setThumbnail(e.target.files[0])}
+            title="انتخاب تصویر اصلی"
+            defaultImg ={post[0].thumbnail}
           />
-          <span>عنوان پست</span>
-        </label>
-        <div className="">
-          <label className="fildinput" htmlFor="status">
-            <select
+          <label className="fildinput">
+            <input
               className="input-outlined"
-              data-value="true"
-              name="status"
-              id="status"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="public">عمومی</option>
-              <option value="private">خصوصی</option>
-            </select>
-            <span>وضعیت پست</span>
+              type="text"
+              name="title"
+              id="titlePost"
+              data-value="false"
+              value={title}
+              onChange={(e) => titleHadnler(e)}
+            />
+            <span>عنوان پست</span>
           </label>
-        </div>
-
-        <div className="">
-          <label htmlFor="body">متن اصلی</label>
-          <CKEditor
-            config={{ language: "fa" }}
-            Data={body}
-            onChange={(e) => setBody(e.editor.getData())}
-          />
-        </div>
-        <div className="row">
-          <button type="reset" className="btn btn-denger">
-            انصراف
-          </button>
-          <button className="btn btn-success" type="submit">
-            ساخت پست
-          </button>
-        </div>
-      </form>
-    </>
-  );
+          <div className="">
+            <label className="fildinput" htmlFor="status">
+              <select
+                className="input-outlined"
+                data-value="true"
+                name="status"
+                id="status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="public">عمومی</option>
+                <option value="private">خصوصی</option>
+              </select>
+              <span>وضعیت پست</span>
+            </label>
+          </div>
+  
+          <div className="">
+            <label htmlFor="body">متن اصلی</label>
+            <CKEditor
+              config={{ language: "fa" }}
+              
+              initData={body.length > 0?body:post[0].body}
+              onChange={(e) => setBody(e.editor.getData())}
+            />
+          </div>
+          <div className="row">
+            <button type="reset" onClick={() => { reset(); history.replace('/dashboard')}} className="btn btn-denger">
+              انصراف
+            </button>
+            <button className="btn btn-success" type="submit">
+              ویرایش پست
+            </button>
+          </div>
+        </form>
+      </>
+    );
+  }
 };
 
 export default EditPost;

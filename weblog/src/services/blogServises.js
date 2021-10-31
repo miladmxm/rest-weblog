@@ -10,14 +10,20 @@ export const getSinglePosts = (id) => {
    return http.get(`${config.localhost}/blog/${id}`)
 }
 
-export const registerUser =(data)=>{
-   return http.post(`${config.localhost}/users/register` , JSON.stringify(data))
+export const registerUser = (data) => {
+   return http.post(`${config.localhost}/users/register`, JSON.stringify(data))
 }
 
-export const loginUser =(data)=>{
-   return http.post(`${config.localhost}/users/login` , JSON.stringify(data))
+export const loginUser = (data) => {
+   return http.post(`${config.localhost}/users/login`, JSON.stringify(data))
 }
 
-export const contact =(data)=>{
-   return http.post(`${config.localhost}/contact` , JSON.stringify(data))
+export const contact = (data) => {
+   return http.post(`${config.localhost}/contact`, JSON.stringify(data))
+}
+export const forgetPass = (data) => {
+   return http.post(`${config.localhost}/users/forget-pass`, JSON.stringify(data))
+}
+export const resetPass = (data, tk) => {
+   return http.post(`${config.localhost}/users/reset-pass/${tk}`, JSON.stringify(data))
 }

@@ -19,6 +19,13 @@ export const addPost = (data) => {
       }
    })
 }
+export const editPost = (id,data) => {
+   return http.put(`${config.localhost}/dashboard/edit-post/${id}`,data,{
+      headers:{
+         "Content-Type": "multipart/form-data"
+      }
+   })
+}
 
 export const deletePost = (id) => {
    return http.delete(`${config.localhost}/dashboard/delete-post/${id}`,{

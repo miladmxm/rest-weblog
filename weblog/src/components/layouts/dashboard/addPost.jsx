@@ -129,7 +129,7 @@ const AddPost = ({history}) => {
           />
         </div>
         <div className="row">
-          <button type="reset" className="btn btn-denger">
+          <button type="reset" onClick={() => { reset(); history.replace('/dashboard')}}  className="btn btn-denger">
             انصراف
           </button>
           <button className="btn btn-success" type="submit">
