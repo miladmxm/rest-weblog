@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ContextDash } from "../context/context";
 import DropShadow from "./brop-shadow";
 import CopyBox from "./copyText";
@@ -7,6 +7,8 @@ import ImgShow from "./imgShow";
 import UploadImg from "./uploadimage";
 import { localhost } from "../../services/config.json";
 import isEmpty from "../utils/isEmpty";
+import { useSelector } from "react-redux";
+import { getAllImage } from "../../services/dashServises";
 
 const UploadBox = () => {
   const dashcontext = useContext(ContextDash);
@@ -41,6 +43,24 @@ const UploadBox = () => {
       return false;
     }
   };
+  
+  const [img,setImg] =useState([])
+  const user = useSelector(state => state.userHandler)
+
+  useEffect(async()=>{
+      try {
+          const data = await getAllImage(user.email)
+          if(data.status=200){
+              setImg(data.data)
+          }else{
+              return false
+          }
+          
+      } catch (err) {
+          console.log(err);
+      }
+
+  },[])
   if (uploadBoxShow) {
     return (
       <>
@@ -63,7 +83,7 @@ const UploadBox = () => {
             <div className="row">
               <CopyBox />
             </div>
-            <ImgShow />
+            <ImgShow imgshow={img} />
           </div>
         </section>
       </>
