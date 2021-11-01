@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { ContextDash } from "../../../context/context";
 import DropShadow from "../../../ui/brop-shadow";
@@ -6,9 +7,9 @@ import UploadBox from "../../../ui/uploadBox";
 import SearchForm from "./search";
 
 const Aside = () => {
-
+  const user = useSelector(state => state.userHandler)
   const dashContext = useContext(ContextDash)
-  const { sideShow, toggleSide, sideHide,showUploadBox } = dashContext
+  const { sideShow, toggleSide, sideHide, showUploadBox } = dashContext
 
   return (
     <>
@@ -22,7 +23,12 @@ const Aside = () => {
       ></i>
       <aside className={toggleSide ? "side-bar showSide" : "side-bar"}>
         <header>
-          داشبورد وبلاگ <img stc="./img/logo.png" />
+          <Link to="/dashboard/setting">
+            <div className="profileImg">
+              <img src="http://localhost:4000/uploads/user.png" />
+            </div>
+          </Link>
+          <h4><Link target="_blank" to="/">{user.fullname}</Link></h4>
         </header>
         <nav>
           <ul>

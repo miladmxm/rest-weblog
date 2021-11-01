@@ -19,15 +19,18 @@ export const addPost = (data) => {
       }
    })
 }
-export const editPost = (id,data) => {
+export const editPost = (id, data) => {
+   const token = localStorage.getItem('token')
    return http.put(`${config.localhost}/dashboard/edit-post/${id}`,data,{
       headers:{
-         "Content-Type": "multipart/form-data"
+         "Content-Type": "multipart/form-data",
+         'Authorization':`Bearer ${token}`
       }
    })
 }
 
 export const deletePost = (id) => {
+   const token = localStorage.getItem('token')
    return http.delete(`${config.localhost}/dashboard/delete-post/${id}`,{
       headers:{
          'Authorization':`Bearer ${token}`
@@ -37,5 +40,10 @@ export const deletePost = (id) => {
 
 
 export const getAllImage = (email) => {
-   return http.get(`${config.localhost}/dashboard/all-image-user/${email}`)
+   const token = localStorage.getItem('token')
+   return http.get(`${config.localhost}/dashboard/all-image-user/${email}`,{
+      headers:{
+         'Authorization':`Bearer ${token}`
+      }
+   })
 }
