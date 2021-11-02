@@ -10,7 +10,7 @@ const Aside = () => {
   const user = useSelector(state => state.userHandler)
   const dashContext = useContext(ContextDash)
   const { sideShow, toggleSide, sideHide, showUploadBox } = dashContext
-
+  console.log(user);
   return (
     <>
       <i
@@ -25,7 +25,7 @@ const Aside = () => {
         <header>
           <Link to="/dashboard/setting">
             <div className="profileImg">
-              <img src="http://localhost:4000/uploads/user.png" />
+              <img src={`http://localhost:4000/uploads/${user.profileImg == "default" ? 'user.png':`image/${user.profileImg}`}`} />
             </div>
           </Link>
           <h4><Link target="_blank" to="/">{user.fullname}</Link></h4>
