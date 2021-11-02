@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {localhost} from '../../services/config.json'
-const UploadImg = ({ name, uploadChange, title,defaultImg }) => {
+const UploadImg = ({ name, uploadChange, title,defaultImg , classN='' }) => {
     const [preW, setPreW] = useState(defaultImg?`${localhost}/uploads/thumbnails/${defaultImg}`:null)
     const [titleStatus , setTitleStatus] = useState(title)
     const uploadValidator = e => {
@@ -19,7 +19,7 @@ const UploadImg = ({ name, uploadChange, title,defaultImg }) => {
         }
     }
     return (
-        <div className="uploadFile">
+        <div className={`uploadFile ${classN}`}>
           <label className="fileUploadD" htmlFor={name}>
             {" "}
             <img className="preW" style={preW !== null? {display:"block"}:null} src={preW} alt="" />{" "}

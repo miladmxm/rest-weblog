@@ -446,6 +446,13 @@ select.input-outlined:focus{
   -o-transition: opacity ease-in-out 0.3s 0.2s;
 }
 
+
+.profiler{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
 .side-bar header .profileImg:hover::before{
   opacity: 1;
 }
