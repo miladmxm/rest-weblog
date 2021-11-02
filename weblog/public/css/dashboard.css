@@ -189,7 +189,7 @@
   position: relative;
   display: block;
   width: 100%;
-  margin: 12px 5px;
+  margin: 12px 0;
 }
 .fildinput span{
   cursor: text;
@@ -234,6 +234,42 @@ select.input-outlined:focus{
   text-indent: 0;
 }
 
+/*  drop box */
+
+.dropBox{
+    overflow: hidden;
+    width: 100%;
+    padding: 0 20px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    height: 0;
+    transition:height ease-in-out 0.5s ;
+    -webkit-transition:height ease-in-out 0.5s ;
+    -moz-transition:height ease-in-out 0.5s ;
+    -ms-transition:height ease-in-out 0.5s ;
+    -o-transition:height ease-in-out 0.5s ;
+}
+
+.dropBoxTitle{
+  font-size: 70%;
+  cursor: pointer;
+}
+.dropBoxTitle i,
+.dropBoxTitle svg{
+  transition:transform ease-in-out 0.2s ;
+  -webkit-transition:transform ease-in-out 0.2s ;
+  -moz-transition:transform ease-in-out 0.2s ;
+  -ms-transition:transform ease-in-out 0.2s ;
+  -o-transition:transform ease-in-out 0.2s ;
+}
+.dropBoxTitle.showBox i,
+.dropBoxTitle.showBox svg{
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+}
 
 /* select file */
 
@@ -451,6 +487,7 @@ select.input-outlined:focus{
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  max-width: 100%;
 }
 
 .side-bar header .profileImg:hover::before{

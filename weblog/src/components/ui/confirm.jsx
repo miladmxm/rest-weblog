@@ -12,7 +12,6 @@ const Confirm = ({ history }) => {
     contextx;
   const posts = useSelector((state) => state.getDashboard);
   const dispatch = useDispatch();
-  console.log(confirm.length);
   if (confirm.length > 5) {
 
     const post = findPost(confirm, posts)[0];

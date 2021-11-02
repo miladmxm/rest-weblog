@@ -22,6 +22,7 @@ import EditPost from "./components/layouts/dashboard/editPost";
 import { getAllPosts } from "./services/dashServises";
 import ForgetPass from "./components/layouts/blog/forgetPass";
 import ResetPass from "./components/layouts/blog/resetPass";
+import Settings from "./components/layouts/dashboard/setting";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
@@ -67,6 +68,7 @@ const App = ({ location }) => {
                 <Route path="/dashboard" exact component={DashBlogs} />
                 <Route path="/dashboard/add-post" exact component={AddPost} />
                 <Route path="/dashboard/edit-post/:id" exact component={EditPost} />
+                <Route path="/dashboard/setting" exact component={Settings} />
                 <Route path="*" component={NotFound} />
               </Switch>
 
