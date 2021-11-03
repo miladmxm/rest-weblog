@@ -2,7 +2,6 @@ import http from './httpService'
 
 import config from "./config.json"
 
-const token = localStorage.getItem('token')
 
 export const getAllPosts = (id,tk) => {
    return http.get(`${config.localhost}/dashboard/${id}`,{
@@ -13,9 +12,11 @@ export const getAllPosts = (id,tk) => {
 }
 
 export const addPost = (data) => {
+   const token = localStorage.getItem('token')
    return http.post(`${config.localhost}/dashboard/add-post`,data,{
       headers:{
-         "Content-Type": "multipart/form-data"
+         "Content-Type": "multipart/form-data",
+         'Authorization':`Bearer ${token}`
       }
    })
 }
