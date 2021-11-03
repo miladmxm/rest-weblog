@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addUser } from "../../../action/user";
+import { cleareDash } from "../../../action/dashboard";
+import { addUser, deleteUser } from "../../../action/user";
 import { editUser } from "../../../services/dashServises";
 import { ContextDash } from "../../context/context";
 import DropBox from "../../ui/dropBox";
@@ -17,7 +18,11 @@ const Settings = ({ history }) => {
   const { setMessage, setMessageArr, setLoader, setMessaLoader } =
     useContext(ContextDash);
   const dispatch = useDispatch();
-
+  const logout = () => {
+    localStorage.removeItem('token')
+    dispatch(cleareDash())
+    dispatch(deleteUser())
+  }
   const reset = () => {
     setPassword("");
     setNewPassword(null)
@@ -148,7 +153,7 @@ const Settings = ({ history }) => {
         </DropBox>
 
         <DropBox title="برای حذف حساب کاربری خود کلیک کنید">
-          <Link to="/delete-user">
+          <Link replace onClick={logout} to={`/delete-user/${user.userId}`}>
             اگر از حذف حساب کاربری خود اطمینان دارید بر روی این لینک کلیک کنید
           </Link>
         </DropBox>
