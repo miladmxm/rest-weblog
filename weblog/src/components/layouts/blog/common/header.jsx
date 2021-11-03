@@ -1,19 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import isEmpty from "../../../utils/isEmpty";
 import SearchForm from "./search";
+import {withRouter} from 'react-router-dom';
 
 
-const HeaderBlog = () => {
+
+const HeaderBlog = ({location}) => {
     const user = useSelector(state => state.userHandler)
     const [empty, setEmpty] = useState(isEmpty(user))
+const [activedToggleBtn, setActivedToggleBtn] = useState(false)
+    const navRef= useRef(null)
     useEffect(() => {
         setEmpty(isEmpty(user))
     },[user])
-    const [activedToggleBtn, setActivedToggleBtn] = useState(false)
+    useEffect(() => {
+        setActivedToggleBtn(false)
+        navRef.current.style.height =0
+    },[location])
+    
     const toggleMenu = () => {
         setActivedToggleBtn(!activedToggleBtn)
+
+        if(!activedToggleBtn){
+            navRef.current.style.height = navRef.current.scrollHeight+'px';
+        }else{
+            navRef.current.style.height =0
+        }
     }
 
     return (
@@ -25,7 +39,7 @@ const HeaderBlog = () => {
                         <span></span>
                     </button>
 
-                    <nav id="navMenu" className={activedToggleBtn ? "showNav" : ""}>
+                    <nav id="navMenu" ref={navRef} className={activedToggleBtn ? "showNav" : ""}>
                         <ul>
                             <li><NavLink exact to="/">خانه</NavLink></li>
                             {!empty ? (
@@ -59,4 +73,4 @@ const HeaderBlog = () => {
 
     )
 }
-export default HeaderBlog
+export default withRouter(HeaderBlog)

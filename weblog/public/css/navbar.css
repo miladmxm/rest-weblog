@@ -117,6 +117,11 @@ nav ul li a:hover {
   z-index: 1000;
 }
 
+@media screen and (min-width: 960px) {
+  .navbar .container #navMenu{
+    height:0 !important;
+  }
+}
 @media screen and (max-width: 960px) {
   .navbar .container #navMenu{
     width: 100%;
@@ -136,9 +141,7 @@ nav ul li a:hover {
     box-sizing: border-box;
   }
   .navbar .container #navMenu.showNav {
-    padding-bottom: 10px;
-    height: 300px;
-    
+    padding-bottom: 10px;  
   }
   .navbar .container #navMenu.showNav ul {
     visibility: visible;
