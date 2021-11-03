@@ -47,3 +47,14 @@ export const getAllImage = (email) => {
       }
    })
 }
+
+
+export const editUser = (data) => {
+   const token = localStorage.getItem('token')
+   return http.put(`${config.localhost}/dashboard/edit-user`,data,{
+      headers:{
+         "Content-Type": "multipart/form-data",
+         'Authorization':`Bearer ${token}`
+      }
+   })
+}

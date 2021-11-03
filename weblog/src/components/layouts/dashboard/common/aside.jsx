@@ -10,7 +10,6 @@ const Aside = () => {
   const user = useSelector(state => state.userHandler)
   const dashContext = useContext(ContextDash)
   const { sideShow, toggleSide, sideHide, showUploadBox } = dashContext
-  console.log(user);
   return (
     <>
       <i

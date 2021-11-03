@@ -107,7 +107,7 @@ const EditPost = ({history,match}) => {
             name="thumbnale"
             uploadChange={(e) => setThumbnail(e.target.files[0])}
             title="انتخاب تصویر اصلی"
-            defaultImg ={post[0].thumbnail}
+            defaultImg ={`thumbnails/${post[0].thumbnail}`}
           />
           <label className="fildinput">
             <input
