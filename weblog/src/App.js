@@ -23,6 +23,7 @@ import { getAllPosts } from "./services/dashServises";
 import ForgetPass from "./components/layouts/blog/forgetPass";
 import ResetPass from "./components/layouts/blog/resetPass";
 import Settings from "./components/layouts/dashboard/setting";
+import DeleteUser from "./components/layouts/blog/deleteuser";
 
 const App = ({ location }) => {
   const isDashboard = location.pathname.includes("dashboard")
@@ -35,8 +36,8 @@ const App = ({ location }) => {
       const { payload } = decodedToken(token)
       if (payload.exp > Date.now() / 1000) {
         dispatch(addUser(payload.user))
-        const postsH = await getAllPosts(payload.user.userId,token )
-        if (postsH) { 
+        const postsH = await getAllPosts(payload.user.userId, token)
+        if (postsH) {
           dispatch(getDashboard(postsH.data.posts));
         }
       } else {
@@ -51,7 +52,7 @@ const App = ({ location }) => {
     <>
       <DashContext>
         <MainLayout dashboard={isDashboard}>
-        <Loader />
+          <Loader />
           <Messages />
           <Switch>
             {/* dashboard router  */}
@@ -76,13 +77,11 @@ const App = ({ location }) => {
               <Switch>
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={Rejister} />
+                <Route path="/delete-user/:token" exact component={DeleteUser} />
                 <Route path="*" component={NotFound} />
               </Switch>
             )}
             {/* blog router  */}
-
-
-
 
           </Switch>
         </MainLayout>

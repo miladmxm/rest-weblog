@@ -14,6 +14,8 @@ const Settings = ({ history }) => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState('');
   const [newRePassword, setNewRePassword] = useState('');
+  const [bio, setBio] = useState(user.bio);
+  const [skill, setSkill] = useState(user.skill);
   const [profile, setProfile] = useState(null);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } =
     useContext(ContextDash);
@@ -29,8 +31,7 @@ const Settings = ({ history }) => {
     setNewRePassword(null)
     setProfile(null)
   };
-  const passwordHadnler = (e) => {
-    setPassword(e.target.value);
+  const titleBar = (e) => {
     if (e.target.value === "" || e.target.value === null) {
       e.currentTarget.dataset.value = "true";
     } else {
@@ -38,22 +39,7 @@ const Settings = ({ history }) => {
     }
   };
 
-  const newPasswordHadnler = (e) => {
-    setNewPassword(e.target.value);
-    if (e.target.value === "" || e.target.value === null) {
-      e.currentTarget.dataset.value = "true";
-    } else {
-      e.currentTarget.dataset.value = "false";
-    }
-  };
-  const newRePasswordHadnler = (e) => {
-    setNewRePassword(e.target.value);
-    if (e.target.value === "" || e.target.value === null) {
-      e.currentTarget.dataset.value = "true";
-    } else {
-      e.currentTarget.dataset.value = "false";
-    }
-  };
+
 
   const submitHandler = async (e) => {
     setLoader(true);
@@ -64,6 +50,8 @@ const Settings = ({ history }) => {
     data.append("password", password);
     data.append("newPassword", newPassword);
     data.append("newRePassword", newRePassword);
+    data.append("bio", bio);
+    data.append("skill", skill);
     data.append("profile", profile);
 
     try {
@@ -120,9 +108,29 @@ const Settings = ({ history }) => {
             id="password"
             data-value="true"
             value={password}
-            onChange={(e) => passwordHadnler(e)}
+            onChange={(e) => { titleBar(e); setPassword(e.target.value); }}
           />
           <span>کلمه عبور خود را وارد کنید</span>
+        </label>
+
+        <label className="fildinput">
+          <input
+            className="input-outlined"
+            type="text"
+            name="skill"
+            id="skill"
+            data-value={user.skill? false:true}
+            value={skill}
+            onChange={(e) => { titleBar(e); setSkill(e.target.value); }}
+          />
+          <span>مهارت و یا شغل شما</span>
+        </label>
+
+        <label className="fildinput">
+          <textarea onChange={e => { titleBar(e); setBio(e.target.value) }} data-value={user.bio? false:true} className="input-outlined" maxLength="400" name="bio" id="bio">
+            {bio}
+          </textarea>
+          <span>بیوگرافی شما</span>
         </label>
 
         <DropBox title="برای تغییر کلمه عبور کلیک کنید (در صورت پشیمانی فیلد ها را خالی بگذارید) ">
@@ -134,7 +142,7 @@ const Settings = ({ history }) => {
               id="newPassword"
               data-value="true"
               value={newPassword}
-              onChange={(e) => newPasswordHadnler(e)}
+              onChange={(e) => { titleBar(e); setNewPassword(e.target.value); }}
             />
             <span>کلمه عبور جدید خود را وارد کنید</span>
           </label>
@@ -146,14 +154,14 @@ const Settings = ({ history }) => {
               id="newRePassword"
               data-value="true"
               value={newRePassword}
-              onChange={(e) => newRePasswordHadnler(e)}
+              onChange={(e) => { titleBar(e); setNewRePassword(e.target.value); }}
             />
-            <span>کلمه عبور جدید خود را وارد کنید</span>
+            <span>تکرار کلمه عبور جدید خود را وارد کنید</span>
           </label>
         </DropBox>
 
         <DropBox title="برای حذف حساب کاربری خود کلیک کنید">
-          <Link replace onClick={logout} to={`/delete-user/${user.userId}`}>
+          <Link replace to={`/delete-user/${localStorage.getItem("token")}`} onClick={logout} >
             اگر از حذف حساب کاربری خود اطمینان دارید بر روی این لینک کلیک کنید
           </Link>
         </DropBox>

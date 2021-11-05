@@ -22,7 +22,7 @@ const Aside = () => {
       ></i>
       <aside className={toggleSide ? "side-bar showSide" : "side-bar"}>
         <header>
-          <Link to="/dashboard/setting">
+          <Link className="tooltip" data-tooltip="تکمیل مشخصات شما" to="/dashboard/setting">
             <div className="profileImg">
               <img src={`http://localhost:4000/uploads/${user.profileImg == "default" ? 'user.png':`image/${user.profileImg}`}`} />
             </div>
@@ -43,7 +43,7 @@ const Aside = () => {
             </li>
             <li>
               <i className="fa fa-cog"></i>
-              <NavLink to="/dashboard/setting">تنظیمات حساب</NavLink>
+              <NavLink className="tooltip" data-tooltip="تکمیل مشخصات شما" to="/dashboard/setting">تنظیمات پروفایل</NavLink>
             </li>
             <li>
               <i className="fa fa-upload"></i>

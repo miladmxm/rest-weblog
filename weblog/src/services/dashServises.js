@@ -1,7 +1,5 @@
 import http from './httpService'
-
 import config from "./config.json"
-
 
 export const getAllPosts = (id,tk) => {
    return http.get(`${config.localhost}/dashboard/${id}`,{
@@ -55,6 +53,14 @@ export const editUser = (data) => {
    return http.put(`${config.localhost}/dashboard/edit-user`,data,{
       headers:{
          "Content-Type": "multipart/form-data",
+         'Authorization':`Bearer ${token}`
+      }
+   })
+}
+
+export const deleteUser = (data, token) => {
+   return http.post(`${config.localhost}/dashboard/delete-user/${token}`,JSON.stringify(data),{
+      headers:{
          'Authorization':`Bearer ${token}`
       }
    })

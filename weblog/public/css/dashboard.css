@@ -194,7 +194,7 @@
 .fildinput span{
   cursor: text;
   z-index: 99;
-  top: -20%;
+  top: -10px;
   background-color: #f2f2f2;
   font-size: 70%;
   right: 10px;
@@ -216,7 +216,7 @@
   z-index: 1;
 }
 .input-outlined:focus + span{
-  top: -20%;
+  top: -10px;
   background-color: #f2f2f2;
   font-size: 70%;
 }
