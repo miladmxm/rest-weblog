@@ -3,6 +3,15 @@
   height: 8vh;
   background-color: #334;
   display: flex;
+  transition: background-color 0.3s linear;
+  -webkit-transition: background-color 0.3s linear;
+  -moz-transition: background-color 0.3s linear;
+  -ms-transition: background-color 0.3s linear;
+  -o-transition: background-color 0.3s linear;
+}
+.navbar.reverscoloe {
+  background: #eee;
+  color: #333;
 }
 .navbar .container {
   width: 1170px;
@@ -29,15 +38,22 @@
 .navbar .container nav>ul li{
   margin: 0 10px;
 }
+
 .logo {
   color: aliceblue;
   height: 100%;
   display: flex;
   align-items: center;
 }
+.reverscoloe .logo{
+  color: #161616;
+}
 nav ul li a {
   color: #fff;
   transition: all 0.3s ease;
+}
+.reverscoloe nav ul li a{
+  color: #000;
 }
 nav ul li a.active,
 nav ul li a:hover {
@@ -100,8 +116,18 @@ nav ul li a:hover {
   border-radius: 10px;
   font-size: large;
 }
+.reverscoloe .serchbar input {
+  background-color: #161616;
+  color: #fafefa;
+}
+.reverscoloe .serchbar input:focus {
+  box-shadow: 2px 2px 5px #1a1a1a79, -2px -2px 5px #00000079;
+}
 .serchbar input:focus {
   box-shadow: 2px 2px 5px #da690c79, -2px -2px 5px #da690c79;
+}
+.reverscoloe .serchbar .serchBtn {
+  color: #fafafa;
 }
 .serchbar .serchBtn {
   position: absolute;
@@ -126,13 +152,25 @@ nav ul li a:hover {
   }
 }
 @media screen and (max-width: 960px) {
+  
   .navbar .container #navMenu{
-    width: 100%;
+    width: 96%;
     background-color: #334;
     border-radius: 0 0 10px 10px;
     height: 0;
     overflow: hidden;
     transition: height 0.4s ease-in-out;
+    position: absolute;
+    top: 52px;
+    right: 50%;
+    transform: translateX(50%);
+    -webkit-border-radius: 0 0 10;
+    -moz-border-radius: 0 0 10;
+    -ms-border-radius: 0 0 10;
+    -o-border-radius: 0 0 10;
+}
+  .navbar.reverscoloe .container #navMenu{
+    background-color: #fefefe;
   }
   .navbar .container #navMenu ul {
     display: block;

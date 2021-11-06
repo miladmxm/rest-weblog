@@ -12,6 +12,7 @@ const DashContext = ({ children }) => {
   const [messageArr, setMessageArr] = useState([])
   const [typeOfMessage, setTypeOfMessage] = useState('error')
   const [confirm, setConfirm] = useState('')
+  const [isLight, setIsLight] = useState(false)
   
   const sideShow = () => {
     setToggleSide(true);
@@ -74,7 +75,9 @@ const DashContext = ({ children }) => {
       confirm,
       setConfirm,
       zindexShadow,
-      setZindexShadow
+      setZindexShadow,
+      setIsLight,
+      isLight
     }}>
       {children}
     </ContextDash.Provider>

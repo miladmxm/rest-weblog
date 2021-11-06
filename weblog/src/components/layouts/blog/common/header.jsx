@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import isEmpty from "../../../utils/isEmpty";
 import SearchForm from "./search";
 import { withRouter } from 'react-router-dom';
 import { localhost } from '../../../../services/config.json'
+import { ContextDash } from "../../../context/context";
 
 
 const HeaderBlog = ({ location }) => {
     const user = useSelector(state => state.userHandler)
+    const context = useContext(ContextDash)
+    const {setIsLight,isLight} = context
     const [empty, setEmpty] = useState(isEmpty(user))
     const [activedToggleBtn, setActivedToggleBtn] = useState(false)
     const [showList, setShowList] = useState(false)
@@ -32,12 +35,21 @@ const HeaderBlog = ({ location }) => {
             navRef.current.style.height = 0
         }
     }
+    const ligthBack = e => {
+        e.target.checked ? document.body.style.backgroundColor = "#fff" : document.body.style.backgroundColor = "";
+        setIsLight(e.target.checked)
+    }
 
     return (
         <div className="fixed-top">
-            <div className="navbar">
+            <div className={isLight?"navbar reverscoloe":"navbar"}>
                 <div className="container">
-                    <h2 className="logo"><Link className='text-initial' to="/">Milad MXM</Link></h2>
+                    <div className="display_flex">
+                        <input type="checkbox" className="checkedBeautiful darkAndLight" onChange={(e)=>ligthBack(e)} />
+                        <h2 className="logo"><Link className='text-initial' to="/">Milad MXM</Link>
+                        </h2>
+                    </div>
+
                     <button className={activedToggleBtn ? "toggle toggler" : "toggle"} onClick={toggleMenu}>
                         <span></span>
                     </button>
@@ -45,7 +57,7 @@ const HeaderBlog = ({ location }) => {
                     <nav id="navMenu" ref={navRef} className={activedToggleBtn ? "showNav" : ""}>
                         <ul>
 
-                            
+
                             {!empty ? (
                                 <>
                                     <li><NavLink exact to="/"><i className="fa fa-home"></i> خانه</NavLink></li>
@@ -70,8 +82,8 @@ const HeaderBlog = ({ location }) => {
                                                 <li><i className="fa fa-sign-out"></i><Link to="/logout">خروج</Link></li>
                                             </ul>
                                         </div>
-                                        </div></li>
-                                        <li><NavLink exact to="/"><i className="fa fa-home"></i> خانه</NavLink></li>
+                                    </div></li>
+                                    <li><NavLink exact to="/"><i className="fa fa-home"></i> خانه</NavLink></li>
                                     <li className="for_nob"><NavLink to="/dashboard"><i className="fa fa-user"></i> پنل کاربری</NavLink></li>
                                     <li className="for_nob"><NavLink to="/logout"><i className="fa fa-sign-out"></i> خروج</NavLink></li>
                                 </>

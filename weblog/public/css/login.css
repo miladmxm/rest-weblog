@@ -54,7 +54,7 @@
     
   }
 
-  #main .checkedBeautiful{
+.checkedBeautiful{
     width: 50px;
     appearance: none;
     -webkit-appearance: none;
@@ -85,6 +85,33 @@
     transform: translateX(26px);
     background-color: rgb(17, 34, 110);
   }
+  .darkAndLight{
+    margin: auto 0 auto 20px;
+  }
+  .checkedBeautiful.darkAndLight::before{
+    content: '\f185';
+    font-family: FontAwesome;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    color: #fff;
+    font-size: 24px;
+    height: 100%;
+    transition:all .3s ease-in-out;
+}
+  .checkedBeautiful.darkAndLight:checked{
+    background-color: rgb(7, 105, 233);
+    transition-delay: .1s;
+  }
+  .checkedBeautiful.darkAndLight:checked::before{
+    color: #333;
+    transform: translateX(28px);
+    -webkit-transform: translateX(28px);
+    -moz-transform: translateX(28px);
+    -ms-transform: translateX(28px);
+    -o-transform: translateX(28px);
+}
 
 
   #main form.loginForm input:focus{

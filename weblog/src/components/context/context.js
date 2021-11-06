@@ -17,5 +17,6 @@ export const ContextDash = createContext({
     messageArr: [],
     typeOfMessage: '',
     setMessage: () => { },
-    setMessageArr: ()=>{}
+    setMessageArr: () => { },
+    
 })
