@@ -133,6 +133,9 @@ const Settings = ({ history }) => {
           <span>بیوگرافی شما</span>
         </label>
 
+        <DropBox title="راه های ارتباط با شما ">
+            
+        </DropBox>
         <DropBox title="برای تغییر کلمه عبور کلیک کنید (در صورت پشیمانی فیلد ها را خالی بگذارید) ">
           <label className="fildinput">
             <input
