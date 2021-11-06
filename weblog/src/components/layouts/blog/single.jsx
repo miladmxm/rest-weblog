@@ -134,10 +134,10 @@ const Single = ({ match, history }) => {
                       راه های ارتباط با من
                     </h4>
                     <div className="mysocial">
-                      <a target="_blank" href={`https://${divice}.whatsapp.com/send?phone=989911002025`}><WhatsappIcon size={40} round={true} /></a>
-                      <a target="_blank" href={`mailto:${post.user.email}`}><EmailIcon size={40} round={true} /></a>
-                      <a target="_blank" className="phone" href={`tel:09109662449`}><i className="fa fa-phone"></i></a>
-                      <a target="_blank" className="insta" href={`https://www.instagram.com/maryam__9018/`}><i className="fa fa-instagram"></i></a>
+                      {post.user.whatsapp?<a target="_blank" href={`https://${divice}.whatsapp.com/send?phone=98${post.user.whatsapp}`}><WhatsappIcon size={40} round={true} /></a>:null}
+                      {post.user.emailAddress?<a target="_blank" href={`mailto:${post.user.emailAddress}`}><EmailIcon size={40} round={true} /></a>:null}
+                      {post.user.phoneNumber?<a target="_blank" className="phone" href={`tel:0${post.user.phoneNumber}`}><i className="fa fa-phone"></i></a>:null}
+                      {post.user.instagram?<a target="_blank" className="insta" href={`https://www.instagram.com/${post.user.instagram}/`}><i className="fa fa-instagram"></i></a>:null}
                     </div>
                   </div>
                 </div>

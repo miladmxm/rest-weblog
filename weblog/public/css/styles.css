@@ -56,7 +56,7 @@ textarea{
 .tooltip {
   position: relative;
 }
-.tooltip::before {
+.tooltip::after {
   content: attr(data-tooltip);
   position: absolute;
   width: max-content;
@@ -73,7 +73,7 @@ textarea{
   z-index: 1;
 }
 
-.tooltip:hover::before {
+.tooltip:hover::after {
   opacity: 1;
   top: 100%;
 }
@@ -605,6 +605,7 @@ span.br{
 .mysocial a{
   height: 40px;
 }
+.inputSocial i,
 .mysocial a.insta,
 .mysocial a.phone{
   width: 40px;
@@ -617,10 +618,34 @@ span.br{
   border-radius: 50%;
   color: #fff;
 }
-.mysocial a.insta{
+.insta{
 font-size: 180%;
   background: rgb(160,54,176);
   background: linear-gradient(71deg, rgba(160,54,176,1) 0%, rgba(221,45,112,1) 50%, rgba(253,182,79,1) 100%);
+}
+.whatsapp{
+  font-size: 180%;
+  background-color: #25d366 !important;
+}
+.email{
+  font-size: 130%;
+  background-color: #7f7f7f !important;
+}
+
+
+.inputSocial{
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.inputSocial input{
+  border: none;
+  border-bottom: 2px solid #3339;
+  width: 80%;
+  border-radius: 5px 5px 0 0;
+  box-sizing: border-box;
+  padding: 5px 10px;
 }
 
 .imgSlider{

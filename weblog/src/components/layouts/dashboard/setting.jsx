@@ -14,9 +14,14 @@ const Settings = ({ history }) => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState('');
   const [newRePassword, setNewRePassword] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [bio, setBio] = useState(user.bio);
   const [skill, setSkill] = useState(user.skill);
   const [profile, setProfile] = useState(null);
+  console.log(user);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } =
     useContext(ContextDash);
   const dispatch = useDispatch();
@@ -52,8 +57,9 @@ const Settings = ({ history }) => {
     data.append("newRePassword", newRePassword);
     data.append("bio", bio);
     data.append("skill", skill);
+    data.append("social", [emailAddress,whatsapp,instagram,phoneNumber]);
     data.append("profile", profile);
-
+  
     try {
       const res = await editUser(data);
       if (res.status == 200) {
@@ -134,7 +140,22 @@ const Settings = ({ history }) => {
         </label>
 
         <DropBox title="راه های ارتباط با شما ">
-            
+            <div className="inputSocial">
+            <i className="fa fa-instagram insta tooltip" data-tooltip="فقط نام کاربری اینستاگرام خود را بنویسید"></i>
+              <input type="text" placeholder="برای مثال : miladmxm" value={instagram} onChange={e=>setInstagram(e.target.value)}/>
+            </div>
+            <div className="inputSocial">
+              <i className="fa fa-phone"></i>
+              <input type="number" placeholder="فقط شماره بدون صفر : 9109600000" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}/>
+            </div>
+            <div className="inputSocial">
+              <i className="fa fa-whatsapp whatsapp" ></i>
+              <input type="number" placeholder="فقط شماره بدون صفر : 9109600000" value={whatsapp} onChange={e=>setWhatsapp(e.target.value)} />
+            </div>
+            <div className="inputSocial">
+              <i className="fa fa-envelope email" ></i>
+              <input type="email" required={false} placeholder="ایمیل خود را کامل وارد کنید : miladmxm@gmail.com" value={emailAddress} onChange={e=>setEmailAddress(e.target.value)}/>
+            </div>
         </DropBox>
         <DropBox title="برای تغییر کلمه عبور کلیک کنید (در صورت پشیمانی فیلد ها را خالی بگذارید) ">
           <label className="fildinput">
