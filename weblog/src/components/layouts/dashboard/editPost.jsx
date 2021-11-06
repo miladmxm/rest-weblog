@@ -9,16 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBlog } from "../../../action/blog";
 import { findPost } from "../../utils/findPost";
 
-const EditPost = ({history,match}) => {
+const EditPost = ({ history, match }) => {
 
-  const posts = useSelector(state=>state.getDashboard)
-  const post =  findPost(match.params.id,posts)
-  
+  const posts = useSelector(state => state.getDashboard)
+  const post = findPost(match.params.id, posts)
+
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("public");
+  const [category, setCategory] = useState("دیگر");
   const [body, setBody] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
-  const { setMessage, setMessageArr,setLoader,setMessaLoader } = useContext(ContextDash)
+  const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
   const dispatch = useDispatch()
 
   const titleHadnler = (e) => {
@@ -30,7 +31,7 @@ const EditPost = ({history,match}) => {
     }
   };
 
-  const reset = ()=>{
+  const reset = () => {
     setTitle('')
     setStatus('public')
     setBody("")
@@ -43,20 +44,23 @@ const EditPost = ({history,match}) => {
     e.preventDefault();
     const data = new FormData()
     data.append(
-      "title",title
+      "title", title
     )
     data.append(
-      "status",status
+      "status", status
     )
     data.append(
-      "body",body
+      "body", body
     )
     data.append(
-      "thumbnail",thumbnail
+      "thumbnail", thumbnail
     )
-    
+    data.append(
+      "category", category
+    )
+
     try {
-      const res = await editPost(match.params.id,data);
+      const res = await editPost(match.params.id, data);
       if (res.status == 200) {
         dispatch(getBlog())
         reset();
@@ -72,26 +76,27 @@ const EditPost = ({history,match}) => {
       } else {
         err.push(ex.response.data.message);
       }
-      
+
       setMessage(err, "error");
     }
-    
+
     setLoader(false)
     setMessaLoader("اتصال اینترنت خود را بررسی کنید")
   };
   useEffect(() => {
     if (post.length > 0) {
-      
+
       setTitle(post[0].title)
       setStatus(post[0].status)
       setBody(post[0].body)
+      setCategory(post[0].category)
     }
-  },[])
+  }, [])
   if (post.length <= 0) {
     history.replace('/dashboard')
     return null
   } else {
-    
+
     return (
       <>
         <h2 className="contentTitle">ویرایش پست</h2>
@@ -107,7 +112,7 @@ const EditPost = ({history,match}) => {
             name="thumbnale"
             uploadChange={(e) => setThumbnail(e.target.files[0])}
             title="انتخاب تصویر اصلی"
-            defaultImg ={`thumbnails/${post[0].thumbnail}`}
+            defaultImg={`thumbnails/${post[0].thumbnail}`}
           />
           <label className="fildinput">
             <input
@@ -137,18 +142,41 @@ const EditPost = ({history,match}) => {
               <span>وضعیت پست</span>
             </label>
           </div>
-  
-          <div className="">
+
+
+          <divs>
+            <label className="fildinput" htmlFor="category">
+              <select
+                className="input-outlined"
+                data-value="true"
+                name="category"
+                id="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="دیگر">دیگر</option>
+                <option value="سرگرمی">سرگرمی</option>
+                <option value="آموزشی">آموزشی</option>
+                <option value="علمی">علمی</option>
+                <option value="خبری">خبری</option>
+                <option value="پزشکی">پزرشکی</option>
+                <option value="شخصی">شخصی</option>
+              </select>
+              <span>دسته بندی</span>
+            </label>
+          </divs>
+
+          <div>
             <label htmlFor="body">متن اصلی</label>
             <CKEditor
               config={{ language: "fa" }}
-              
-              initData={body.length > 0?body:post[0].body}
+
+              initData={body.length > 0 ? body : post[0].body}
               onChange={(e) => setBody(e.editor.getData())}
             />
           </div>
           <div className="row">
-            <button type="reset" onClick={() => { reset(); history.replace('/dashboard')}} className="btn btn-denger">
+            <button type="reset" onClick={() => { reset(); history.replace('/dashboard') }} className="btn btn-denger">
               انصراف
             </button>
             <button className="btn btn-success" type="submit">

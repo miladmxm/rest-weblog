@@ -71,6 +71,7 @@ textarea{
   transition: all ease-in-out 0.3s;
   transition-delay: 0.3s;
   z-index: 1;
+  pointer-events: none;
 }
 
 .tooltip:hover::after {
@@ -201,6 +202,96 @@ textarea{
 }
 
 /* end alert errors */
+
+/* main_profileControll */
+.main_profileControll{
+  position: relative;
+  height: auto;
+}
+.main_profileControll .profile-photo{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    overflow: hidden;
+}
+.main_profileControll .profile-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.main_profileControll .list{
+  background-color: rgb(255, 255, 255);
+  width: max-content;
+  position: absolute;
+  right: -24px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  padding: 10px;
+  top: 60px;
+  opacity: 0;
+  transform: translateY(50px);
+  -webkit-transform: translateY(50px);
+  -moz-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  -o-transform: translateY(50px);
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.main_profileControll .list.actove{
+  opacity: 1;
+  transform: translateY(0);
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+}
+.main_profileControll .list::before{
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: -10px;
+  right: 30px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.main_profileControll .list h3{
+  text-align: center;
+}
+.main_profileControll .list h3 span{
+  font-size: 15px;
+  font-weight: 100;
+}
+.main_profileControll .list ul li{
+  list-style: none;
+  margin:10px 7px !important;
+  display: flex;
+  align-items: center;
+}
+.main_profileControll .list ul li *{
+  margin-left: 10px;
+}
+.main_profileControll .list ul li a{
+  text-decoration: none;
+  color: #111;
+}
+
 
 /* confirm box */
 .boxConfirm {
@@ -670,6 +761,9 @@ font-size: 180%;
   width: calc(40% - 5px) ;
 }
 @media screen and (max-width: 960px) {
+  .main_profileControll{
+    display: none;
+  }
   .postCart,.Comments,.w-30,.w-70 {
     width: 95%;
   }

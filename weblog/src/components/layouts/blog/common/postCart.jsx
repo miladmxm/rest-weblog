@@ -3,7 +3,7 @@ import { localhost } from '../../../../services/config.json'
 import { Link } from 'react-router-dom'
 import { truncate } from "../../../utils/truncate";
 import { formatDate } from "../../../utils/jalali";
-const PostCart = ({ thumbnail,id, body, title, fullname, createdAt }) => {
+const PostCart = ({ thumbnail,id, body, title, fullname, createdAt,category }) => {
    
     return (
         <>
@@ -18,6 +18,7 @@ const PostCart = ({ thumbnail,id, body, title, fullname, createdAt }) => {
                 </div>
                 <footer>
                     <span>تاریخ انتشار : {formatDate(createdAt)}</span>
+                    <span>دسته بندی : {category}</span>
                     <span>نویسنده : {fullname }</span>
 
                 </footer>

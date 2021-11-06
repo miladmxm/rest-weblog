@@ -19,14 +19,14 @@
   height: 100%;
   width: 70%;
 }
-.navbar .container nav ul {
+.navbar .container nav>ul {
   display: flex;
   align-items: center;
   height: 100%;
   justify-content: space-between;
   list-style: none;
 }
-.navbar .container nav ul li{
+.navbar .container nav>ul li{
   margin: 0 10px;
 }
 .logo {
@@ -96,7 +96,7 @@ nav ul li a:hover {
   background-color: #fafefa;
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 6px;
   border-radius: 10px;
   font-size: large;
 }
@@ -120,6 +120,9 @@ nav ul li a:hover {
 @media screen and (min-width: 960px) {
   .navbar .container #navMenu{
     height:0 !important;
+  }
+  .for_nob{
+    display: none;
   }
 }
 @media screen and (max-width: 960px) {

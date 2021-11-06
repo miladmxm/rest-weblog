@@ -16,7 +16,7 @@ const Blog = () => {
 
 
             {posts.length > 0 ? posts.map((post, index) => {
-                return <PostCart key={index} id={post._id} thumbnail={post.thumbnail} body={post.body} title={post.title} fullname={post.user?post.user.fullname:null} createdAt={post.createdAt} />
+                return <PostCart key={index} category={post.category} id={post._id} thumbnail={post.thumbnail} body={post.body} title={post.title} fullname={post.user?post.user.fullname:null} createdAt={post.createdAt} />
             }) :
                 <h2 className="center" style={{ color:"#fff"}}>متأسفم مثل اینکه هیچ پستی وجود نداره 😥</h2>
             }

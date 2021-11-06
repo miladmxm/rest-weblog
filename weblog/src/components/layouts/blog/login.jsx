@@ -9,7 +9,6 @@ import { addUser } from "../../../action/user";
 import { decodedToken } from "../../utils/decodedToken";
 import isEmpty from "../../utils/isEmpty";
 import { getDashboard } from "../../../action/dashboard";
-import { getAllPosts } from "../../../services/dashServises";
 
 const Login = ({ history }) => {
 
@@ -47,15 +46,12 @@ const Login = ({ history }) => {
             const { data, status } = await loginUser(datas)
             if (status === 200) {
                 const { payload } = decodedToken(data.token)
-                const posts = await getAllPosts(payload.user.userId,data.token)
-                console.log(posts.data.posts)
-
                 reset()
                 
                 localStorage.setItem('token', data.token)
-
-                dispatch(getDashboard(posts.data.posts));
                 dispatch(addUser(payload.user))
+
+                dispatch(getDashboard());
 
                 setMessage(['با موفقیت وارد شدید'], "success")
                 history.replace('/dashboard')

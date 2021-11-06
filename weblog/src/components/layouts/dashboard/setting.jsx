@@ -14,10 +14,10 @@ const Settings = ({ history }) => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState('');
   const [newRePassword, setNewRePassword] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [instagram, setInstagram] = useState(user.instagram);
+  const [whatsapp, setWhatsapp] = useState(user.whatsapp);
+  const [emailAddress, setEmailAddress] = useState(user.emailAddress);
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
   const [bio, setBio] = useState(user.bio);
   const [skill, setSkill] = useState(user.skill);
   const [profile, setProfile] = useState(null);

@@ -12,14 +12,7 @@ const Aside = () => {
   const { sideShow, toggleSide, sideHide, showUploadBox } = dashContext
   return (
     <>
-      <i
-        onClick={sideShow}
-        className={
-          toggleSide
-            ? "fa fa-cog side-settingShow for-show hide"
-            : "fa fa-cog side-settingShow for-show"
-        }
-      ></i>
+      <i onClick={sideShow} className={toggleSide? "fa fa-cog side-settingShow for-show hide": "fa fa-cog side-settingShow for-show"}></i>
       <aside className={toggleSide ? "side-bar showSide" : "side-bar"}>
         <header>
           <Link className="tooltip" data-tooltip="تکمیل مشخصات شما" to="/dashboard/setting">

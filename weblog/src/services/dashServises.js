@@ -1,10 +1,11 @@
 import http from './httpService'
 import config from "./config.json"
 
-export const getAllPosts = (id,tk) => {
+export const getAllPosts = (id) => {
+   const token = localStorage.getItem('token')
    return http.get(`${config.localhost}/dashboard/${id}`,{
       headers:{
-         'Authorization':`Bearer ${tk}`
+         'Authorization':`Bearer ${token}`
       }
    })
 }

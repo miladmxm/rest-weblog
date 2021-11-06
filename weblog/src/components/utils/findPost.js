@@ -4,3 +4,10 @@ export const findPost = (id ,posts) => {
     })
     return post
 }
+
+export const findeByCategory = (category ,posts) => {
+    const post = posts.filter((item) => {
+        return item.category === category
+    })
+    return post
+}

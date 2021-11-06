@@ -11,6 +11,7 @@ import { getBlog } from "../../../action/blog";
 const AddPost = ({history}) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("public");
+  const [category, setCategory] = useState("دیگر");
   const [body, setBody] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const { setMessage, setMessageArr,setLoader,setMessaLoader } = useContext(ContextDash)
@@ -49,7 +50,9 @@ const AddPost = ({history}) => {
     data.append(
       "thumbnail",thumbnail
     )
-    
+    data.append(
+      "category",category
+    )
     try {
       const res = await addPost(data);
       if (res.status == 201) {
@@ -103,7 +106,7 @@ const AddPost = ({history}) => {
           />
           <span>عنوان پست</span>
         </label>
-        <div className="">
+        <divs>
           <label className="fildinput" htmlFor="status">
             <select
               className="input-outlined"
@@ -118,7 +121,28 @@ const AddPost = ({history}) => {
             </select>
             <span>وضعیت پست</span>
           </label>
-        </div>
+        </divs>
+        <divs>
+          <label className="fildinput" htmlFor="category">
+            <select
+              className="input-outlined"
+              data-value="true"
+              name="category"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="دیگر">دیگر</option>
+              <option value="سرگرمی">سرگرمی</option>
+              <option value="آموزشی">آموزشی</option>
+              <option value="علمی">علمی</option>
+              <option value="خبری">خبری</option>
+              <option value="پزشکی">پزرشکی</option>
+              <option value="شخصی">شخصی</option>
+            </select>
+            <span>دسته بندی</span>
+          </label>
+        </divs>
 
         <div className="">
           <label htmlFor="body">متن اصلی</label>
