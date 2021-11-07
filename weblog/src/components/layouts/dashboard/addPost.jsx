@@ -55,7 +55,7 @@ const AddPost = ({history}) => {
     )
     try {
       const res = await addPost(data);
-      if (res.status == 201) {
+      if (res.status === 201) {
         dispatch(getBlog())
         reset();
         history.replace('/dashboard')

@@ -70,7 +70,7 @@ const HeaderBlog = ({ location }) => {
                                 <>
                                     <li><div className="main_profileControll">
                                         <div className="profile-photo" onClick={activeList}>
-                                            <img className="profileImg" src={`${localhost}/uploads/${user.profileImg == "default" ? 'user.png' : `image/${user.profileImg}`}`} />
+                                            <img className="profileImg" alt="user profile image" src={`${localhost}/uploads/${user.profileImg === "default" ? 'user.png' : `image/${user.profileImg}`}`} />
                                         </div>
                                         <div className={showList ? "list actove" : "list"}>
                                             <h3>{user.fullname}<br /> <span>{user.skill}</span> </h3>
@@ -94,7 +94,7 @@ const HeaderBlog = ({ location }) => {
                                 <NavLink to="/contact"><i className="fa fa-volume-control-phone"></i> تماس با ما</NavLink>
                             </li>
                             <li>
-                                <SearchForm />
+                                <SearchForm url="/" />
                             </li>
                         </ul>
                     </nav>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import SearchForm from "./search";
+import SearchForm from "../../blog/common/search";
 
 const HeaderDash = () => {
   const user = useSelector(state=>state.userHandler)
@@ -11,7 +11,7 @@ const HeaderDash = () => {
       <div>
           <h4 className="tooltip" data-tooltip="مشاهده وبلاگ"><Link target="_blank" to="/">{ user.fullname}</Link></h4>
       </div>
-      <SearchForm />
+      <SearchForm url='/dashboard/' />
       <Link to="/logout" className="btn">
         خروج
       </Link>

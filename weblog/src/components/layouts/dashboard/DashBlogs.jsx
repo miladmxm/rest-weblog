@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../utils/jalali";
@@ -6,24 +6,30 @@ import { Link } from "react-router-dom";
 import { getDashboard } from "../../../action/dashboard";
 import { ContextDash } from "../../context/context";
 const DashBlogs = ({ location }) => {
-  const posts = useSelector((state) => state.getDashboard);
+  const [filterpost,setFilterpost] = useState([])
+  const Allposts = useSelector((state) => state.getDashboard);
   const contextx = useContext(ContextDash)
   const { setConfirm, confirm } = contextx
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    
-      dispatch(getDashboard());
-    
-    console.log(location);
-  }, [location, confirm]);
+  useEffect(()=>{
+    dispatch(getDashboard());
+    setFilterpost(Allposts)
+    const searchText = new URLSearchParams(location.search).get("search")
+    if(searchText !== null){
+        const filteredPost = Allposts.filter(item=>{
+            return item.title.includes(searchText)
+        })
+        setFilterpost(filteredPost)
+    }
+},[location,Allposts,confirm])
   return (
     <div className="table">
       <Helmet>
         <title>داشبورد | همه پست ها</title>
       </Helmet>
 
-      {posts.length > 0
+      {filterpost.length > 0
 
         ?
         <table className="tableShowItem">
@@ -38,7 +44,7 @@ const DashBlogs = ({ location }) => {
           </thead>
           <tbody>
             {
-              posts.map((post, index) => {
+              filterpost.map((post, index) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
@@ -47,7 +53,7 @@ const DashBlogs = ({ location }) => {
                     </td>
                     <td>{formatDate(post.createdAt)}</td>
                     <td>
-                      {post.status == "private" ? (
+                      {post.status === "private" ? (
                         <span className="badge badge-denger">خصوصی</span>
                       ) : (
                         <span className="badge">عمومی</span>

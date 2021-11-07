@@ -23,10 +23,6 @@ const Message = ({ message, classN , index = 1}) => {
     },index * 200);
   }, []);
 
-  // setTimeout(() => {
-  //   show();
-  // }, 200);
-
   return (
     <div className={`alertBox ${alertClass} ${classN}`}>
       <span className="closeAlert" onClick={closeMessage}>

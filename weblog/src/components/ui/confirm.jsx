@@ -21,7 +21,7 @@ const Confirm = ({ history }) => {
     const deletePosthandler = async () => {
       try {
         const data = await deletePost(confirm);
-        if (data.status == 200) {
+        if (data.status === 200) {
           dispatch(getDashboard(posts.user.userId));
           history.replace("/dashboard/");
         }

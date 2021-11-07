@@ -61,7 +61,7 @@ const EditPost = ({ history, match }) => {
 
     try {
       const res = await editPost(match.params.id, data);
-      if (res.status == 200) {
+      if (res.status === 200) {
         dispatch(getBlog())
         reset();
         history.replace('/dashboard')

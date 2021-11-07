@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ContextDash } from "../../../context/context";
 import DropShadow from "../../../ui/brop-shadow";
 import UploadBox from "../../../ui/uploadBox";
-import SearchForm from "./search";
+import SearchForm from "../../blog/common/search";
 
 const Aside = () => {
   const user = useSelector(state => state.userHandler)
@@ -43,7 +43,7 @@ const Aside = () => {
               <Link onClick={showUploadBox} to="#">آپلود کردن تصویر</Link>
             </li>
             <li>
-              <SearchForm />
+              <SearchForm url='/dashboard/' />
             </li>
             <i onClick={sideHide} className="fa fa-cog side-settingShow"></i>
           </ul>

@@ -62,7 +62,7 @@ const Settings = ({ history }) => {
   
     try {
       const res = await editUser(data);
-      if (res.status == 200) {
+      if (res.status === 200) {
         dispatch(addUser(res.data.data));
         reset();
         history.replace("/dashboard");
