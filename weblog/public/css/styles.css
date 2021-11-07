@@ -32,6 +32,126 @@ textarea{
   opacity: 0;
 }
 
+
+/* paginateItems */
+ul.paginateItems {
+    display: flex;
+    width: 80%;
+    margin:10px auto;
+    list-style: none;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #51bae8;
+    border-radius:6px ;
+    -webkit-border-radius:6px ;
+    -moz-border-radius:6px ;
+    -ms-border-radius:6px ;
+    -o-border-radius:6px ;
+}
+
+ul.paginateItems li a:hover,
+ul.paginateItems li a:active,
+ul.paginateItems li a:active{
+  color:#1d6a95 ;
+}
+ul.paginateItems li a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+  color: #edfafd;
+  cursor: pointer;
+}
+ul.paginateItems li.activePaginateItems a{
+  color:#1d6a95 ;
+}
+ul.paginateItems li.activePaginateItems a{
+    position: relative;
+}
+ul.paginateItems li.activePaginateItems a::before{
+    content: "";
+    position: absolute;
+    border: 2px solid #1d6a95;
+    width: 35px;
+    height: 35px;
+    right: -14px;
+    top: 5%;
+    border-radius: 50%;
+}
+
+ul.paginateItems .nextClassName{
+  text-align: left;
+  border-right:1px solid #3333 ;
+}
+ul.paginateItems .previousClassName{
+  text-align: right;
+  border-left:1px solid #3333 ;
+ }
+ ul.paginateItems .previousClassName a::after,
+ul.paginateItems .nextClassName a::after{ 
+  content: "\f053";
+  width: 100%;
+  height: 100%;
+  font: normal normal normal 14px/1 FontAwesome;
+  text-align: center;
+}
+ul.paginateItems .previousClassName a::after{ 
+  content: "\f054";
+}
+ul.paginateItems .nextClassName,
+ul.paginateItems .previousClassName{ 
+  width: 16%;
+ }
+/* 
+ul.paginateItems {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+  margin: 10px auto;
+  background: #09f;
+  border-radius: 5px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  color: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+ul.paginateItems li{
+  cursor: pointer;
+}
+ul.paginateItems .nextClassName,
+ul.paginateItems .previousClassName{  
+    border-left: 1px solid #3334;
+      padding: 6px 9px;  
+      box-sizing: border-box;
+      text-align: center;
+}
+ul.paginateItems .nextClassName{
+  border-right: 1px solid #3334;
+  border-left: none;
+}
+ul.paginateItems .paginateItemsLi {
+  padding: 5px;
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  text-align: center;
+}
+ul.paginateItems .paginateItemsLi.activePaginateItems{
+
+  background: #33333361;
+} */
+
+
+
+
 /* alert errors */
 
 .fixedR {
