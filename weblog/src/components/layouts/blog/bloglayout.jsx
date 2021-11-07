@@ -11,10 +11,10 @@ const Blog = ({ location }) => {
     const { isLight } = useContext(ContextDash)
     const [perPage, setPerPage] = useState(1)
     const [currentPage, SetCurrentPage] = useState(1)
-    const [pageCount, setPageCount] = useState(1)
+    const [pageCount, setPageCount] = useState(Math.ceil(Allposts.length / 2))
+
 
     useEffect(() => {
-        console.log(Allposts);
         setFilterpost(Allposts)
         const searchText = new URLSearchParams(location.search).get("search")
         if (searchText !== null) {
@@ -22,11 +22,14 @@ const Blog = ({ location }) => {
                 return item.title.includes(searchText)
             })
             setFilterpost(filteredPost)
+            setPageCount(0)
         }
-        setPageCount(Math.ceil(filterpost.length / 2))
-        console.log(Math.ceil(filterpost.length / 2))
-    }, [location.search, Allposts])
 
+
+
+        setPageCount(Math.ceil(Allposts.length / 2))
+        console.log(Allposts)
+    }, [location.search, Allposts])
     const clicked = e => {
         console.log(e.selected + 1);
     }
@@ -44,7 +47,8 @@ const Blog = ({ location }) => {
                     <h2 className="center" style={isLight ? { color: "#333", width: "100%" } : { color: "#fff", width: "100%" }}>متأسفم مثل اینکه هیچ پستی وجود نداره 😥</h2>
                 }
             </div>
-            
+            {pageCount > 1 ?
+
                 <ReactPaginate
                     previousLabel=""
                     nextLabel=""
@@ -55,8 +59,9 @@ const Blog = ({ location }) => {
                     containerClassName='paginateItems'
                     onPageChange={(e) => clicked(e)}
                     pageCount={pageCount}
-                    renderOnZeroPageCount={null}
                 />
+                : null}
+
         </div>
     )
 }
