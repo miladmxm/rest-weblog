@@ -8,8 +8,7 @@ import Rejister from "./components/layouts/blog/register";
 import Single from "./components/layouts/blog/single";
 import AddPost from "./components/layouts/dashboard/addPost";
 import DashBlogs from "./components/layouts/dashboard/DashBlogs";
-import MainLayout from "./components/layouts/mainLayout";
-import Logout from './components/layouts/blog/logout'
+import Logout from "./components/layouts/blog/logout";
 import { Messages } from "./components/ui/messages";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, deleteUser } from "./action/user";
@@ -24,71 +23,111 @@ import ForgetPass from "./components/layouts/blog/forgetPass";
 import ResetPass from "./components/layouts/blog/resetPass";
 import Settings from "./components/layouts/dashboard/setting";
 import DeleteUser from "./components/layouts/blog/deleteuser";
+import Dashboard from "./components/layouts/dashboard/dashlayout";
+import HeaderBlog from "./components/layouts/blog/common/header";
 
 const App = ({ location }) => {
-  const isDashboard = location.pathname.includes("dashboard")
-  const user = useSelector(state => state.userHandler)
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.userHandler);
+  const dispatch = useDispatch();
 
   useEffect(async () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     if (token) {
-      const { payload } = decodedToken(token)
+      const { payload } = decodedToken(token);
       if (payload.exp > Date.now() / 1000) {
-        dispatch(addUser(payload.user))
-        const postsH = await getAllPosts(payload.user.userId, token)
+        dispatch(addUser(payload.user));
+        const postsH = await getAllPosts(payload.user.userId, token);
         if (postsH) {
           dispatch(getDashboard(postsH.data.posts));
         }
       } else {
-        localStorage.removeItem('token')
-        dispatch(deleteUser())
-        dispatch(cleareDash())
+        localStorage.removeItem("token");
+        dispatch(deleteUser());
+        dispatch(cleareDash());
       }
-
     }
-  }, [])
+  }, []);
   return (
     <>
       <DashContext>
-        <MainLayout dashboard={isDashboard}>
-          <Loader />
-          <Messages />
-          <Switch>
-            {/* dashboard router  */}
-            <Route path="/" exact component={Blog} />
-            <Route path="/single/:id" exact component={Single} />
-            <Route path="/contact" exact component={Contact} />
-            <Route path="/forget-password" exact component={ForgetPass} />
-            <Route path="/reset-password/:token" exact component={ResetPass} />
-
+        <Loader />
+        <Messages />
+        <Switch>
+          <Route
+            path={[
+              "/dashboard",
+              "/dashboard/add-post",
+              "/dashboard/edit-post/:id",
+              "/dashboard/setting",
+            ]}
+          >
             {isEmpty(user) ? (
-
-              <Switch>
-                <Route path="/logout" exact component={Logout} />
-                <Route path="/dashboard" exact component={DashBlogs} />
-                <Route path="/dashboard/add-post" exact component={AddPost} />
-                <Route path="/dashboard/edit-post/:id" exact component={EditPost} />
-                <Route path="/dashboard/setting" exact component={Settings} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-
+              <Dashboard>
+                <Switch>
+                  <Route path="/dashboard" exact component={DashBlogs} />
+                  <Route path="/dashboard/add-post" exact component={AddPost} />
+                  <Route
+                    path="/dashboard/edit-post/:id"
+                    exact
+                    component={EditPost}
+                  />
+                  <Route path="/dashboard/setting" exact component={Settings} />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </Dashboard>
             ) : (
-              <Switch>
-                <Route path="/login" exact component={Login} />
-                <Route path="/register" exact component={Rejister} />
-                <Route path="/delete-user/:token" exact component={DeleteUser} />
-                <Route path="*" component={NotFound} />
-              </Switch>
+              <>
+              <HeaderBlog />
+              <Route path="*" component={NotFound} />
+              </>
             )}
-            {/* blog router  */}
+          </Route>
 
-          </Switch>
-        </MainLayout>
+          <Route
+            path={[
+              "/",
+              "/single/:id",
+              "/contact",
+              "/forget-password",
+              "/reset-password/:token",
+            ]}
+          >
+            <HeaderBlog />
+            <Switch>
+              {/* dashboard router  */}
+              <Route path="/" exact component={Blog} />
+              <Route path="/single/:id" exact component={Single} />
+              <Route path="/contact" exact component={Contact} />
+              <Route path="/forget-password" exact component={ForgetPass} />
+              <Route
+                path="/reset-password/:token"
+                exact
+                component={ResetPass}
+              />
+              {!isEmpty(user) ? (
+                <Switch>
+                  <Route path="/login" exact component={Login} />
+                  <Route path="/register" exact component={Rejister} />
+                  <Route
+                    path="/delete-user/:token"
+                    exact
+                    component={DeleteUser}
+                  />
+                <Route path="*" component={NotFound} />
+                </Switch>
+              ) : (
+                <Switch>
+                <Route path="/logout" exact component={Logout} />
+                <Route path="*" component={NotFound} />
+                </Switch>
+              )}
+          
+            </Switch>
+          </Route>
+        </Switch>
       </DashContext>
-
     </>
   );
-}
+};
 
 export default withRouter(App);
