@@ -13,7 +13,7 @@ const DashContext = ({ children }) => {
   const [typeOfMessage, setTypeOfMessage] = useState('error')
   const [confirm, setConfirm] = useState('')
   const [isLight, setIsLight] = useState(false)
-  
+  const [numberOfPaginate,setNumberOfPaginate]=useState(6)
   const sideShow = () => {
     setToggleSide(true);
     setDropShadowToggle(true)
@@ -77,7 +77,9 @@ const DashContext = ({ children }) => {
       zindexShadow,
       setZindexShadow,
       setIsLight,
-      isLight
+      isLight,
+      numberOfPaginate,
+      setNumberOfPaginate
     }}>
       {children}
     </ContextDash.Provider>

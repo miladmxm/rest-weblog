@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import Paginate from "../../ui/paginate";
 import MapingBlogs from "./mapBlogs";
+import { ContextDash } from "../../context/context";
 
 const Blog = ({ location }) => {
+    const constext = useContext(ContextDash)
+    const {numberOfPaginate,setNumberOfPaginate} = constext
     const Allposts = useSelector(state => state.getBlog)
     const [filterpost, setFilterpost] = useState(Allposts)
     const [correntPage, setCorrentPage] = useState(1)
-    const [productNumber, setProductNumber] = useState(2)
+    const [productNumber, setProductNumber] = useState(numberOfPaginate)
+    const [endPage, setEndPage] = useState(false)
     const [showPaginate, setShowPaginate] = useState(false)
 
 
@@ -33,10 +37,13 @@ const Blog = ({ location }) => {
 
     
     const clicked = e => {
+        
         if (Math.ceil(filterpost.length / productNumber) === e) {
-            setProductNumber(filterpost.length % 2)
+            setEndPage(true)
+            setProductNumber(filterpost.length % numberOfPaginate)
         } else {
-            setProductNumber(2)
+            setEndPage(false)
+            setProductNumber(numberOfPaginate)
         }
 
         setCorrentPage(e)
@@ -46,8 +53,8 @@ const Blog = ({ location }) => {
             <Helmet>
                 <title>miladmxm</title>
             </Helmet>
-            <MapingBlogs correntPage={correntPage} filterpost={filterpost} productNumber={productNumber} >
-                {showPaginate ? <Paginate pageCount={Math.ceil(filterpost.length / 2)} clicked={e => clicked(e)} /> : null}
+            <MapingBlogs correntPage={correntPage} endPage={endPage} filterpost={filterpost} productNumber={productNumber} >
+                {showPaginate ? <Paginate pageCount={Math.ceil(filterpost.length / numberOfPaginate)} clicked={e => clicked(e)} /> : null}
             </MapingBlogs>
 
         </div>

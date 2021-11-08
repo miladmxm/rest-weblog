@@ -14,6 +14,8 @@ const DashBlogs = ({ location }) => {
 
   useEffect(()=>{
     dispatch(getDashboard());
+},[location,confirm])
+  useEffect(()=>{
     setFilterpost(Allposts)
     const searchText = new URLSearchParams(location.search).get("search")
     if(searchText !== null){
@@ -23,6 +25,7 @@ const DashBlogs = ({ location }) => {
         setFilterpost(filteredPost)
     }
 },[location,Allposts,confirm])
+
   return (
     <div className="table">
       <Helmet>
