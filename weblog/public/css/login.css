@@ -1,4 +1,6 @@
-
+.fontziro{
+  font-size: 0;
+}
 #main{
     min-height: 50vh;
     width: 40%;
@@ -26,7 +28,12 @@
     justify-content: center;
     flex-direction: column;
   }
-  #main form.loginForm>input,
+  #main form.loginForm>div{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  #main form.loginForm>div>input,
   #main form .captchalabel input
   {
     width: 100%;
@@ -38,6 +45,10 @@
     color: #fff;
     opacity: .8;
     transition: opacity 0.4s ease-in-out;
+  }
+  #main form.loginForm>div.remember>input{
+    padding: 0;
+    width: 50px;
   }
   #main form.loginForm .remember,.captchalabel{
     width: 100%;
@@ -54,6 +65,25 @@
     
   }
 
+  #main form.loginForm>div::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    opacity: 0;
+    height: 100%;
+    background-color: #f81414;
+    transition: all ease-in-out 0.2s;
+    -webkit-transition: all ease-in-out 0.2s;
+    -moz-transition: all ease-in-out 0.2s;
+    -ms-transition: all ease-in-out 0.2s;
+    -o-transition: all ease-in-out 0.2s;
+}
+#main form.loginForm>div.invalid::after{
+  width: 8px;
+  opacity: 1;
+}
 .checkedBeautiful{
     width: 50px;
     appearance: none;
@@ -117,8 +147,8 @@
   #main form.loginForm input:focus{
     opacity: 1;
   }
-  
-  #main form.loginForm input:nth-child(1){
+  #main form.loginForm div:nth-child(1),
+  #main form.loginForm div:nth-child(1) input{
     border-radius: 10px 10px 0 0;
   }
   #main form.loginForm input::-webkit-input-placeholder { /* Edge */
@@ -180,7 +210,7 @@
     max-height: 400px;
     width: 100%;
     border: none;
-    padding: 5px;
+    padding: 5px 10px 5px 5px;
     box-sizing: border-box;
     color: #fff;
     min-height: 100px;

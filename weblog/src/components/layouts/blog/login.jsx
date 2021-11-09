@@ -9,15 +9,15 @@ import { addUser } from "../../../action/user";
 import { decodedToken } from "../../utils/decodedToken";
 import isEmpty from "../../utils/isEmpty";
 import { getDashboard } from "../../../action/dashboard";
+import { useForm } from "react-hook-form";
 
 const Login = ({ history }) => {
-
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
     const [isCaptcha, setIsCaptcha] = useState(null)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [reMember, setReMember] = useState(false)
-    const { setMessage, setMessageArr,setLoader,setMessaLoader } = useContext(ContextDash)
     const dispatch = useDispatch()
+
     const captcha = (value) => {
         if (value) {
             setIsCaptcha(value)
@@ -25,20 +25,22 @@ const Login = ({ history }) => {
             setIsCaptcha(null)
         }
     }
+
     const reset = () => {
-        setEmail('')
-        setPassword("")
+        setValue('email', '')
+        setValue("password", "")
         setIsCaptcha('')
         setReMember(false)
     }
-    const loginHandler = async (e) => {
+
+    const onSubmit = async input => {
         setLoader(true)
         setMessaLoader("لطفا منتظر بمانید")
         setMessageArr([])
-        e.preventDefault()
+
         const datas = {
-            email,
-            password,
+            email: input.email,
+            password: input.password,
             reMember,
             grecaptcharesponse: isCaptcha
         }
@@ -47,7 +49,7 @@ const Login = ({ history }) => {
             if (status === 200) {
                 const { payload } = decodedToken(data.token)
                 reset()
-                
+
                 localStorage.setItem('token', data.token)
                 dispatch(addUser(payload.user))
 
@@ -56,7 +58,7 @@ const Login = ({ history }) => {
                 setMessage(['با موفقیت وارد شدید'], "success")
                 history.replace('/dashboard')
             } else (
-               setMessage(['مشکلی در ورود پیش آمده است'], 'error')
+                setMessage(['مشکلی در ورود پیش آمده است'], 'error')
             )
 
         } catch (ex) {
@@ -75,19 +77,26 @@ const Login = ({ history }) => {
         setLoader(false)
         setMessaLoader("اتصال اینترنت خود را بررسی کنید")
     }
+
     return (
-        <main id="main" onClick={() => isCaptcha === '' ? setIsCaptcha('d') : null}>
+        <main id="main" onClick={() => isCaptcha === '' ? setIsCaptcha('d') : null} >
             <h2 className="title">ورود به بخش مدیریت</h2>
             <Helmet>
                 <title>وبلاگ | ورود به سایت</title>
             </Helmet>
-            <form className="loginForm" onSubmit={e => loginHandler(e)}>
-                <input type="email" name="email" id="email" placeholder="ایمیل خود را وارد کنید" required value={email} onChange={e => setEmail(e.target.value)} />
-                <input type="password" name="password" id="password" placeholder="رمز عبور را وارد کنید" required value={password} onChange={e => setPassword(e.target.value)} />
+            <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
+                {/* register your input into the hook by invoking the "register" function */}
+                <div className={errors.email && "invalid"}>
+                    <input type="email" placeholder="ایمیل خود را وارد کنید" {...register("email", { required: true, minLength: 4 })} />
+                </div>
+                <div className={errors.password && "invalid"}>
+                    <input type="password" placeholder="رمز عبور را وارد کنید" {...register("password", { required: true, minLength:4 })} />
+                </div>
                 <div className="remember">
                     <label htmlFor="reMember">مرا به خاطر بسپار</label>
                     <input name="reMember" value={reMember} onChange={e => { setReMember(e.target.checked) }} className="checkedBeautiful" id="reMember" type="checkbox" />
                 </div>
+
                 <div className="g-recaptcha">
                     {isCaptcha !== '' ? <ReCAPTCHA
                         sitekey="6Ld9Pb0cAAAAADrqfRhWeHqvXTCN-8YES5r-6qr5"
@@ -100,8 +109,7 @@ const Login = ({ history }) => {
             </form>
             <Link to="/forget-password" className="center">رمز عبورتان را فراموش کردید؟!</Link>
         </main>
-
-    )
+    );
 }
 export default React.memo(Login)
 

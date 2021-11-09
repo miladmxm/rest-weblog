@@ -21,7 +21,6 @@ const Settings = ({ history }) => {
   const [bio, setBio] = useState(user.bio);
   const [skill, setSkill] = useState(user.skill);
   const [profile, setProfile] = useState(null);
-  console.log(user);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } =
     useContext(ContextDash);
   const dispatch = useDispatch();
