@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { cleareDash } from "../../../action/dashboard";
@@ -11,28 +12,27 @@ import UploadImg from "../../ui/uploadimage";
 const Settings = ({ history }) => {
   const user = useSelector((state) => state.userHandler);
 
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState('');
-  const [newRePassword, setNewRePassword] = useState('');
-  const [instagram, setInstagram] = useState(user.instagram);
-  const [whatsapp, setWhatsapp] = useState(user.whatsapp);
-  const [emailAddress, setEmailAddress] = useState(user.emailAddress);
-  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-  const [bio, setBio] = useState(user.bio);
-  const [skill, setSkill] = useState(user.skill);
+  
   const [profile, setProfile] = useState(null);
-  const { setMessage, setMessageArr, setLoader, setMessaLoader } =
-    useContext(ContextDash);
+  const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash);
+
+  const { register, handleSubmit, reset,setError, formState: { errors } } = useForm();
+
   const dispatch = useDispatch();
+
   const logout = () => {
     localStorage.removeItem('token')
     dispatch(cleareDash())
     dispatch(deleteUser())
   }
-  const reset = () => {
-    setPassword("");
-    setNewPassword(null)
-    setNewRePassword(null)
+
+  const defaultValue = {
+    password: '',
+    newPassword: null,
+    newRePassword:null
+  }
+  const resetForm = () => {
+    reset({defaultValue})
     setProfile(null)
   };
   const titleBar = (e) => {
@@ -45,25 +45,33 @@ const Settings = ({ history }) => {
 
 
 
-  const submitHandler = async (e) => {
+  const onSubmit = async input => {
+
+    if (input.newPassword === '' && input.newRePassword === "" && input.bio === user.bio && input.skill === user.skill && input.emailAddress === user.emailAddress && input.whatsapp === user.whatsapp && input.instagram === user.instagram && input.phoneNumber === user.phoneNumber) {
+      return setMessage(["برای ویرایش حداقل یک مورد را باید تغییر بدید"], "error");
+    } else if (input.newPassword !== ''||input.newRePassword !== '') {
+      if (input.newPassword !== input.newRePassword) {
+        return setError('newRePassword',{type: 'required', message: '', ref: input})
+      }
+    }
     setLoader(true);
     setMessaLoader("لطفا منتظر بمانید");
     setMessageArr([]);
-    e.preventDefault();
+
     const data = new FormData();
-    data.append("password", password);
-    data.append("newPassword", newPassword);
-    data.append("newRePassword", newRePassword);
-    data.append("bio", bio);
-    data.append("skill", skill);
-    data.append("social", [emailAddress,whatsapp,instagram,phoneNumber]);
+    data.append("password", input.password);
+    data.append("newPassword", input.newPassword);
+    data.append("newRePassword", input.newRePassword);
+    data.append("bio", input.bio);
+    data.append("skill", input.skill);
+    data.append("social", [input.emailAddress, input.whatsapp, input.instagram, input.phoneNumber]);
     data.append("profile", profile);
-  
+
     try {
       const res = await editUser(data);
       if (res.status === 200) {
         dispatch(addUser(res.data.data));
-        reset();
+        resetForm();
         history.replace("/dashboard");
       }
     } catch (ex) {
@@ -89,7 +97,7 @@ const Settings = ({ history }) => {
       <form
         className="add-post"
         encType="multipart/form-data"
-        onSubmit={(e) => submitHandler(e)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="row">
           <UploadImg
@@ -105,81 +113,90 @@ const Settings = ({ history }) => {
           />
         </div>
 
-        <label className="fildinput">
+        <label className={errors.password ? "fildinput red" : "fildinput"}>
           <input
             className="input-outlined"
             type="password"
             name="password"
             id="password"
             data-value="true"
-            value={password}
-            onChange={(e) => { titleBar(e); setPassword(e.target.value); }}
+            onInput={e => titleBar(e)}
+            {...register("password", { required: true, minLength: 4 })}
           />
           <span>کلمه عبور خود را وارد کنید</span>
+          {errors.password && <small className="subTitle">برای ذخیره تغییرات نیاز به وارد کردن رمز خود دارید</small>}
         </label>
 
-        <label className="fildinput">
+        <label className={errors.skill ? "fildinput red" : "fildinput"}>
           <input
             className="input-outlined"
             type="text"
             name="skill"
             id="skill"
-            data-value={user.skill? false:true}
-            value={skill}
-            onChange={(e) => { titleBar(e); setSkill(e.target.value); }}
+            data-value={user.skill ? false : true}
+            defaultValue={user.skill}
+            onInput={e => titleBar(e)}
+            {...register("skill", { minLength: 2 })}
           />
           <span>مهارت و یا شغل شما</span>
+          {errors.skill && <small className="subTitle">مهارت خود را به درستی وارد کنید</small>}
         </label>
 
-        <label className="fildinput">
-          <textarea onChange={e => { titleBar(e); setBio(e.target.value) }} data-value={user.bio? false:true} className="input-outlined" maxLength="400" name="bio" id="bio">
-            {bio}
+        <label className={errors.bio ? "fildinput red" : "fildinput"}>
+          <textarea
+            onInput={e => titleBar(e)}
+            defaultValue={user.bio}
+            {...register("bio", { minLength: 10 })}
+            data-value={user.bio ? false : true} className="input-outlined" maxLength="400" name="bio" id="bio">
           </textarea>
           <span>بیوگرافی شما</span>
+          {errors.bio && <small className="subTitle">بیوگرافی شما نباید کمتر از 10 کاراکتر باشد</small>}
         </label>
 
         <DropBox title="راه های ارتباط با شما ">
-            <div className="inputSocial">
+          <div className="inputSocial">
             <i className="fa fa-instagram insta tooltip" data-tooltip="فقط نام کاربری اینستاگرام خود را بنویسید"></i>
-              <input type="text" placeholder="برای مثال : miladmxm" value={instagram} onChange={e=>setInstagram(e.target.value)}/>
-            </div>
-            <div className="inputSocial">
-              <i className="fa fa-phone"></i>
-              <input type="number" placeholder="فقط شماره بدون صفر : 9109600000" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}/>
-            </div>
-            <div className="inputSocial">
-              <i className="fa fa-whatsapp whatsapp" ></i>
-              <input type="number" placeholder="فقط شماره بدون صفر : 9109600000" value={whatsapp} onChange={e=>setWhatsapp(e.target.value)} />
-            </div>
-            <div className="inputSocial">
-              <i className="fa fa-envelope email" ></i>
-              <input type="email" required={false} placeholder="ایمیل خود را کامل وارد کنید : miladmxm@gmail.com" value={emailAddress} onChange={e=>setEmailAddress(e.target.value)}/>
-            </div>
+            <input type="text" placeholder="برای مثال : miladmxm" className={errors.instagram && "red"} defaultValue={user.instagram} {...register("instagram", { minLength: 4 })} />
+          </div>
+          <div className="inputSocial">
+            <i className="fa fa-phone"></i>
+            <input type="number" className={errors.phoneNumber && "red"} placeholder="فقط شماره بدون صفر : 9109600000" defaultValue={user.phoneNumber} {...register("phoneNumber", { min: 10, pattern: /^9(1[0-9]|3[1-9]|2[1-9])[0-9]{7}/ })} />
+          </div>
+          <div className="inputSocial">
+            <i className="fa fa-whatsapp whatsapp" ></i>
+            <input type="number" placeholder="فقط شماره بدون صفر : 9109600000" className={errors.whatsapp && "red"} defaultValue={user.whatsapp} {...register("whatsapp", { min: 10, pattern: /^9(1[0-9]|3[1-9]|2[1-9])[0-9]{7}/ })} />
+          </div>
+          <div className="inputSocial">
+            <i className="fa fa-envelope email" ></i>
+            <input type="email" required={false} placeholder="ایمیل خود را کامل وارد کنید : miladmxm@gmail.com" className={errors.emailAddress && "red"} defaultValue={user.emailAddress} {...register("emailAddress", { minLength: 4, pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
+          </div>
         </DropBox>
-        <DropBox title="برای تغییر کلمه عبور کلیک کنید (در صورت پشیمانی فیلد ها را خالی بگذارید) ">
-          <label className="fildinput">
+        <DropBox plus={40} title="برای تغییر کلمه عبور کلیک کنید (در صورت پشیمانی فیلد ها را خالی بگذارید) ">
+          <label className="fildinput" className={errors.newPassword ? "fildinput red" : "fildinput"}>
             <input
               className="input-outlined"
               type="password"
               name="newPassword"
               id="newPassword"
               data-value="true"
-              value={newPassword}
-              onChange={(e) => { titleBar(e); setNewPassword(e.target.value); }}
+              onInput={e => titleBar(e)}
+              {...register("newPassword", { minLength: 4 })}
             />
             <span>کلمه عبور جدید خود را وارد کنید</span>
+            {errors.newPassword && <small className="subTitle">رمز عبور خود را به درستی و بیشتر از 4 کاراکتر وارد کنید</small>}
           </label>
-          <label className="fildinput">
+          <label className="fildinput" className={errors.newRePassword ? "fildinput red" : "fildinput"}>
             <input
               className="input-outlined"
               type="password"
               name="newRePassword"
               id="newRePassword"
               data-value="true"
-              value={newRePassword}
-              onChange={(e) => { titleBar(e); setNewRePassword(e.target.value); }}
+              onInput={e => titleBar(e)}
+              {...register("newRePassword", { minLength: 4 })}
             />
             <span>تکرار کلمه عبور جدید خود را وارد کنید</span>
+            {errors.newRePassword && <small className="subTitle">تکرار رمز عبور خود را برابر با رمز عبور جدید وارد کنید</small>}
           </label>
         </DropBox>
 
@@ -193,7 +210,7 @@ const Settings = ({ history }) => {
           <button
             type="reset"
             onClick={() => {
-              reset();
+              resetForm();
               history.replace("/dashboard");
             }}
             className="btn btn-denger"

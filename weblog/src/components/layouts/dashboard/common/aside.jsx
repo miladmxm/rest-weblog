@@ -1,15 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { withRouter } from "react-router";
 import { ContextDash } from "../../../context/context";
 import DropShadow from "../../../ui/brop-shadow";
 import UploadBox from "../../../ui/uploadBox";
 import SearchForm from "../../blog/common/search";
 
-const Aside = () => {
+const Aside = ({location}) => {
   const user = useSelector(state => state.userHandler)
   const dashContext = useContext(ContextDash)
   const { sideShow, toggleSide, sideHide, showUploadBox } = dashContext
+
+  useEffect(() => {
+    if (toggleSide) {
+      sideHide()
+    }
+  },[location])
+
   return (
     <>
       <i onClick={sideShow} className={toggleSide? "fa fa-cog side-settingShow for-show hide": "fa fa-cog side-settingShow for-show"}></i>
@@ -54,4 +62,4 @@ const Aside = () => {
     </>
   );
 };
-export default Aside;
+export default withRouter(Aside);

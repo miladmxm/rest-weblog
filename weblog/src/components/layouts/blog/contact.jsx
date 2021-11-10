@@ -57,9 +57,10 @@ const Contact = ({ history }) => {
     return (
         <main id="main" >
             <Helmet>
-                <title>وبلاگ | ثبت نام در سایت</title>
+                <title>وبلاگ | تماس با ما</title>
+                <meta name="description" content="Nested component"/>
             </Helmet>
-            <h2 className="title">ثبت نام در سایت</h2>
+            <h2 className="title">تماس با ما</h2>
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className={errors.fullname && "invalid"}>

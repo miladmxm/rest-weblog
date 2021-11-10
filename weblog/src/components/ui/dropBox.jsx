@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const DropBox = ({ children, title }) => {
+const DropBox = ({ children, title,plus=0 }) => {
 
     const [show, setShow] = useState(false)
     
@@ -9,7 +9,7 @@ const DropBox = ({ children, title }) => {
     const togge = () => {
         setShow(!show)
         if (!show) {
-            drop.current.style.height = drop.current.scrollHeight+'px'
+            drop.current.style.height = drop.current.scrollHeight+plus+'px'
         } else {
             
             drop.current.style.height = 0
