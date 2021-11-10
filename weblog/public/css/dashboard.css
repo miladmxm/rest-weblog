@@ -183,6 +183,9 @@
   box-sizing: border-box;
   opacity: 0.8;
 }
+.fildinput.red .input-outlined{
+  border-color: #aa0404;
+}
 .fildinput{
   width: auto;
   height: auto;
@@ -209,8 +212,31 @@
   -o-transition: ease-in-out 0.1s;
   transition-property: top font-size;
 }
+.fildinput.red span{
+  color: #aa0404;
+}
+
+.fildinput small.subTitle{
+  font-size: 80%;
+  color: #aa0404;
+  display: block;
+  height: min-content;
+  margin-right: 25px;
+  animation: topToggle 0.3s linear forwards;
+}
+
+@keyframes topToggle {
+  0%{
+    margin-top: 0;
+    opacity: 0;
+  }
+  100%{
+    margin-top: 5px;
+    opacity: 1;
+  }
+}
 .input-outlined[data-value = "true"] + span{
-  top: 23%;
+  top: 11px;
   background-color: transparent;
   font-size: 100%;
   z-index: 1;
@@ -287,6 +313,12 @@ select.input-outlined:focus{
   -o-border-radius: 10px;
   overflow: hidden;
   margin: 10px 0;
+}
+.uploadFile.red{
+  border:#aa0404 solid 2px;
+}
+.red{
+  color: #aa0404;
 }
 .uploadFile input{
     opacity: 0;

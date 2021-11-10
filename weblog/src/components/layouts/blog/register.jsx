@@ -7,16 +7,11 @@ import { ContextDash } from '../../context/context'
 const Rejister = ({ history }) => {
   
 
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, setError,reset,setValue, formState: { errors } } = useForm();
     const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
 
-    const reset = () => {
-        setValue('email', '')
-        setValue("password", "")
-        setValue("rePassword", "")
-        setValue("fullname", "")
-
-    }
+    const defaultValues  = {email:'',password:'',repassword:'',fullname:''}
+     
 
     const onSubmit = async input => {
         setMessageArr([])
@@ -26,7 +21,7 @@ const Rejister = ({ history }) => {
         if (input.password !== input.repassword) {
             setLoader(false)
             setMessaLoader("اتصال اینترنت خود را بررسی کنید")
-            errors.repassword={type: 'required', message: '', ref: input}
+            setError('repassword',{type: 'required', message: '', ref: input})
             return setValue("repassword", "")
         }
 
@@ -42,7 +37,7 @@ const Rejister = ({ history }) => {
             if (status === 201) {
                 setMessage(['ثبت نام شما موفقیت آمیز بود'], "success")
                 history.replace('/login')
-                reset()
+                reset({defaultValues})
             } else {
                 setMessage(["مشکلی در ثبت نام پیش آمده است"], 'error')
             }
@@ -78,7 +73,7 @@ const Rejister = ({ history }) => {
                     <input type="text" placeholder="نام و نام خانوادگی خود را وارد کنید"{...register("fullname", { required: true, minLength: 4, maxLength: 255 })} />
                 </div>
                 <div className={errors.email && "invalid"}>
-                    <input type="email" placeholder="ایمیل خود را وارد کنید" {...register("email", { required: true, minLength: 4 })} />
+                    <input type="email" placeholder="ایمیل خود را وارد کنید" {...register("email", { required: true, minLength: 4,pattern:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
                 </div>
                 <div className={errors.password && "invalid"}>
                     <input type="password" placeholder="رمز عبور را وارد کنید" {...register("password", { required: true, minLength: 4 })} />

@@ -12,7 +12,7 @@ import { getDashboard } from "../../../action/dashboard";
 import { useForm } from "react-hook-form";
 
 const Login = ({ history }) => {
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, setValue, formState: { errors } } = useForm();
     const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
     const [isCaptcha, setIsCaptcha] = useState(null)
     const [reMember, setReMember] = useState(false)
@@ -25,10 +25,12 @@ const Login = ({ history }) => {
             setIsCaptcha(null)
         }
     }
-
-    const reset = () => {
-        setValue('email', '')
-        setValue("password", "")
+    const defaultValues ={
+        email:"",
+        password:""
+    }
+    const resetform = () => {
+        reset({defaultValues})
         setIsCaptcha('')
         setReMember(false)
     }
@@ -37,7 +39,7 @@ const Login = ({ history }) => {
         setLoader(true)
         setMessaLoader("لطفا منتظر بمانید")
         setMessageArr([])
-
+        
         const datas = {
             email: input.email,
             password: input.password,
@@ -48,7 +50,7 @@ const Login = ({ history }) => {
             const { data, status } = await loginUser(datas)
             if (status === 200) {
                 const { payload } = decodedToken(data.token)
-                reset()
+                resetform()
 
                 localStorage.setItem('token', data.token)
                 dispatch(addUser(payload.user))
@@ -70,7 +72,7 @@ const Login = ({ history }) => {
             } else {
                 err.push(ex.response.data.message)
             }
-            reset()
+            resetform()
 
             setMessage(err, 'error')
         }
@@ -87,7 +89,7 @@ const Login = ({ history }) => {
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className={errors.email && "invalid"}>
-                    <input type="email" placeholder="ایمیل خود را وارد کنید" {...register("email", { required: true, minLength: 4 })} />
+                    <input type="email" placeholder="ایمیل خود را وارد کنید" {...register("email", { required: true, minLength: 4,pattern:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
                 </div>
                 <div className={errors.password && "invalid"}>
                     <input type="password" placeholder="رمز عبور را وارد کنید" {...register("password", { required: true, minLength:4 })} />

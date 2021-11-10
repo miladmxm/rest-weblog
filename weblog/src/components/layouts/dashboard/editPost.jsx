@@ -8,22 +8,25 @@ import { ContextDash } from "../../context/context";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlog } from "../../../action/blog";
 import { findPost } from "../../utils/findPost";
+import { useForm } from "react-hook-form";
+import { truncateAll } from "../../utils/truncate";
 
 const EditPost = ({ history, match }) => {
 
   const posts = useSelector(state => state.getDashboard)
   const post = findPost(match.params.id, posts)
 
-  const [title, setTitle] = useState("");
   const [status, setStatus] = useState("public");
   const [category, setCategory] = useState("دیگر");
   const [body, setBody] = useState("");
+  const [bodyValid,setBodyValid]=useState(true)
   const [thumbnail, setThumbnail] = useState(null);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const dispatch = useDispatch()
 
   const titleHadnler = (e) => {
-    setTitle(e.target.value);
+
     if (e.target.value === "" || e.target.value === null) {
       e.currentTarget.dataset.value = "true";
     } else {
@@ -32,19 +35,25 @@ const EditPost = ({ history, match }) => {
   };
 
   const reset = () => {
-    setTitle('')
+    setValue("title",'')
     setStatus('public')
     setBody("")
   }
 
-  const submitHandler = async (e) => {
+  const onSubmit = async input => {
+console.log(truncateAll(body))
+console.log(truncateAll(body).length)
+    if(truncateAll(body) === ""|| truncateAll(body)===null||truncateAll(body).length <= 3){
+      return setBodyValid(false)
+    }
+
     setLoader(true)
     setMessaLoader("لطفا منتظر بمانید")
     setMessageArr([])
-    e.preventDefault();
+    
     const data = new FormData()
     data.append(
-      "title", title
+      "title", input.title
     )
     data.append(
       "status", status
@@ -84,9 +93,7 @@ const EditPost = ({ history, match }) => {
     setMessaLoader("اتصال اینترنت خود را بررسی کنید")
   };
   useEffect(() => {
-    if (post.length > 0) {
-
-      setTitle(post[0].title)
+    if (post.length > 0) {      
       setStatus(post[0].status)
       setBody(post[0].body)
       setCategory(post[0].category)
@@ -106,7 +113,7 @@ const EditPost = ({ history, match }) => {
         <form
           className="add-post"
           encType="multipart/form-data"
-          onSubmit={(e) => submitHandler(e)}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <UploadImg
             name="thumbnale"
@@ -114,19 +121,21 @@ const EditPost = ({ history, match }) => {
             title="انتخاب تصویر اصلی"
             defaultImg={`thumbnails/${post[0].thumbnail}`}
           />
-          <label className="fildinput">
+          <label className={errors.title?"fildinput red":"fildinput"}>
             <input
               className="input-outlined"
               type="text"
               name="title"
               id="titlePost"
               data-value="false"
-              value={title}
-              onChange={(e) => titleHadnler(e)}
+              defaultValue={post[0]?post[0].title:null}
+              onInput={e=>titleHadnler(e)}
+              {...register("title", { required: true, minLength: 4})}
             />
             <span>عنوان پست</span>
+            {errors.title &&<small className="subTitle">برای پست خود حتماً یک عنوان بنویسید</small>}
           </label>
-          <div className="">
+          <div>
             <label className="fildinput" htmlFor="status">
               <select
                 className="input-outlined"
@@ -167,7 +176,7 @@ const EditPost = ({ history, match }) => {
           </divs>
 
           <div>
-            <label htmlFor="body">متن اصلی</label>
+            <label className={bodyValid?"":"red"} htmlFor="body">متن اصلی</label>
             <CKEditor
               config={{ language: "fa" }}
 

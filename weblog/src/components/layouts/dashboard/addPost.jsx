@@ -7,18 +7,23 @@ import isEmpty from "../../utils/isEmpty";
 import { ContextDash } from "../../context/context";
 import { useDispatch } from "react-redux";
 import { getBlog } from "../../../action/blog";
+import { useForm } from "react-hook-form";
+import { truncateAll } from "../../utils/truncate";
 
 const AddPost = ({history}) => {
-  const [title, setTitle] = useState("");
+
   const [status, setStatus] = useState("public");
   const [category, setCategory] = useState("دیگر");
+  const [bodyValid,setBodyValid]=useState(true)
+  const [thumbnailValid,setThumbnailValid]=useState(true)
   const [body, setBody] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const { setMessage, setMessageArr,setLoader,setMessaLoader } = useContext(ContextDash)
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+
   const dispatch = useDispatch()
 
   const titleHadnler = (e) => {
-    setTitle(e.target.value);
     if (e.target.value === "" || e.target.value === null) {
       e.currentTarget.dataset.value = "true";
     } else {
@@ -27,19 +32,26 @@ const AddPost = ({history}) => {
   };
 
   const reset = ()=>{
-    setTitle('')
+    
+    setValue("title",'')
     setStatus('public')
     setBody("")
   }
 
-  const submitHandler = async (e) => {
+  const onSubmit = async input => {
+    if(thumbnail === null || thumbnail === ""){
+      return setThumbnailValid(false)
+    }else if(truncateAll(body) === ""|| truncateAll(body)===null||truncateAll(body).length <= 3){
+      return setBodyValid(false)
+    }
+    
     setLoader(true)
     setMessaLoader("لطفا منتظر بمانید")
     setMessageArr([])
-    e.preventDefault();
+    
     const data = new FormData()
     data.append(
-      "title",title
+      "title",input.title
     )
     data.append(
       "status",status
@@ -87,26 +99,27 @@ const AddPost = ({history}) => {
       <form
         className="add-post"
         encType="multipart/form-data"
-        onSubmit={(e) => submitHandler(e)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <UploadImg
           name="thumbnale"
-          uploadChange={(e) => setThumbnail(e.target.files[0])}
+          classN={thumbnailValid?"":"red"}
+          uploadChange={(e) => {setThumbnailValid(true);setThumbnail(e.target.files[0]);}}
           title="انتخاب تصویر اصلی"
         />
-        <label className="fildinput">
+        <label className={errors.title?"fildinput red":"fildinput"}>
           <input
             className="input-outlined"
             type="text"
-            name="title"
             id="titlePost"
             data-value="true"
-            value={title}
-            onChange={(e) => titleHadnler(e)}
+            onInput={e=>titleHadnler(e)}
+            {...register("title", { required: true, minLength: 4})}
           />
           <span>عنوان پست</span>
+          {errors.title &&<small className="subTitle">برای پست خود حتماً یک عنوان بنویسید</small>}
         </label>
-        <divs>
+        <div>
           <label className="fildinput" htmlFor="status">
             <select
               className="input-outlined"
@@ -121,8 +134,8 @@ const AddPost = ({history}) => {
             </select>
             <span>وضعیت پست</span>
           </label>
-        </divs>
-        <divs>
+        </div>
+        <div>
           <label className="fildinput" htmlFor="category">
             <select
               className="input-outlined"
@@ -142,10 +155,10 @@ const AddPost = ({history}) => {
             </select>
             <span>دسته بندی</span>
           </label>
-        </divs>
+        </div>
 
-        <div className="">
-          <label htmlFor="body">متن اصلی</label>
+        <div>
+          <label className={bodyValid?"":"red"} htmlFor="body">متن اصلی</label>
           <CKEditor
             config={{ language: "fa" }}
             Data={body}
@@ -163,6 +176,8 @@ const AddPost = ({history}) => {
       </form>
     </>
   );
+
+
 };
 
 export default AddPost;
