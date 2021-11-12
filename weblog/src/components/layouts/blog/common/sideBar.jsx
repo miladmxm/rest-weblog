@@ -79,7 +79,7 @@ const SideBar = ({ user_id, post ,edit}) => {
                 </div>
                 <span className="br" />
                 <h3 className="m3">درباره نویسنده <i className="fa fa-pencil"></i></h3>
-                {edit ? <Link className="editLink" to={`/dashboard/edit-post/${'fa'}`}><i class="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
+                {edit ? <Link className="editLink" to={`/dashboard/setting`}><i class="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
                 {post.user ? <>
                     <div className="dropBox" style={{ height: "124px", padding: '0' }} ref={drop}>
                         <div className="writer">
