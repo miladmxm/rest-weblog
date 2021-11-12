@@ -41,8 +41,6 @@ const EditPost = ({ history, match }) => {
   }
 
   const onSubmit = async input => {
-console.log(truncateAll(body))
-console.log(truncateAll(body).length)
     if(truncateAll(body) === ""|| truncateAll(body)===null||truncateAll(body).length <= 3){
       return setBodyValid(false)
     }

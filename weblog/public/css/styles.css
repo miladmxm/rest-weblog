@@ -887,6 +887,26 @@ font-size: 180%;
   text-align: right;
   width: calc(40% - 5px) ;
 }
+
+
+.editLink{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  background-color: #da9820;
+  color: #fafafa;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.editLink i{
+  margin: 0 0 0 5px;
+}
 @media screen and (max-width: 960px) {
   .main_profileControll{
     display: none;

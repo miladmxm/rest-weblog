@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import Slider from "../../../ui/slider";
 import { findeByCategory } from "../../../utils/findPost";
 
-const SideBar = ({ user_id, post }) => {
+const SideBar = ({ user_id, post ,edit}) => {
     
     
     const [divice, setDivice] = useState('web')
@@ -47,7 +47,6 @@ const SideBar = ({ user_id, post }) => {
     return (
         <aside className="asideSinglePost w-30">
             <div className="container-aside">
-
                 <div className="w-70">
                     <h3 className="m3">اشتراک گذاری در <i className='fa fa-share-alt'></i></h3>
                     <div className="display_flex">
@@ -80,6 +79,7 @@ const SideBar = ({ user_id, post }) => {
                 </div>
                 <span className="br" />
                 <h3 className="m3">درباره نویسنده <i className="fa fa-pencil"></i></h3>
+                {edit ? <Link className="editLink" to={`/dashboard/edit-post/${'fa'}`}><i class="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
                 {post.user ? <>
                     <div className="dropBox" style={{ height: "124px", padding: '0' }} ref={drop}>
                         <div className="writer">

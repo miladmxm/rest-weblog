@@ -9,6 +9,7 @@ import { editUser } from "../../../services/dashServises";
 import { ContextDash } from "../../context/context";
 import DropBox from "../../ui/dropBox";
 import UploadImg from "../../ui/uploadimage";
+import { decodedToken } from "../../utils/decodedToken";
 const Settings = ({ history }) => {
   const user = useSelector((state) => state.userHandler);
 
@@ -58,24 +59,33 @@ const Settings = ({ history }) => {
     setMessaLoader("لطفا منتظر بمانید");
     setMessageArr([]);
 
-    const data = new FormData();
-    data.append("password", input.password);
-    data.append("newPassword", input.newPassword);
-    data.append("newRePassword", input.newRePassword);
-    data.append("bio", input.bio);
-    data.append("skill", input.skill);
-    data.append("social", [input.emailAddress, input.whatsapp, input.instagram, input.phoneNumber]);
-    data.append("profile", profile);
+    const datas = new FormData();
+    datas.append("password", input.password);
+    datas.append("newPassword", input.newPassword);
+    datas.append("newRePassword", input.newRePassword);
+    datas.append("bio", input.bio);
+    datas.append("skill", input.skill);
+    datas.append("social", [input.emailAddress, input.whatsapp, input.instagram, input.phoneNumber]);
+    datas.append("profile", profile);
 
     try {
-      const res = await editUser(data);
-      if (res.status === 200) {
-        dispatch(addUser(res.data.data));
+      const { data, status } = await editUser(datas);
+      
+      if (status === 200) {
+
+        const { payload } = decodedToken(data.token)
+       
+
+        localStorage.setItem('token', data.token)
+        dispatch(addUser(payload.user))
+
+
+        setMessage(['تغییرات با موفقیت ذخیره شد'], "success")
         resetForm();
         history.replace("/dashboard");
       }
     } catch (ex) {
-      console.log(ex.response);
+      console.log(ex);
       let err = [];
 
       err.push(ex.response.data.message);

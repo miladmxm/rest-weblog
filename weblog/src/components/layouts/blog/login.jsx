@@ -48,6 +48,7 @@ const Login = ({ history }) => {
         }
         try {
             const { data, status } = await loginUser(datas)
+            
             if (status === 200) {
                 const { payload } = decodedToken(data.token)
                 resetform()

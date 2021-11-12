@@ -7,7 +7,6 @@ export const truncate = (str, len) => {
 export const truncateAll = (str) => {
   let newTxt = str.replace(/<.*?>/g, "");
   newTxt = newTxt.replace(/&.*?;/g, "");
-  console.log(/[a-zA-Z0-9]/.test(newTxt))
   if(!/[a-zA-Z0-9ا-ی]/.test(newTxt)){
     return newTxt = ''
   }
