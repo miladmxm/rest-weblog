@@ -48,7 +48,7 @@ const Settings = ({ history }) => {
 
   const onSubmit = async input => {
 
-    if (input.newPassword === '' && input.newRePassword === "" && input.bio === user.bio && input.skill === user.skill && input.emailAddress === user.emailAddress && input.whatsapp === user.whatsapp && input.instagram === user.instagram && input.phoneNumber === user.phoneNumber) {
+    if (input.newPassword === '' &&profile == null&& input.newRePassword === "" && input.bio === user.bio && input.skill === user.skill && input.emailAddress === user.emailAddress && input.whatsapp === user.whatsapp && input.instagram === user.instagram && input.phoneNumber === user.phoneNumber) {
       return setMessage(["برای ویرایش حداقل یک مورد را باید تغییر بدید"], "error");
     } else if (input.newPassword !== ''||input.newRePassword !== '') {
       if (input.newPassword !== input.newRePassword) {

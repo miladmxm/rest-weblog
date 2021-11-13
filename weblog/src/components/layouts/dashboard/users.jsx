@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { getDashboard } from "../../../action/dashboard";
 import { ContextDash } from "../../context/context";
 import DropBox from "../../ui/dropBox";
-const DashBlogs = ({ location }) => {
+const Users = ({ location }) => {
   const [filterpost, setFilterpost] = useState([]);
   const Allposts = useSelector((state) => state.getDashboard);
   const user = useSelector((state) => state.userHandler);
@@ -84,4 +84,4 @@ const DashBlogs = ({ location }) => {
   );
 };
 
-export default React.memo(DashBlogs);
+export default React.memo(Users);
