@@ -3,30 +3,33 @@ import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../utils/jalali";
 import { Link } from "react-router-dom";
-import { getDashboard } from "../../../action/dashboard";
 import { ContextDash } from "../../context/context";
-import DropBox from "../../ui/dropBox";
-const Users = ({ location }) => {
-  const [filterpost, setFilterpost] = useState([]);
-  const Allposts = useSelector((state) => state.getDashboard);
+import { getAllUsers } from "../../../action/allUsers";
+const Users = ({ history,location }) => {
+  const [filterUsers, setFilterUsers] = useState([]);
+  const allUser = useSelector((state) => state.allUsers);
   const user = useSelector((state) => state.userHandler);
-  const contextx = useContext(ContextDash);
-  const { setConfirm, confirm } = contextx;
+  const { setConfirmUser, confirm } =  useContext(ContextDash);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDashboard());
+    if (user.dadashami !== "dada") {
+      history.replace('/dashboard')
+    } else {
+      
+      dispatch(getAllUsers());
+    }
   }, [location, confirm]);
   useEffect(() => {
-    setFilterpost(Allposts);
+    setFilterUsers(allUser);
     const searchText = new URLSearchParams(location.search).get("search");
     if (searchText !== null) {
-      const filteredPost = Allposts.filter((item) => {
+      const filteredPost = allUser.filter((item) => {
         return item.title.includes(searchText);
       });
-      setFilterpost(filteredPost);
+      setFilterUsers(filteredPost);
     }
-  }, [location, Allposts, confirm]);
+  }, [location, allUser, confirm]);
 
   return (
     <div className="table">
@@ -34,41 +37,38 @@ const Users = ({ location }) => {
         <title>داشبورد | همه پست ها</title>
       </Helmet>
 
-      {filterpost.length > 0 ? (
+      {filterUsers.length > 0 ? (
         <table className="tableShowItem">
           <thead>
             <tr>
               <th>#</th>
-              <th>عنوان پست</th>
-              <th>تاریخ ثبت پست</th>
-              <th>وضعیت</th>
-              {user.dadashami === "dada"?<th>نویسنده</th>:null}
+              <th>نام کاربر</th>
+              <th>تاریخ ثبت نام</th>
+              <th>ایمیل</th>
               <th className="textCenter">ویرایش | حذف</th>
             </tr>
           </thead>
           <tbody>
-            {filterpost.map((post, index) => {
+            {filterUsers.map((user, index) => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
-                    <Link to={`/single/${post._id}`}>{post.title}</Link>
+                    <Link to={`/dashboard/setting/${user._id}`}>{user.fullname}</Link>
                   </td>
-                  <td>{formatDate(post.createdAt)}</td>
+                  <td>{formatDate(user.createdAt)}</td>
                   <td>
-                    {post.status === "private" ? (
-                      <span className="badge badge-denger">خصوصی</span>
-                    ) : (
-                      <span className="badge">عمومی</span>
-                    )}
+                   
+                      <a target="_blank" href={`mailto:${user.email}`} className="badge">{user.email}</a>
+                    
                   </td>
-                  {user.dadashami === "dada"?<td>{post.user.fullname}</td>:null}
+                 
                   <td className="textCenter editDelete">
-                    <Link to={`/dashboard/edit-post/${post._id}`}>
+                    <Link to={`/dashboard/setting/${user._id}`}>
                       <i className="fa fa-edit"></i>
                     </Link>{" "}
                     |{" "}
-                    <Link to="#" onClick={() => setConfirm(post._id)}>
+                    <Link to="#" onClick={() => setConfirmUser(user._id)}>
                       <i className="fa fa-trash"></i>
                     </Link>
                   </td>

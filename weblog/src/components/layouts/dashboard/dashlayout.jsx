@@ -1,11 +1,13 @@
 import React from "react";
-import Confirm from "../../ui/confirm";
+import ConfirmDeletePost from "../../ui/confirmdeletepost";
+import ConfirmDeleteUser from "../../ui/confirmdeleteuser";
 import Aside from "./common/aside";
 import HeaderDash from "./common/header";
 const Dashboard = ({ children }) => {
   return (
     <>
-      <Confirm />
+      <ConfirmDeletePost />
+      <ConfirmDeleteUser />
       <HeaderDash />
       <div id="dashboard">
         <Aside />

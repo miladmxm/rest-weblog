@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import DashContext from "./components/context/dashContext";
 import Blog from "./components/layouts/blog/bloglayout";
 import Contact from "./components/layouts/blog/contact";
@@ -25,8 +25,9 @@ import Settings from "./components/layouts/dashboard/setting";
 import DeleteUser from "./components/layouts/blog/deleteuser";
 import Dashboard from "./components/layouts/dashboard/dashlayout";
 import HeaderBlog from "./components/layouts/blog/common/header";
+import Users from "./components/layouts/dashboard/users";
 
-const App = ({ location }) => {
+const App = () => {
   const user = useSelector((state) => state.userHandler);
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ const App = ({ location }) => {
     if (token) {
       const { payload } = decodedToken(token);
       if (payload.exp > Date.now() / 1000) {
+
         dispatch(addUser(payload.user));
         const postsH = await getAllPosts(payload.user.userId, token);
         if (postsH) {
@@ -59,6 +61,7 @@ const App = ({ location }) => {
               "/dashboard/add-post",
               "/dashboard/edit-post/:id",
               "/dashboard/setting",
+              "/dashboard/users",
             ]}
           >
             {isEmpty(user) ? (
@@ -71,7 +74,8 @@ const App = ({ location }) => {
                     exact
                     component={EditPost}
                   />
-                  <Route path="/dashboard/setting" exact component={Settings} />
+                  <Route path="/dashboard/setting/:id" exact component={Settings} />
+                  <Route path="/dashboard/users" exact component={Users} />
                   <Route path="*" component={NotFound} />
                 </Switch>
               </Dashboard>
@@ -130,4 +134,4 @@ const App = ({ location }) => {
   );
 };
 
-export default withRouter(App);
+export default App;

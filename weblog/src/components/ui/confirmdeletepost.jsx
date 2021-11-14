@@ -6,29 +6,29 @@ import { localhost } from "../../services/config.json";
 import { deletePost } from "../../services/dashServises";
 import { getDashboard } from "../../action/dashboard";
 
-const Confirm = ({ history }) => {
+const ConfirmDeletePost = ({ history }) => {
   const contextx = useContext(ContextDash);
-  const { confirm, setConfirm, setDropShadowToggle, setZindexShadow } =
+  const { confirmPost, setConfirmPost, setDropShadowToggle, setZindexShadow } =
     contextx;
   const posts = useSelector((state) => state.getDashboard);
   const dispatch = useDispatch();
-  if (confirm.length > 5) {
+  if (confirmPost.length > 5) {
 
-    const post = findPost(confirm, posts)[0];
+    const post = findPost(confirmPost, posts)[0];
     setDropShadowToggle(true);
     setZindexShadow(151);
 
     const deletePosthandler = async () => {
       try {
-        const data = await deletePost(confirm);
+        const data = await deletePost(confirmPost);
         if (data.status === 200) {
           dispatch(getDashboard(posts.user.userId));
           history.replace("/dashboard/");
         }
       } catch (ex) {
-        console.table(ex.response);
+        console.log(ex.response);
       }
-      setConfirm("");
+      setConfirmPost("");
       setDropShadowToggle(false);
       setZindexShadow(100);
     };
@@ -54,7 +54,7 @@ const Confirm = ({ history }) => {
           <button
             className="btn btn-success"
             onClick={() => {
-              setConfirm("");
+              setConfirmPost("");
               setDropShadowToggle(false);
             }}
           >
@@ -69,4 +69,4 @@ const Confirm = ({ history }) => {
   }
 };
 
-export default Confirm;
+export default ConfirmDeletePost;

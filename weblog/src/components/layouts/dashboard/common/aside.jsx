@@ -7,7 +7,7 @@ import DropShadow from "../../../ui/brop-shadow";
 import UploadBox from "../../../ui/uploadBox";
 import SearchForm from "../../blog/common/search";
 
-const Aside = ({location}) => {
+const Aside = ({ location }) => {
   const user = useSelector(state => state.userHandler)
   const dashContext = useContext(ContextDash)
   const { sideShow, toggleSide, sideHide, showUploadBox } = dashContext
@@ -16,16 +16,16 @@ const Aside = ({location}) => {
     if (toggleSide) {
       sideHide()
     }
-  },[location])
+  }, [location])
 
   return (
     <>
-      <i onClick={sideShow} className={toggleSide? "fa fa-cog side-settingShow for-show hide": "fa fa-cog side-settingShow for-show"}></i>
+      <i onClick={sideShow} className={toggleSide ? "fa fa-cog side-settingShow for-show hide" : "fa fa-cog side-settingShow for-show"}></i>
       <aside className={toggleSide ? "side-bar showSide" : "side-bar"}>
         <header>
-          <Link className="tooltip" data-tooltip="تکمیل مشخصات شما" to="/dashboard/setting">
+          <Link className="tooltip" data-tooltip="تکمیل مشخصات شما" to={`/dashboard/setting/${user.userId}`}>
             <div className="profileImg">
-              <img src={`http://localhost:4000/uploads/${user.profileImg == "default" ? 'user.png':`image/${user.profileImg}`}`} />
+              <img src={`http://localhost:4000/uploads/${user.profileImg == "default" ? 'user.png' : `image/${user.profileImg}`}`} />
             </div>
           </Link>
           <h4><Link target="_blank" to="/">{user.fullname}</Link></h4>
@@ -42,9 +42,15 @@ const Aside = ({location}) => {
               <i className="fa fa-plus"></i>
               <NavLink to="/dashboard/add-post">افزودن پست</NavLink>
             </li>
+            {user.dadashami === "dada" ?
+              <li>
+                <i className="fa fa-users"></i>
+                <NavLink to="/dashboard/users">همه کاربران</NavLink>
+              </li>
+              : null}
             <li>
               <i className="fa fa-cog"></i>
-              <NavLink className="tooltip" data-tooltip="تکمیل مشخصات شما" to="/dashboard/setting">تنظیمات پروفایل</NavLink>
+              <NavLink className="tooltip" data-tooltip="تکمیل مشخصات شما" to={`/dashboard/setting/${user.userId}`}>تنظیمات پروفایل</NavLink>
             </li>
             <li>
               <i className="fa fa-upload"></i>

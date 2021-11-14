@@ -10,6 +10,15 @@ export const getAllPosts = (id) => {
    })
 }
 
+export const httpgetAllUsers = () => {
+   const token = localStorage.getItem('token')
+   return http.get(`${config.localhost}/dashboard/get-all-user`,{
+      headers:{
+         'Authorization':`Bearer ${token}`
+      }
+   })
+}
+
 export const addPost = (data) => {
    const token = localStorage.getItem('token')
    return http.post(`${config.localhost}/dashboard/add-post`,data,{
@@ -49,9 +58,9 @@ export const getAllImage = (email) => {
 }
 
 
-export const editUser = (data) => {
+export const editUser = (data,id) => {
    const token = localStorage.getItem('token')
-   return http.put(`${config.localhost}/dashboard/edit-user`,data,{
+   return http.put(`${config.localhost}/dashboard/edit-user/${id}`,data,{
       headers:{
          "Content-Type": "multipart/form-data",
          'Authorization':`Bearer ${token}`
@@ -61,6 +70,15 @@ export const editUser = (data) => {
 
 export const deleteUser = (data, token) => {
    return http.post(`${config.localhost}/dashboard/delete-user/${token}`,JSON.stringify(data),{
+      headers:{
+         'Authorization':`Bearer ${token}`
+      }
+   })
+}
+
+export const deleteUserByAdmin = (id) => {
+   const token = localStorage.getItem('token')
+   return http.delete(`${config.localhost}/dashboard/delete-user-by-admin/${id}`,{
       headers:{
          'Authorization':`Bearer ${token}`
       }

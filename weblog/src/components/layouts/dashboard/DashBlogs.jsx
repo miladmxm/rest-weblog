@@ -5,13 +5,12 @@ import { formatDate } from "../../utils/jalali";
 import { Link } from "react-router-dom";
 import { getDashboard } from "../../../action/dashboard";
 import { ContextDash } from "../../context/context";
-import DropBox from "../../ui/dropBox";
 const DashBlogs = ({ location }) => {
   const [filterpost, setFilterpost] = useState([]);
   const Allposts = useSelector((state) => state.getDashboard);
   const user = useSelector((state) => state.userHandler);
   const contextx = useContext(ContextDash);
-  const { setConfirm, confirm } = contextx;
+  const { setConfirmPost, confirm } = contextx;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -68,7 +67,7 @@ const DashBlogs = ({ location }) => {
                       <i className="fa fa-edit"></i>
                     </Link>{" "}
                     |{" "}
-                    <Link to="#" onClick={() => setConfirm(post._id)}>
+                    <Link to="#" onClick={() => setConfirmPost(post._id)}>
                       <i className="fa fa-trash"></i>
                     </Link>
                   </td>

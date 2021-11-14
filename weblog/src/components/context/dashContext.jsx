@@ -11,7 +11,8 @@ const DashContext = ({ children }) => {
   const [textForCopy, setTextForCopy] = useState('')
   const [messageArr, setMessageArr] = useState([])
   const [typeOfMessage, setTypeOfMessage] = useState('error')
-  const [confirm, setConfirm] = useState('')
+  const [confirmPost, setConfirmPost] = useState('')
+  const [confirmUser, setConfirmUser] = useState('')
   const [isLight, setIsLight] = useState(false)
   const [numberOfPaginate,setNumberOfPaginate]=useState(6)
   const sideShow = () => {
@@ -27,7 +28,8 @@ const DashContext = ({ children }) => {
     setToggleSide(false)
     setUploadBoxShow(false)
     setTextForCopy('')
-    setConfirm('')
+    setConfirmPost('')
+    setConfirmUser('')
     setZindexShadow(100)
   }
 
@@ -72,14 +74,16 @@ const DashContext = ({ children }) => {
       setLoader,
       messaLoader,
       setMessaLoader,
-      confirm,
-      setConfirm,
+      confirmPost,
+      setConfirmPost,
       zindexShadow,
       setZindexShadow,
       setIsLight,
       isLight,
       numberOfPaginate,
-      setNumberOfPaginate
+      setNumberOfPaginate,
+      confirmUser,
+      setConfirmUser
     }}>
       {children}
     </ContextDash.Provider>
