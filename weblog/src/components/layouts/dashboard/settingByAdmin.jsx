@@ -12,8 +12,23 @@ import DropBox from "../../ui/dropBox";
 import UploadImg from "../../ui/uploadimage";
 import { decodedToken } from "../../utils/decodedToken";
 import { findPost } from "../../utils/findPost";
-const Settings = ({ history, match, location }) => {
-  const user = useSelector((state) => state.userHandler);
+const SettingUserByAdmin = ({ history, match, location }) => {
+    const initUser = useSelector(state=>state.userHandler)
+    const allUser = useSelector(state => state.allUsers)
+    const [user, setUser] = useState(findPost(match.params.id, allUser)[0])
+ 
+
+  useEffect(() => {
+    if (initUser.dadashami === "dada") {
+      setUser(findPost(match.params.id, allUser)[0])
+    } else {
+        history.replace('/dashboard/users')
+        return null;
+    }
+    return () => {
+      setUser(null)
+    }
+  }, [location,allUser,initUser])
   const [profile, setProfile] = useState(null);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash);
 
@@ -95,6 +110,7 @@ const Settings = ({ history, match, location }) => {
     setLoader(false);
     setMessaLoader("اتصال اینترنت خود را بررسی کنید");
   };
+  if (user) {
     return (
       <>
         <Helmet>
@@ -228,6 +244,10 @@ const Settings = ({ history, match, location }) => {
         </form>
       </>
     );
+  } else {
+    history.replace('/dashboard/users')
+    return null;
+  }
 };
 
-export default Settings;
+export default SettingUserByAdmin;

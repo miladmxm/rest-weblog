@@ -64,7 +64,7 @@ const Users = ({ history,location }) => {
                   </td>
                  
                   <td className="textCenter editDelete">
-                    <Link to={`/dashboard/setting/${user._id}`}>
+                    <Link to={`/dashboard/setting-user/${user._id}`}>
                       <i className="fa fa-edit"></i>
                     </Link>{" "}
                     |{" "}
