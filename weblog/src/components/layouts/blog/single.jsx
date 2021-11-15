@@ -52,7 +52,7 @@ const Single = ({ match, history }) => {
             <span>دسته بندی : {post.category}</span>
             <span>نویسنده: {post.user ? post.user.fullname : null} </span>
           </footer>
-          {edit ? <Link className="editLink" to={`/dashboard/edit-post/${match.params.id}`}><i class="fa fa-edit"></i> ویرایش این نوشته</Link> : null}
+          {edit ? <Link className="editLink" to={`/dashboard/edit-post/${match.params.id}`}><i className="fa fa-edit"></i> ویرایش این نوشته</Link> : null}
         </article>
         <SideBar user_id={match.params.id} post={post} edit={edit} />
       </section>

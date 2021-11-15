@@ -43,10 +43,16 @@ const Aside = ({ location }) => {
               <NavLink to="/dashboard/add-post">افزودن پست</NavLink>
             </li>
             {user.dadashami === "dada" ?
+              <>
               <li>
                 <i className="fa fa-users"></i>
                 <NavLink to="/dashboard/users">همه کاربران</NavLink>
               </li>
+              <li>
+              <i className="fa fa-user-plus"></i>
+              <NavLink to="/dashboard/add-user">افزودن کاربر</NavLink>
+            </li>
+            </>
               : null}
             <li>
               <i className="fa fa-cog"></i>

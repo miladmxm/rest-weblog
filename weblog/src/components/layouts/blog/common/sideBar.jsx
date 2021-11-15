@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import {localhost} from "../../../../services/config.json"
+import { localhost } from "../../../../services/config.json"
 import {
     EmailIcon,
     EmailShareButton,
@@ -17,16 +17,15 @@ import { Link } from "react-router-dom";
 import Slider from "../../../ui/slider";
 import { findeByCategory } from "../../../utils/findPost";
 
-const SideBar = ({ user_id, post ,edit}) => {
-    
-    
+const SideBar = ({ user_id, post, edit }) => {
+    const mainUser = useSelector(state => state.userHandler)
     const [divice, setDivice] = useState('web')
-    
-    
+
+
     const [show, setShow] = useState(false)
-    
+
     const drop = useRef(null)
-    const posts =findeByCategory(post.category,useSelector(state => state.getBlog))
+    const posts = findeByCategory(post.category, useSelector(state => state.getBlog))
 
     const togge = () => {
         setShow(!show)
@@ -79,7 +78,7 @@ const SideBar = ({ user_id, post ,edit}) => {
                 </div>
                 <span className="br" />
                 <h3 className="m3">درباره نویسنده <i className="fa fa-pencil"></i></h3>
-                {edit ? <Link className="editLink" to={`/dashboard/setting`}><i class="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
+                {edit ? <Link className="editLink" to={mainUser.dadashami === "dada" ? `/dashboard/setting-user/${post.user._id}` : `/dashboard/setting/${post.user._id}`}><i class="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
                 {post.user ? <>
                     <div className="dropBox" style={{ height: "124px", padding: '0' }} ref={drop}>
                         <div className="writer">
@@ -129,4 +128,4 @@ const SideBar = ({ user_id, post ,edit}) => {
         </aside>
     )
 }
-export default SideBar
+export default React.memo(SideBar)

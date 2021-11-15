@@ -84,3 +84,13 @@ export const deleteUserByAdmin = (id) => {
       }
    })
 }
+
+export const addUser = (data) => {
+   const token = localStorage.getItem('token')
+   return http.post(`${config.localhost}/dashboard/add-user`,data,{
+      headers: {
+         "Content-Type": "multipart/form-data",
+         'Authorization':`Bearer ${token}`
+      }
+   })
+}

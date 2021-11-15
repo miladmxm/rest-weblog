@@ -11,8 +11,7 @@ import { ContextDash } from "../../context/context";
 import DropBox from "../../ui/dropBox";
 import UploadImg from "../../ui/uploadimage";
 import { decodedToken } from "../../utils/decodedToken";
-import { findPost } from "../../utils/findPost";
-const Settings = ({ history, match, location }) => {
+const Settings = ({ history }) => {
   const mainuser = useSelector((state) => state.userHandler);
   const [user,setUser] = useState(mainuser)
   const [profile, setProfile] = useState(null);

@@ -27,6 +27,7 @@ import Dashboard from "./components/layouts/dashboard/dashlayout";
 import HeaderBlog from "./components/layouts/blog/common/header";
 import Users from "./components/layouts/dashboard/users";
 import SettingUserByAdmin from "./components/layouts/dashboard/settingByAdmin";
+import AddUser from "./components/layouts/dashboard/addUser";
 
 const App = () => {
   const user = useSelector((state) => state.userHandler);
@@ -73,6 +74,7 @@ const App = () => {
                   <Route path="/dashboard/setting/:id" exact component={Settings} />
                   <Route path="/dashboard/setting-user/:id" exact component={SettingUserByAdmin} />
                   <Route path="/dashboard/users" exact component={Users} />
+                  <Route path="/dashboard/add-user" exact component={AddUser} />
                   <Route path="*" component={NotFound} />
                 </Switch>
               </Dashboard>
