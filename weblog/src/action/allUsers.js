@@ -7,7 +7,6 @@ export const getAllUsers = () => {
             
             if (user.dadashami === "dada") {
                 const users = await httpgetAllUsers()
-                console.log(users);
                 if (users.status === 200) {  
                     await dispatch({type:'SET_ALL_USERS',payload:users.data.allUser})        
                 } else {

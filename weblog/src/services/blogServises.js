@@ -18,6 +18,10 @@ export const loginUser = (data) => {
    return http.post(`${config.localhost}/users/login`, JSON.stringify(data))
 }
 
+export const isUserForUp = (token) => {
+   return http.get(`${config.localhost}/users/isuservalid/${token}`)
+}
+
 export const contact = (data) => {
    return http.post(`${config.localhost}/contact`, JSON.stringify(data))
 }

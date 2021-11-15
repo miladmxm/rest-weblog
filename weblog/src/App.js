@@ -11,11 +11,11 @@ import DashBlogs from "./components/layouts/dashboard/DashBlogs";
 import Logout from "./components/layouts/blog/logout";
 import { Messages } from "./components/ui/messages";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, deleteUser } from "./action/user";
+import { addUser, deleteUser, updateUser } from "./action/user";
 import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
 import Loader from "./components/ui/loader";
-import { cleareDash, getDashboard } from "./action/dashboard";
+import { cleareDash } from "./action/dashboard";
 import NotFound from "./components/layouts/404";
 import EditPost from "./components/layouts/dashboard/editPost";
 import { getAllPosts } from "./services/dashServises";
@@ -37,12 +37,7 @@ const App = () => {
     if (token) {
       const { payload } = decodedToken(token);
       if (payload.exp > Date.now() / 1000) {
-
-        dispatch(addUser(payload.user));
-        const postsH = await getAllPosts(payload.user.userId, token);
-        if (postsH) {
-          dispatch(getDashboard(postsH.data.posts));
-        }
+        dispatch(updateUser());
       } else {
         localStorage.removeItem("token");
         dispatch(deleteUser());

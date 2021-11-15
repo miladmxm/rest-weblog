@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { clearAllUsers } from "../../../action/allUsers";
 import { cleareDash } from "../../../action/dashboard";
-import { addUser, deleteUser } from "../../../action/user";
+import { addUser, deleteUser, updateUser } from "../../../action/user";
 import { editUser } from "../../../services/dashServises";
 import { ContextDash } from "../../context/context";
 import DropBox from "../../ui/dropBox";
@@ -13,7 +13,8 @@ import UploadImg from "../../ui/uploadimage";
 import { decodedToken } from "../../utils/decodedToken";
 import { findPost } from "../../utils/findPost";
 const Settings = ({ history, match, location }) => {
-  const user = useSelector((state) => state.userHandler);
+  const mainuser = useSelector((state) => state.userHandler);
+  const [user,setUser] = useState(mainuser)
   const [profile, setProfile] = useState(null);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash);
 
@@ -21,6 +22,13 @@ const Settings = ({ history, match, location }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(()=>{
+    dispatch(updateUser())
+  },[])
+
+  useEffect(()=>{
+    setUser(mainuser)
+  },[mainuser])
   const logout = () => {
     localStorage.removeItem('token')
     dispatch(cleareDash())

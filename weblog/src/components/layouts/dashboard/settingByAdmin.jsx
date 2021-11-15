@@ -88,18 +88,17 @@ const SettingUserByAdmin = ({ history, match, location }) => {
       if (status === 200) {
 
         const { payload } = decodedToken(data.token)
-
-
-        localStorage.setItem('token', data.token)
-        dispatch(addUser(payload.user))
+        if(user.isAdmin){
+          localStorage.setItem('token', data.token)
+          dispatch(addUser(payload.user))
+        }
 
 
         setMessage(['تغییرات با موفقیت ذخیره شد'], "success")
         resetForm();
-        history.replace("/dashboard");
+        history.replace("/dashboard/users");
       }
     } catch (ex) {
-      console.log(ex);
       let err = [];
 
       err.push(ex.response.data.message);
