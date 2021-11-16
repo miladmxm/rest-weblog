@@ -9,7 +9,7 @@ const HeaderDash = () => {
     <header className="fixed-top">
     <div className="dashboard-header">
       <div>
-          <h4 className="tooltip" data-tooltip="مشاهده وبلاگ"><Link target="_blank" to="/">{ user.fullname}</Link></h4>
+          <h4 className="tooltip" data-tooltip="مشاهده وبلاگ"><Link to="/">{ user.fullname}</Link></h4>
       </div>
       <SearchForm url='/dashboard/' />
       <Link to="/logout" className="btn">
