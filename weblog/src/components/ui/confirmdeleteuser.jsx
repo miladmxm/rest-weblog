@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ContextDash } from "../context/context";
 import { findPost } from "../utils/findPost";
@@ -7,9 +7,11 @@ import { deleteUserByAdmin } from "../../services/dashServises";
 import { getAllUsers } from "../../action/allUsers";
 
 const ConfirmDeleteUser = ({ history }) => {
-  const { confirmUser, setConfirmUser, setDropShadowToggle, setZindexShadow } = useContext(ContextDash);
+  const contex =  useContext(ContextDash);
+  const { confirmUser, setConfirmUser, setDropShadowToggle, setMessage, setZindexShadow } =contex
   const admin = useSelector((state) => state.userHandler);
   const users = useSelector((state) => state.allUsers);
+  const [moveData,setMoveData] = useState(false)
   const dispatch = useDispatch();
   if (confirmUser.length > 5 && admin.dadashami === "dada") {
 
@@ -20,19 +22,26 @@ const ConfirmDeleteUser = ({ history }) => {
 
     const deletePosthandler = async () => {
       try {
-        const data = await deleteUserByAdmin(confirmUser);
+        const data = await deleteUserByAdmin(confirmUser, { moveData });
+  
         if (data.status === 200) {
           dispatch(getAllUsers());
-          history.replace("/dashboard/users");
+          history.replace("/dashboard");
         }
       } catch (ex) {
-        console.log(ex.response);
+        let err = []
+        if (ex) {
+          if (ex.response) {
+            err.push(ex.response.data.message)
+          }
+        }
+        setMessage(err, 'error')
       }
       setConfirmUser("");
       setDropShadowToggle(false);
       setZindexShadow(100);
     }
-    
+
     return (
       <div className="boxConfirm">
         <div className="conteiner">
@@ -42,9 +51,25 @@ const ConfirmDeleteUser = ({ history }) => {
           <div className="row">
             <img
               className="imgSingle"
-              src={`${localhost}/uploads/${user.profileImg == "default"?'user.png' : `image/${user.profileImg}`}`}
+              src={`${localhost}/uploads/${user.profileImg == "default" ? 'user.png' : `image/${user.profileImg}`}`}
             />
           </div>
+        </div>
+        <div className="add-post">
+          <label className="fildinput" htmlFor="status">
+            <select
+              className="input-outlined"
+              data-value="true"
+              name="moveData"
+              id="moveData"
+              value={moveData}
+              onChange={(e) => setMoveData(e.target.value)}
+            >
+              <option value="false">حذف کامل</option>
+              <option value="true">انتقال به همین کاربر</option>
+            </select>
+            <span>محتوا</span>
+          </label>
         </div>
         <div className="center">
           <button className="btn btn-denger" onClick={deletePosthandler}>
@@ -61,6 +86,7 @@ const ConfirmDeleteUser = ({ history }) => {
             {" "}
             کنسل{" "}
           </button>
+
         </div>
       </div>
     );

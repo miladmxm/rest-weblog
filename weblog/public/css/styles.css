@@ -422,7 +422,7 @@ ul.paginateItems .paginateItemsLi.activePaginateItems{
   width: 32%;
   position: fixed;
   height: max-content;
-  top: 15%;
+  top: 10%;
   right: 34%;
   background-color: #f2f2f2;
   border-radius: 8px;

@@ -11,8 +11,7 @@ import { useSelector } from "react-redux";
 import { getAllImage } from "../../services/dashServises";
 
 const UploadBox = () => {
-  const dashcontext = useContext(ContextDash);
-  const { uploadBoxShow, copyBoxShow } = dashcontext;
+  const { uploadBoxShow, copyBoxShow } = useContext(ContextDash);;
 
   const [progressBar, setProgressBar] = useState(0);
 
@@ -60,7 +59,7 @@ const UploadBox = () => {
           console.log(err);
       }
 
-  },[])
+  },[uploadBoxShow])
   if (uploadBoxShow) {
     return (
       <>

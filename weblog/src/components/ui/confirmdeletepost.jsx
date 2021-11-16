@@ -21,18 +21,21 @@ const ConfirmDeletePost = ({ history }) => {
     const deletePosthandler = async () => {
       try {
         const data = await deletePost(confirmPost);
+        console.log(data);
         if (data.status === 200) {
-          dispatch(getDashboard(posts.user.userId));
+          dispatch(getDashboard());
           history.replace("/dashboard/");
         }
       } catch (ex) {
-        console.log(ex.response);
+        if (ex.response) {
+          console.log(ex.response);
+        }
       }
       setConfirmPost("");
       setDropShadowToggle(false);
       setZindexShadow(100);
     };
-    
+
     return (
       <div className="boxConfirm">
         <div className="conteiner">

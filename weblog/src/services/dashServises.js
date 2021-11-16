@@ -76,9 +76,9 @@ export const deleteUser = (data, token) => {
    })
 }
 
-export const deleteUserByAdmin = (id) => {
+export const deleteUserByAdmin = (id,data) => {
    const token = localStorage.getItem('token')
-   return http.delete(`${config.localhost}/dashboard/delete-user-by-admin/${id}`,{
+   return http.post(`${config.localhost}/dashboard/delete-user-by-admin/${id}`,JSON.stringify(data),{
       headers:{
          'Authorization':`Bearer ${token}`
       }

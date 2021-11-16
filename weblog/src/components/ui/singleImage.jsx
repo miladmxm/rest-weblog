@@ -14,9 +14,7 @@ const ImageUploaded = ({ url }) => {
         <button onClick={copyImg}>
           <i className="fa fa-copy"></i>
         </button>
-        <button>
-          <i className="fa fa-file-image-o"></i>
-        </button>
+        
       </div>
       <input ref={urlHide} className="hide" onChange={()=>{}} value={url} />
     </div>

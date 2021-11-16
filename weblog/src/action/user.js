@@ -11,16 +11,25 @@ export const addUser = (user) => {
 export const updateUser = () => {
   return async (dispatch) => {
     const token = localStorage.getItem("token");
-    const { data, status } = await isUserForUp(token);
-    if (status === 200) {
-      localStorage.setItem("token", data.token);
-      const { payload } = decodedToken(data.token);
-      await dispatch({ type: "ADD_USER", payload: payload.user });
-      await dispatch(getDashboard());
-    } else {
+    try {
+      
+      const { data, status } = await isUserForUp(token);
+  
+      if (status === 200) {
+        localStorage.setItem("token", data.token);
+        const { payload } = decodedToken(data.token);
+        await dispatch({ type: "ADD_USER", payload: payload.user });
+        await dispatch(getDashboard());
+      } else {
+        localStorage.removeItem("token");
+        dispatch(deleteUser());
+        dispatch(cleareDash());
+      }
+    } catch (ex) {
+      console.log(ex.data);
       localStorage.removeItem("token");
-      dispatch(deleteUser());
-      dispatch(cleareDash());
+        dispatch(deleteUser());
+        dispatch(cleareDash());
     }
   };
 };

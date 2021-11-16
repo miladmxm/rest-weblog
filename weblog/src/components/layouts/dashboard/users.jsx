@@ -5,18 +5,18 @@ import { formatDate } from "../../utils/jalali";
 import { Link } from "react-router-dom";
 import { ContextDash } from "../../context/context";
 import { getAllUsers } from "../../../action/allUsers";
-const Users = ({ history,location }) => {
+const Users = ({ history, location }) => {
   const [filterUsers, setFilterUsers] = useState([]);
   const allUser = useSelector((state) => state.allUsers);
-  const user = useSelector((state) => state.userHandler);
-  const { setConfirmUser, confirm } =  useContext(ContextDash);
+  const mainUser = useSelector((state) => state.userHandler);
+  const { setConfirmUser, confirm } = useContext(ContextDash);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user.dadashami !== "dada") {
+    if (mainUser.dadashami !== "dada") {
       history.replace('/dashboard')
     } else {
-      
+
       dispatch(getAllUsers());
     }
   }, [location, confirm]);
@@ -25,7 +25,7 @@ const Users = ({ history,location }) => {
     const searchText = new URLSearchParams(location.search).get("search");
     if (searchText !== null) {
       const filteredPost = allUser.filter((item) => {
-        return item.title.includes(searchText);
+        return item.email.includes(searchText) || item.fullname.includes(searchText);
       });
       setFilterUsers(filteredPost);
     }
@@ -58,19 +58,28 @@ const Users = ({ history,location }) => {
                   </td>
                   <td>{formatDate(user.createdAt)}</td>
                   <td>
-                   
-                      <a target="_blank" href={`mailto:${user.email}`} className="badge">{user.email}</a>
-                    
+
+                    <a target="_blank" href={`mailto:${user.email}`} className="badge">{user.email}</a>
+
                   </td>
-                 
+
                   <td className="textCenter editDelete">
+
+
                     <Link to={`/dashboard/setting-user/${user._id}`}>
                       <i className="fa fa-edit"></i>
-                    </Link>{" "}
-                    |{" "}
-                    <Link to="#" onClick={() => setConfirmUser(user._id)}>
-                      <i className="fa fa-trash"></i>
                     </Link>
+
+                   
+                    {user._id !== mainUser.userId ?
+                      <>
+                       {" "}
+                    |{" "}
+                      <Link to="#" onClick={() => setConfirmUser(user._id)}>
+                        <i className="fa fa-trash"></i>
+                      </Link>
+                      </>
+                      : null}
                   </td>
                 </tr>
               );
@@ -78,7 +87,7 @@ const Users = ({ history,location }) => {
           </tbody>
         </table>
       ) : (
-        <h2 className="center">متأسفم مثل اینکه هیچ پستی وجود نداره 😥</h2>
+        <h2 className="center">متأسفم مثل اینکه هیچ کاربری پیدا نشد 😥</h2>
       )}
     </div>
   );
