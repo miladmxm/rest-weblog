@@ -78,12 +78,12 @@ const SideBar = ({ user_id, post, edit }) => {
                 </div>
                 <span className="br" />
                 <h3 className="m3">درباره نویسنده <i className="fa fa-pencil"></i></h3>
-                {edit ? <Link className="editLink" to={mainUser.dadashami === "dada" ? `/dashboard/setting-user/${post.user._id}` : `/dashboard/setting/${post.user._id}`}><i class="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
+                {edit ? <Link className="editLink" to={mainUser.dadashami === "dada" ? `/dashboard/setting-user/${post.user._id}` : `/dashboard/setting/${post.user._id}`}><i className="fa fa-edit"></i> ویرایش اطلاعات شخصی</Link> : null}
                 {post.user ? <>
                     <div className="dropBox" style={{ height: "124px", padding: '0' }} ref={drop}>
                         <div className="writer">
                             <div className="row" onClick={togge} >
-                                <img className="profileImg" src={`${localhost}/uploads/${post.user.profileImg == "default" ? 'user.png' : `image/${post.user.profileImg}`}`} />
+                                <img className="profileImg" alt="تصویری برای پروفایل" src={`${localhost}/uploads/${post.user.profileImg === "default" ? 'user.png' : `image/${post.user.profileImg}`}`} />
                                 <div className="column userNameInWriter">
                                     <h4>{post.user.fullname}</h4>
                                     <small>{post.user.skill}</small>
@@ -117,7 +117,7 @@ const SideBar = ({ user_id, post, edit }) => {
                 <Slider responsive={[4, 3, 3, 2]}>
                     {posts.map(pos => {
                         return (
-                            <Link to={`/single/${pos._id}`} className="slidItem row">
+                            <Link key={pos._id} to={`/single/${pos._id}`} className="slidItem row">
                                 <img className="imgSlider" src={`${localhost}/uploads/thumbnails/${pos.thumbnail}`} />
                                 <small>{pos.title}</small>
                             </Link>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { forgetPass } from "../../../services/blogServises";
@@ -6,8 +6,8 @@ import { ContextDash } from "../../context/context";
 
 const ForgetPass = ({ history }) => {
   
-
-  const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
+  const constext = useContext(ContextDash)
+  const { setMessage, setMessageArr, setLoader, setMessaLoader } = constext
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   const onSubmit = async input => {

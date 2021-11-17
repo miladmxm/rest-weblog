@@ -11,14 +11,13 @@ import DashBlogs from "./components/layouts/dashboard/DashBlogs";
 import Logout from "./components/layouts/blog/logout";
 import { Messages } from "./components/ui/messages";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, deleteUser, updateUser } from "./action/user";
+import { deleteUser, updateUser } from "./action/user";
 import { decodedToken } from "./components/utils/decodedToken";
 import isEmpty from "./components/utils/isEmpty";
 import Loader from "./components/ui/loader";
 import { cleareDash } from "./action/dashboard";
 import NotFound from "./components/layouts/404";
 import EditPost from "./components/layouts/dashboard/editPost";
-import { getAllPosts } from "./services/dashServises";
 import ForgetPass from "./components/layouts/blog/forgetPass";
 import ResetPass from "./components/layouts/blog/resetPass";
 import Settings from "./components/layouts/dashboard/setting";
@@ -33,7 +32,7 @@ const App = () => {
   const user = useSelector((state) => state.userHandler);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       const { payload } = decodedToken(token);

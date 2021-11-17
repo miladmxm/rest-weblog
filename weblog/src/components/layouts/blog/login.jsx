@@ -12,8 +12,9 @@ import { getDashboard } from "../../../action/dashboard";
 import { useForm } from "react-hook-form";
 
 const Login = ({ history }) => {
-    const { register, handleSubmit,reset, setValue, formState: { errors } } = useForm();
-    const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const context = useContext(ContextDash)
+    const { setMessage, setMessageArr, setLoader, setMessaLoader } = context
     const [isCaptcha, setIsCaptcha] = useState(null)
     const [reMember, setReMember] = useState(false)
     const dispatch = useDispatch()

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContextDash } from "./context";
 
 const DashContext = ({ children }) => {
@@ -15,6 +15,26 @@ const DashContext = ({ children }) => {
   const [confirmUser, setConfirmUser] = useState('')
   const [isLight, setIsLight] = useState(false)
   const [numberOfPaginate,setNumberOfPaginate]=useState(6)
+
+  useEffect(() => {
+    return () => {
+      setDropShadowToggle(false)
+      setZindexShadow(100)
+      setToggleSide(false)
+      setUploadBoxShow(false)
+      setLoader(false)
+      setMessaLoader('اتصال اینترنت خود را بررسی کنید')
+      setTextForCopy('')
+      setConfirmPost('')
+      setConfirmUser('')
+      setMessageArr([])
+      setTypeOfMessage("error")
+      setIsLight(false)
+      setNumberOfPaginate(6)
+
+    }
+  },[])
+
   const sideShow = () => {
     setToggleSide(true);
     setDropShadowToggle(true)

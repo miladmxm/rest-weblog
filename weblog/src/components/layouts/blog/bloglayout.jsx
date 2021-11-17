@@ -7,7 +7,7 @@ import { ContextDash } from "../../context/context";
 
 const Blog = ({ location }) => {
     const constext = useContext(ContextDash)
-    const { numberOfPaginate, setNumberOfPaginate } = constext
+    const { numberOfPaginate } = constext
     const Allposts = useSelector(state => state.getBlog)
     const [filterpost, setFilterpost] = useState(Allposts)
     const [correntPage, setCorrentPage] = useState(1)
@@ -34,7 +34,7 @@ const Blog = ({ location }) => {
             setShowPaginate(true)
         }
     }, [filterpost])
-console.log(location);
+
 
     const clicked = e => {
 
@@ -61,4 +61,4 @@ console.log(location);
         </div>
     )
 }
-export default Blog
+export default React.memo(Blog)

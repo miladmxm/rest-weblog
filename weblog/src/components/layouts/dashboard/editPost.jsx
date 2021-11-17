@@ -151,7 +151,7 @@ const EditPost = ({ history, match }) => {
           </div>
 
 
-          <divs>
+          <div>
             <label className="fildinput" htmlFor="category">
               <select
                 className="input-outlined"
@@ -171,7 +171,7 @@ const EditPost = ({ history, match }) => {
               </select>
               <span>دسته بندی</span>
             </label>
-          </divs>
+          </div>
 
           <div>
             <label className={bodyValid?"":"red"} htmlFor="body">متن اصلی</label>

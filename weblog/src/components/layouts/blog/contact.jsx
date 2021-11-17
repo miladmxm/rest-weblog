@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { contact } from "../../../services/blogServises";
@@ -7,7 +7,8 @@ import { ContextDash } from "../../context/context";
 const Contact = ({ history }) => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
+    const conte = useContext(ContextDash)
+    const { setMessage, setMessageArr, setLoader, setMessaLoader } = conte
 
 
     const defaultValues ={
@@ -93,4 +94,4 @@ const Contact = ({ history }) => {
 
 }
 
-export default Contact
+export default React.memo(Contact)

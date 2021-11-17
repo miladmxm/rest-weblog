@@ -42,4 +42,4 @@ const MapingBlogs = ({ correntPage, filterpost, productNumber, children, endPage
         </>
     )
 }
-export default MapingBlogs
+export default React.memo(MapingBlogs)

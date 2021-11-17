@@ -30,7 +30,13 @@ const Single = ({ match, history }) => {
       history.replace("/404");
       console.log(ex);
     }
-  }, [match.params.id,user]);
+  }, [match.params.id, user]);
+  useEffect(() => {
+    return () => {
+      setEdit(false)
+      setPost({})
+    }
+  },[])
   return (
     <>
       <Helmet>

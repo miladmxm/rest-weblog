@@ -11,7 +11,6 @@ import DropBox from "../../ui/dropBox";
 
 const AddUser = ({ history }) => {
 
-
     const [profile, setProfile] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash)
@@ -127,6 +126,7 @@ const AddUser = ({ history }) => {
                         className="input-outlined"
                         type="password"
                         name="password"
+                        autocomplete='off'
                         id="password"
                         data-value="true"
                         onInput={e => titleBar(e)}
@@ -141,6 +141,7 @@ const AddUser = ({ history }) => {
                         className="input-outlined"
                         type="password"
                         name="repassword"
+                        autocomplete='off'
                         id="repassword"
                         data-value="true"
                         onInput={e => titleBar(e)}
