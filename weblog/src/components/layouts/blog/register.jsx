@@ -27,7 +27,7 @@ const Rejister = ({ history }) => {
 
         const datas = {
             fullname: input.fullname,
-            email: input.email,
+            email: input.email.toLowerCase(),
             password: input.password,
             repassword: input.repassword
         }
@@ -66,7 +66,7 @@ const Rejister = ({ history }) => {
             <Helmet>
                 <title>وبلاگ | ثبت نام در سایت</title>
             </Helmet>
-            <h2 className="title">ثبت نام در سایت</h2>
+            <h1 className="title">ثبت نام در سایت</h1>
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className={errors.fullname && "invalid"}>
