@@ -23,7 +23,7 @@ const Contact = ({ history }) => {
        
         const datas = {
             fullname:input.fullname,
-            email:input.email,
+            email:input.email.toLowerCase(),
             subject:input.subject,
             text:input.text,
             numCaptcha:input.numCaptcha
@@ -60,7 +60,7 @@ const Contact = ({ history }) => {
                 <title>وبلاگ | تماس با ما</title>
                 <meta name="description" content="Nested component"/>
             </Helmet>
-            <h2 className="title">تماس با ما</h2>
+            <h1 className="title">تماس با ما</h1>
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
                 <div className={errors.fullname && "invalid"}>

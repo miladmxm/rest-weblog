@@ -41,7 +41,7 @@ const Single = ({ match, history }) => {
         <article className="postCart w-70">
           <img src={`${localhost}/uploads/thumbnails/${post.thumbnail}`} />
           <div className="main">
-            <h2>{post.title}</h2>
+            <h1>{post.title}</h1>
             <div
               className="bodyPost"
               dangerouslySetInnerHTML={{ __html: post.body }}
@@ -57,7 +57,7 @@ const Single = ({ match, history }) => {
         <SideBar user_id={match.params.id} post={post} edit={edit} />
       </section>
 
-      <div className="postCart">
+      {/* <div className="postCart">
         <form className="Comments" action="#">
           <input type="email" name="email" id="email" placeholder="ایمیل شما" />
           <textarea
@@ -67,7 +67,7 @@ const Single = ({ match, history }) => {
           ></textarea>
           <button type="button">ارسال نظر</button>
         </form>
-      </div>
+      </div> */}
     </>
   );
 };

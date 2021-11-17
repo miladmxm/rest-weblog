@@ -17,7 +17,7 @@ const ForgetPass = ({ history }) => {
     
 
     const datas = {
-        email:input.email
+        email:input.email.toLowerCase()
     }
     try {
         const {data, status } = await forgetPass(datas)
@@ -43,7 +43,7 @@ const ForgetPass = ({ history }) => {
 
   return (
     <main id="main">
-      <h2 className="title">فراموشی رمز عبور</h2>
+      <h1 className="title">فراموشی رمز عبور</h1>
       <Helmet>
         <title>وبلاگ | فراموشی رمز عبور</title>
       </Helmet>

@@ -28,6 +28,16 @@ body {
 textarea{
   resize: none;
 }
+
+h1{
+  font-size: 32px;
+}
+h2{
+  font-size: 28px;
+}
+h2{
+  font-size: 24px;
+}
 .hide {
   opacity: 0;
 }
@@ -927,14 +937,31 @@ font-size: 180%;
     width: 70%;
     right: 15%;
   }
+  h1{
+    font-size: 100%;
+  }
 }
-
+.mobileShow{
+  display: none;
+}
 
 @media screen and (max-width: 400px) {
   .alertBox {
     width: 70vw;
   }
+  .mobileShow{
+    display: block;
+  }
   .container-aside{
     width: 100%;
+  }
+  h1{
+    font-size: 90%;
+  }
+  .postCart footer {
+    flex-direction: column;
+  }
+  .postCart {
+    padding-bottom: 70px;
   }
 }

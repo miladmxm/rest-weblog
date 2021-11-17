@@ -196,3 +196,17 @@ nav ul li a:hover {
     display: block;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .navbar .container .logo{
+    font-size: 80%;
+  }
+  .navbar .container .descShow{
+    display: none;
+  }
+  .toggle {
+    width: 30px;
+    height: 30px;
+  }
+
+}

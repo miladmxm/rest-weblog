@@ -117,7 +117,7 @@ const DeleteUser = ({ match, history }) => {
         setMessageArr([])
 
         const datas = {
-            email: input.email,
+            email: input.email.toLowerCase(),
             password: input.password,
             grecaptcharesponse: isCaptcha
         }
@@ -151,8 +151,9 @@ const DeleteUser = ({ match, history }) => {
         setMessaLoader("اتصال اینترنت خود را بررسی کنید")
     }
     return (
+        
         <main id="main" onClick={() => isCaptcha === '' ? setIsCaptcha('d') : null} >
-            <h2 className="title">حذف حساب کاربری</h2>
+            <h1 className="title">حذف حساب کاربری</h1>
             <Helmet>
                 <title>وبلاگ | حذف حساب کاربری</title>
             </Helmet>
@@ -176,7 +177,8 @@ const DeleteUser = ({ match, history }) => {
                 <button type="submit">حذف حساب <i className="fa fa-trash"></i></button>
             </form>
             <Link to="/forget-password" className="center">رمز عبورتان را فراموش کردید؟!</Link>
-        </main>
+            </main>
+
     )
 }
 export default DeleteUser

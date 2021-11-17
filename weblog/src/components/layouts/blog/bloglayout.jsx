@@ -7,7 +7,7 @@ import { ContextDash } from "../../context/context";
 
 const Blog = ({ location }) => {
     const constext = useContext(ContextDash)
-    const {numberOfPaginate,setNumberOfPaginate} = constext
+    const { numberOfPaginate, setNumberOfPaginate } = constext
     const Allposts = useSelector(state => state.getBlog)
     const [filterpost, setFilterpost] = useState(Allposts)
     const [correntPage, setCorrentPage] = useState(1)
@@ -34,10 +34,10 @@ const Blog = ({ location }) => {
             setShowPaginate(true)
         }
     }, [filterpost])
+console.log(location);
 
-    
     const clicked = e => {
-        
+
         if (Math.ceil(filterpost.length / productNumber) === e) {
             setEndPage(true)
             setProductNumber(filterpost.length % numberOfPaginate)
@@ -53,6 +53,7 @@ const Blog = ({ location }) => {
             <Helmet>
                 <title>miladmxm</title>
             </Helmet>
+            
             <MapingBlogs correntPage={correntPage} endPage={endPage} filterpost={filterpost} productNumber={productNumber} >
                 {showPaginate ? <Paginate pageCount={Math.ceil(filterpost.length / numberOfPaginate)} clicked={e => clicked(e)} /> : null}
             </MapingBlogs>

@@ -96,6 +96,7 @@ const App = () => {
             ]}
           >
             <HeaderBlog />
+              <div className="postWraper mobileShow"></div>
             <Switch>
               {/* dashboard router  */}
               <Route path="/" exact component={Blog} />

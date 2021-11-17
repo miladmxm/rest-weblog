@@ -45,7 +45,7 @@ const HeaderBlog = ({ location }) => {
             <div className={isLight?"navbar reverscoloe":"navbar"}>
                 <div className="container">
                     <div className="display_flex">
-                        <input type="checkbox" className="checkedBeautiful darkAndLight" onChange={(e)=>ligthBack(e)} />
+                        <input type="checkbox" className="checkedBeautiful descShow darkAndLight" checked={isLight} onChange={(e)=>ligthBack(e)} />
                         <h2 className="logo"><Link className='text-initial' to="/">Milad MXM</Link>
                         </h2>
                     </div>
@@ -85,7 +85,8 @@ const HeaderBlog = ({ location }) => {
                                     </div></li>
                                     <li><NavLink exact to="/"><i className="fa fa-home"></i> خانه</NavLink></li>
                                     <li className="for_nob"><NavLink to="/dashboard"><i className="fa fa-user"></i> پنل کاربری</NavLink></li>
-                                    <li className="for_nob"><NavLink to="/logout"><i className="fa fa-sign-out"></i> خروج</NavLink></li>
+                                        <li className="for_nob"><NavLink to="/logout"><i className="fa fa-sign-out"></i> خروج</NavLink></li>
+                                        
                                 </>
                             )}
 
@@ -93,6 +94,7 @@ const HeaderBlog = ({ location }) => {
                             <li>
                                 <NavLink to="/contact"><i className="fa fa-volume-control-phone"></i> تماس با ما</NavLink>
                             </li>
+                            <li><input type="checkbox" className="checkedBeautiful darkAndLight mobileShow" checked={isLight} onChange={(e)=>ligthBack(e)} /></li>
                             <li>
                                 <SearchForm url="/" />
                             </li>

@@ -41,7 +41,7 @@ const Login = ({ history }) => {
         setMessageArr([])
         
         const datas = {
-            email: input.email,
+            email: input.email.toLowerCase(),
             password: input.password,
             reMember,
             grecaptcharesponse: isCaptcha
@@ -82,8 +82,9 @@ const Login = ({ history }) => {
     }
 
     return (
+       
         <main id="main" onClick={() => isCaptcha === '' ? setIsCaptcha('d') : null} >
-            <h2 className="title">ورود به بخش مدیریت</h2>
+            <h1 className="title">ورود به بخش مدیریت</h1>
             <Helmet>
                 <title>وبلاگ | ورود به سایت</title>
             </Helmet>
@@ -111,7 +112,8 @@ const Login = ({ history }) => {
                 <button type="submit">ورود <i className="fa fa-sign-in"></i></button>
             </form>
             <Link to="/forget-password" className="center">رمز عبورتان را فراموش کردید؟!</Link>
-        </main>
+            </main>
+   
     );
 }
 export default React.memo(Login)

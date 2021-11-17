@@ -79,7 +79,7 @@ const SettingUserByAdmin = ({ history, match, location }) => {
     datas.append("newRePassword", input.newRePassword);
     datas.append("bio", input.bio);
     datas.append("skill", input.skill);
-    datas.append("social", [input.emailAddress, input.whatsapp, input.instagram, input.phoneNumber]);
+    datas.append("social", [input.emailAddress.toLowerCase(), input.whatsapp, input.instagram, input.phoneNumber]);
     datas.append("profile", profile);
 
     try {
