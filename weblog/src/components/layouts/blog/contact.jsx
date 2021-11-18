@@ -83,7 +83,7 @@ const Contact = ({ history }) => {
                             placeholder="کد امنیتی را وارد کنید"
                             {...register("numCaptcha", { required: true, minLength: 4 })}
                         />
-                        <img src="http://localhost:4000/captcha.png" alt="captcha" />
+                        <img src="https://api.miladmxm.ir/captcha.png" alt="captcha" />
                     </label>
                 </div>
                 <button type="submit">ارسال <i className="fa fa-send"></i></button>

@@ -16,7 +16,6 @@ const ConfirmDeleteUser = ({ history }) => {
   if (confirmUser.length > 5 && admin.dadashami === "dada") {
 
     const user = findPost(confirmUser, users)[0];
-    console.log(user);
     setDropShadowToggle(true);
     setZindexShadow(151);
 

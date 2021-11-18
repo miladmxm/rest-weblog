@@ -45,7 +45,6 @@ const Rejister = ({ history }) => {
             let err = []
             if (ex.statusCode === 500) {
                 err.push(ex.data)
-                console.log('sala');
             } else {
 
                 if (ex.response.data.data) {

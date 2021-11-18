@@ -28,7 +28,6 @@ const ForgetPass = ({ history }) => {
         }
     } catch (ex) {
         let err = []
-        console.log(ex);
         if (ex.status != 200) {
             err.push(ex.response.data.message)
         }

@@ -73,14 +73,15 @@ const AddPost = ({history}) => {
         history.replace('/dashboard')
       }
     } catch (ex) {
-      console.log(ex);
       let err = [];
-      if (isEmpty(ex.response.data.data)) {
-        ex.response.data.data.forEach((message) => {
-          err.push(message.message);
-        });
-      } else {
-        err.push(ex.response.data.message);
+      if (ex.response) {  
+        if (isEmpty(ex.response.data.data)) {
+          ex.response.data.data.forEach((message) => {
+            err.push(message.message);
+          });
+        } else {
+          err.push(ex.response.data.message);
+        }
       }
       
       setMessage(err, "error");

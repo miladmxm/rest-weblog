@@ -10,7 +10,7 @@ const ImgShow = ({imgshow=[]}) => {
     return(
         <div className="imgUploadGroup">
             {imgshow.map((src,index)=>{
-                return <ImageUploaded url={`http://localhost:4000/uploads/image/${user.email}/${src}`} key={index} />
+                return <ImageUploaded url={`https://api.miladmxm.ir/uploads/image/${user.email}/${src}`} key={index} />
             })}
         </div>
     )

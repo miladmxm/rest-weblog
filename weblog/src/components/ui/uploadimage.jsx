@@ -8,7 +8,6 @@ const UploadImg = ({ name, uploadChange, title,defaultImg , classN='' }) => {
     const [titleStatus , setTitleStatus] = useState(title)
     const uploadValidator = e => {
         const file = e.target.files[0]
-        console.log(file);
         if (file && file.size < 4000000) {
             const reader = new FileReader()
             reader.addEventListener('load', function () {

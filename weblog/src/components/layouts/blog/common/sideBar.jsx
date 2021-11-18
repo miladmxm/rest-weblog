@@ -50,27 +50,27 @@ const SideBar = ({ user_id, post, edit }) => {
                     <h3 className="m3">اشتراک گذاری در <i className='fa fa-share-alt'></i></h3>
                     <div className="display_flex">
                         <EmailShareButton
-                            url={`http://localhost:3000/single/${user_id}`}
+                            url={`http:miladmxm.ir/single/${user_id}`}
                         >
                             <EmailIcon size={40} round={true} />
                         </EmailShareButton>
                         <FacebookShareButton
-                            url={`http://localhost:3000/single/${user_id}`}
+                            url={`http:miladmxm.ir/single/${user_id}`}
                         >
                             <FacebookIcon size={40} round={true} />
                         </FacebookShareButton>
                         <TelegramShareButton
-                            url={`http://localhost:3000/single/${user_id}`}
+                            url={`http:miladmxm.ir/single/${user_id}`}
                         >
                             <TelegramIcon size={40} round={true} />
                         </TelegramShareButton>
                         <WhatsappShareButton
-                            url={`http://localhost:3000/single/${user_id}`}
+                            url={`http:miladmxm.ir/single/${user_id}`}
                         >
                             <WhatsappIcon size={40} round={true} />
                         </WhatsappShareButton>
                         <TwitterShareButton
-                            url={`http://localhost:3000/single/${user_id}`}
+                            url={`http:miladmxm.ir/single/${user_id}`}
                         >
                             <TwitterIcon size={40} round={true} />
                         </TwitterShareButton>

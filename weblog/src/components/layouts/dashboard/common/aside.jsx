@@ -25,7 +25,7 @@ const Aside = ({ location }) => {
         <header>
           <Link className="tooltip" data-tooltip="تکمیل مشخصات شما" to={`/dashboard/setting/${user.userId}`}>
             <div className="profileImg">
-              <img src={`http://localhost:4000/uploads/${user.profileImg == "default" ? 'user.png' : `image/${user.profileImg}`}`} />
+              <img src={`https://api.miladmxm.ir/uploads/${user.profileImg == "default" ? 'user.png' : `image/${user.profileImg}`}`} />
             </div>
           </Link>
           <h4><Link target="_blank" to="/">{user.fullname}</Link></h4>
