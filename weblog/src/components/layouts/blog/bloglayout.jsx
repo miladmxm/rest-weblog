@@ -15,7 +15,6 @@ const Blog = ({ location }) => {
     const [endPage, setEndPage] = useState(false)
     const [showPaginate, setShowPaginate] = useState(false)
 
-
     useEffect(() => {
         setFilterpost(Allposts)
         const searchText = new URLSearchParams(location.search).get("search")

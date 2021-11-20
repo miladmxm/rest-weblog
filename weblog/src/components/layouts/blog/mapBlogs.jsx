@@ -5,11 +5,13 @@ import PostCart from "./common/postCart";
 const MapingBlogs = ({ correntPage, filterpost, productNumber, children, endPage }) => {
 
     const constext = useContext(ContextDash)
-    const { numberOfPaginate, setNumberOfPaginate } = constext
+    const { numberOfPaginate } = constext
     const { isLight } = useContext(ContextDash)
     const posts = [...filterpost]
     const [outFilter, setOutFilte] = useState([])
     const newPosts = []
+
+    
     useEffect(() => {
         setOutFilte(posts)
         if (!endPage) {

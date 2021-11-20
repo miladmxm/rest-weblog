@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { localhost } from "../../../services/config.json";
 import { formatDate } from "../../utils/jalali";
 import { Helmet } from "react-helmet";
@@ -6,19 +6,24 @@ import { getSinglePosts } from "../../../services/blogServises";
 import SideBar from "./common/sideBar";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ContextDash } from "../../context/context";
 
 const Single = ({ match, history }) => {
 
-  const [edit,setEdit] = useState(false)
+  const [edit, setEdit] = useState(false)
   const [post, setPost] = useState({});
-  const user = useSelector(state=>state.userHandler)
-  
+  const user = useSelector(state => state.userHandler)
+  const context = useContext(ContextDash)
+  const { setLoader, setMessaLoader } = context
+
   useEffect(async () => {
     try {
+      setLoader(true)
+      setMessaLoader("لطفا منتظر بمانید")
       const newpost = await getSinglePosts(match.params.id);
       if (newpost.status === 200) {
         setPost(newpost.data.post);
-        if (newpost.data.post.user._id === user.userId || user.dadashami=== "dada") {
+        if (newpost.data.post.user._id === user.userId || user.dadashami === "dada") {
           setEdit(true)
         } else {
           setEdit(false)
@@ -30,13 +35,15 @@ const Single = ({ match, history }) => {
       history.replace("/404");
       console.log(ex);
     }
+    setLoader(false)
+    setMessaLoader("اتصال اینترنت خود را بررسی کنید")
   }, [match.params.id, user]);
   useEffect(() => {
     return () => {
       setEdit(false)
       setPost({})
     }
-  },[])
+  }, [])
   return (
     <>
       <Helmet>

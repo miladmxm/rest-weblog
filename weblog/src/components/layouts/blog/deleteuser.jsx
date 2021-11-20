@@ -89,7 +89,7 @@ const DeleteUser = ({ match, history }) => {
 
                 <div className="g-recaptcha">
                     {isCaptcha !== '' ? <ReCAPTCHA
-                        sitekey="6Ld9Pb0cAAAAADrqfRhWeHqvXTCN-8YES5r-6qr5"
+                        sitekey="6Ld0CkAdAAAAAPOGMLasWDvq-xv9_3x7KO0wtIyj"
                         onChange={captcha}
                         hl="fa"
                     /> : null}
