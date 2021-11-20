@@ -78,7 +78,7 @@ const HeaderBlog = ({ location }) => {
                                             <ul>
                                                 <li><i className="fa fa-user"></i><Link to="/dashboard">پنل شما</Link></li>
                                                 <li><i className="fa fa-plus"></i><Link to="/dashboard/add-post">افزودن پست</Link></li>
-                                                <li><i className="fa fa-cog"></i><Link to="/dashboard/setting">تنظیمات و مشخصات</Link></li>
+                                                    <li><i className="fa fa-cog"></i><Link to={`/dashboard/setting/${user.userId}`}>تنظیمات و مشخصات</Link></li>
                                                 <li><i className="fa fa-sign-out"></i><Link to="/logout">خروج</Link></li>
                                             </ul>
                                         </div>
