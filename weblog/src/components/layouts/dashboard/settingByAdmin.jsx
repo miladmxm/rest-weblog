@@ -13,22 +13,22 @@ import UploadImg from "../../ui/uploadimage";
 import { decodedToken } from "../../utils/decodedToken";
 import { findPost } from "../../utils/findPost";
 const SettingUserByAdmin = ({ history, match, location }) => {
-    const initUser = useSelector(state=>state.userHandler)
-    const allUser = useSelector(state => state.allUsers)
-    const [user, setUser] = useState(findPost(match.params.id, allUser)[0])
- 
+  const initUser = useSelector(state => state.userHandler)
+  const allUser = useSelector(state => state.allUsers)
+  const [user, setUser] = useState(findPost(match.params.id, allUser)[0])
+
 
   useEffect(() => {
     if (initUser.dadashami === "dada") {
       setUser(findPost(match.params.id, allUser)[0])
     } else {
-        history.replace('/dashboard/users')
-        return null;
+      history.replace('/dashboard/users')
+      return null;
     }
     return () => {
       setUser(null)
     }
-  }, [location,allUser,initUser])
+  }, [location, allUser, initUser])
   const [profile, setProfile] = useState(null);
   const { setMessage, setMessageArr, setLoader, setMessaLoader } = useContext(ContextDash);
 
@@ -83,12 +83,12 @@ const SettingUserByAdmin = ({ history, match, location }) => {
     datas.append("profile", profile);
 
     try {
-      const { data, status } = await editUser(datas,user.userId?user.userId:user._id);
+      const { data, status } = await editUser(datas, user.userId ? user.userId : user._id);
 
       if (status === 200) {
 
         const { payload } = decodedToken(data.token)
-        if(user.isAdmin){
+        if (user.isAdmin) {
           localStorage.setItem('token', data.token)
           dispatch(addUser(payload.user))
         }
@@ -218,13 +218,6 @@ const SettingUserByAdmin = ({ history, match, location }) => {
               {errors.newRePassword && <small className="subTitle">تکرار رمز عبور خود را برابر با رمز عبور جدید وارد کنید</small>}
             </label>
           </DropBox>
-
-          <DropBox title="برای حذف حساب کاربری خود کلیک کنید">
-            <Link replace to={`/delete-user/${localStorage.getItem("token")}`} onClick={logout} >
-              اگر از حذف حساب کاربری خود اطمینان دارید بر روی این لینک کلیک کنید
-            </Link>
-          </DropBox>
-
           <div className="row">
             <button
               type="reset"
