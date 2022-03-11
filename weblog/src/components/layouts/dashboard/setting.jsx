@@ -183,7 +183,7 @@ const Settings = ({ history }) => {
           </div>
         </DropBox>
         <DropBox plus={40} title="برای تغییر کلمه عبور کلیک کنید (در صورت پشیمانی فیلد ها را خالی بگذارید) ">
-          <label className="fildinput" className={errors.newPassword ? "fildinput red" : "fildinput"}>
+          <label className={errors.newPassword ? "fildinput red" : "fildinput"}>
             <input
               className="input-outlined"
               type="password"
@@ -196,7 +196,7 @@ const Settings = ({ history }) => {
             <span>کلمه عبور جدید خود را وارد کنید</span>
             {errors.newPassword && <small className="subTitle">رمز عبور خود را به درستی و بیشتر از 4 کاراکتر وارد کنید</small>}
           </label>
-          <label className="fildinput" className={errors.newRePassword ? "fildinput red" : "fildinput"}>
+          <label className={errors.newRePassword ? "fildinput red" : "fildinput"}>
             <input
               className="input-outlined"
               type="password"
